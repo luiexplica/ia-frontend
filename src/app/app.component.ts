@@ -1,6 +1,6 @@
-import { Component, signal, effect, OnInit, AfterViewInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AfterViewChecked, AfterViewInit, Component, signal } from '@angular/core';
 
+declare const ripple: any;
 @Component({
   selector: 'app-root',
   imports: [
@@ -9,23 +9,21 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements AfterViewChecked  {
+
 
   title = 'ia-frontend';
   loaded = signal(false);
 
-  ngOnInit(): void {
+  ngAfterViewChecked(): void {
+    console.log('ripple', ripple);
+    if (typeof ripple !== 'undefined') {
 
-
-  }
-
-  ngAfterViewInit(): void {
-
-    this.loaded.set(true);
+      ripple.initialize();
+    }
 
   }
 
-      // angular effect
 
 
 
