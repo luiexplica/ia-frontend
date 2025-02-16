@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'dashboard',
+  selector: 'public-body-layout',
   imports: [],
-  templateUrl: './dashboard.component.html',
+  templateUrl: './PublicBodyLayout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent { }
+export class PublicBodyLayoutComponent { }

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'mid-body-layout',
+  selector: 'footer-bar',
   imports: [],
-  templateUrl: './midBodyLayout.component.html',
+  templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MidBodyLayoutComponent { }
+export class FooterComponent { }

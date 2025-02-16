@@ -7,6 +7,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
         // provideExperimentalZonelessChangeDetection()
         provideExperimentalZonelessChangeDetection(),
+        // provideZoneChangeDetection(),
         provideRouter(routes),
   ]
 };
