@@ -1,9 +1,19 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "baseUrl": ".",
+    "paths": {
+        "@app/*": ["./src/app/*"],
+        "@core/*": ["./src/app/core/*"],
+        "@interfaces/*": ["./src/app/core/interfaces/*"],
+        "@components/*": ["./src/app/core/components/*"],
+        "@services/*": ["./src/app/services/*"],
+        "@modules/*": ["./src/app/modules/*"],
+        "@dashboard/*": ["./src/app/dashboard/*"],
+        "@public/*": ["./src/app/public/*"],
+
+    },
+    "outDir": "./dist",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -13,7 +23,8 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
+
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022"

@@ -1,0 +1,30 @@
+
+<ul
+[ngClass]="{
+  'flex-row': orientation() === 'horizontal',
+  'flex-col': orientation() === 'vertical'
+}" class="flex flex-row gap-2 my-auto ">
+
+  @for (item of this.menuList(); track $index) {
+
+    <li >
+    <!-- bg-[rgb(33_33_33_/_0.1)] -->
+        <!-- [className]="'capitalize px-4 '" -->
+      <app-button
+        [buttonStyle]="'text'"
+        (onClick)="item.action($index)"
+        [className]="'capitalize px-4 ' + ( item.active  ? ' bg-[rgb(33_33_33_/_0.075)]' : '')"
+        [fullWidth]="this.setFullWidth()"
+        >
+
+        <ng-content text>
+          {{ item.title }}
+        </ng-content>
+
+      </app-button>
+    </li>
+
+  }
+
+</ul>
+

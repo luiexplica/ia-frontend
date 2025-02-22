@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, input, output, OnInit, signal } from '@angular/core';
 
-export type ButtonStyle = 'primary' | 'secondary' | 'outline' | 'danger' | 'warning' | 'success' | 'info';
-export type ButtonType = 'normal' | 'normal-block' | 'rounded' | 'rounded-block';
-export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg';
+import { ChangeDetectionStrategy, Component, input, output, OnInit, signal } from '@angular/core';
+import { DUIButton } from 'david-ui-angular';
+
+export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
+export type ButtonVariant = 'filled' | 'outlined' | 'gradient' | 'text';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
 export interface ButtonIcon_I {
   type: 'string' | 'html';
   value: string;
@@ -10,29 +13,30 @@ export interface ButtonIcon_I {
 
 @Component({
   selector: 'app-button',
-  imports: [],
+  imports: [
+    DUIButton
+  ],
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent implements OnInit {
 
-  // title = input<string>('title');
-  style = input<ButtonStyle>('primary');
-  type = input<ButtonType>('normal');
+  buttonStyle = input<ButtonStyle>('primary');
+  fullWidth = input(false);
   size = input<ButtonSize>('md');
+  rouded = input(false);
   ripple = input<boolean>(true);
   disabled = input<boolean>(false);
-  // icon = input<ButtonIcon_I | null>(null);
+  className = input<string>('');
+
   onClick = output();
-
   loaded = signal(false);
-  size_class = signal<string>('');
-  style_class = signal<string>('');
 
+  style_class = signal<string>('');
+  variant = signal<ButtonVariant>('filled');
   buttonClasses = signal<string>('');
 
   constructor() {
-
   }
 
   ngOnInit(): void {
@@ -46,37 +50,45 @@ export class ButtonComponent implements OnInit {
   }
 
   setButtonClasses() {
-
-    this.setSize();
     this.setStyle();
-
     this.buttonClasses.set(`
-    ${this.size_class()}
     ${this.style_class()}
     `)
 
   }
 
   setStyle() {
-    if (this.style() === 'primary') {
+    if (this.buttonStyle() === 'primary') {
       this.style_class.set(`
+        ${this.className()}
         bg-primaryBlue
-        text-white
+        !text-white,
       `);
+      this.variant.set('filled');
+
     }
-  }
 
-  setSize() {
+    if (this.buttonStyle() === 'secondary') {
+      this.style_class.set(`
+        ${this.className()}
+      `);
+      this.variant.set('outlined');
 
-    if (this.size() === 'md') {
-      this.size_class.set('px-4 py-2 ml-2 text-sm text-center transition-all border border-transparent rounded-md shadow-md hover:shadow-lg focus:shadow-none active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none');
+    }
+
+    if (this.buttonStyle() === 'text') {
+      this.style_class.set(`
+        ${this.className()}
+      `);
+      this.variant.set('text');
+
     }
 
   }
 
   click() {
     this.onClick.emit();
-  }
 
+  }
 
 }

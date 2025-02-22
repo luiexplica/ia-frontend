@@ -1,30 +1,18 @@
-import { AfterViewChecked, AfterViewInit, Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-declare const ripple: any;
+
 @Component({
   selector: 'app-root',
   imports: [
-    // RouterOutlet,
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements AfterViewChecked  {
-
+export class AppComponent  {
 
   title = 'ia-frontend';
-  loaded = signal(false);
-
-  ngAfterViewChecked(): void {
-    console.log('ripple', ripple);
-    if (typeof ripple !== 'undefined') {
-
-      ripple.initialize();
-    }
-
-  }
-
-
 
 
 }

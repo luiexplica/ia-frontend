@@ -1,13 +1,15 @@
-<nav-bar [menuItems]="this.public_routes" />
 
-<public-body-layout>
+@if (!this.hideNavbar()) {
+  <nav-bar [menuItems]="this.public_routes()" />
+}
+
+<section class="container !mx-auto  h-screen place-items-center"
+  [class]="{
+    'max-w-full': this.fullWidth()
+  }">
   <router-outlet />
-</public-body-layout>
+</section>
 
-<footer-bar />
-
-<!-- <button
-  class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20 !mt-4"
-  type="button" data-ripple-dark="true">
-  Log Out
-</button> -->
+@if (!this.hideFooter()) {
+  <footer-bar />
+}

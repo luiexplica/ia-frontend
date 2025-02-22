@@ -1,42 +1,86 @@
 <nav
-  class="block w-full max-w-full px-4 py-4 text-white bg-white border rounded-none backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80"
->
-  <div
-    class="container flex items-center justify-between mx-auto"
-  >
-    <div class="flex gap-2">
-      <img src="/image/mt-logo.svg" alt="logo" /><a
-        href="#"
-        class="block mr-4 font-sans text-xs antialiased font-bold leading-relaxed cursor-pointer text-blue-gray-900"
-        >Material <br />
-        Tailwind</a
-      >
-      <div class="hidden lg:block">
-        <ul
-          class="flex flex-col gap-3 mt-2 mb-4 lg:mb-0 lg:mt-1 lg:flex-row lg:items-center lg:gap-8"
-        >
-            <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-gray-600 " >
-              Inicio
-            </li>
-            <!-- <li class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-gray-600 " >
-              Inicio
-            </li> -->
+  class="block w-full max-w-full px-4 py-4 text-white bg-white border rounded-none backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80">
+  <div class="container flex items-center justify-between mx-auto">
+    <div class="flex ">
 
-          <!-- <a href="#" >
-            <li class="block antialiased font-sans text-sm leading-normal text-inherit p-1 font-medium !text-gray-900" >
-              Projects
-            </li>
-            </a> -->
-        </ul>
+      <div (click)="goTo('home')" class="logoSection hover:cursor-pointer">
+        <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
       </div>
+
     </div>
 
-  <button
-      class="align-middle select-none font-sans font-bold text-center  transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg text-gray-900 hover:bg-gray-900/10 active:bg-gray-900/20 !mt-4"
-      type="button"
-      data-ripple-dark="true"
-    >
-      Iniciar sesión
-    </button>
+    <div class="flex gap-6 buttonGroup">
+
+      <app-menu-list class="hidden pcTab:flex" [menuList]="this.menuItems()" />
+
+      <div class="hidden gap-2 buttonsSection pcTab:flex">
+
+        <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'">
+          <ng-content text>
+            Registrate
+          </ng-content>
+        </app-button>
+        <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'">
+          <ng-content text>
+            Iniciar sesión
+          </ng-content>
+        </app-button>
+
+      </div>
+      <div class="flex gap-2 buttonsSection pcTab:hidden">
+
+        <app-button [className]="'relative '" [size]="'sm'" [buttonStyle]="'text'"
+          [attr.data-collapse-target]="'navbar'" (onClick)="this.toggleCollapseMenu()">
+          <ng-content icon>
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" aria-hidden="true" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5">
+                </path>
+              </svg>
+            </span>
+
+          </ng-content>
+        </app-button>
+
+      </div>
+
+    </div>
   </div>
+
+  <div class="block w-full h-0 overflow-hidden transition-all duration-300 ease-in basis-full pcTab:hidden " [ngClass]="{
+      'h-full': this.collapseMenu()
+    }">
+    <div class="p-0 py-6 mt-0 bg-white rounded-tl-none rounded-tr-none rounded-xl ">
+      <div class="container flex flex-col items-center justify-between mx-auto">
+
+          <app-menu-list
+          class="w-full"
+          [orientation]="'vertical'"
+          [menuList]="this.menuItems()" />
+          <!-- [orientation]="'vertical'" -->
+
+        <hr class="mt-2">
+        <div class="flex flex-col w-full gap-4 buttonsSection">
+
+          <app-button (onClick)="goTo('register')" [fullWidth]="true" [buttonStyle]="'primary'">
+            <ng-content text>
+              Registrate
+            </ng-content>
+          </app-button>
+          <app-button (onClick)="goTo('login')" [fullWidth]="true" [buttonStyle]="'secondary'">
+            <ng-content text>
+              Iniciar sesión
+            </ng-content>
+          </app-button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </nav>
+
+<!-- <pre>
+            {{ this.menuItems() | json }}
+          </pre> -->

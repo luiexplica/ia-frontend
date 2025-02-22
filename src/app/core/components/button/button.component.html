@@ -1,12 +1,15 @@
 
-<button (click)="click()" [attr.data-ripple-light]="ripple()"
-  [class]="buttonClasses()"
-  type="button">
+<dui-button
+className="{{ this.style_class() }} "
+[attr.className]="this.buttonClasses()"
+[variant]="this.variant()"
+[size]="this.size()"
+[rounded]="this.rouded()"
+[ripple]="this.ripple()"
+[fullWidth]="this.fullWidth()"
+(click)="click()"
+[attr.type]="'button'"
+>
   <ng-content select="[icon]"></ng-content>
   <ng-content select="[text]"></ng-content>
-</button>
-
-
-<!--
-  class="px-4 py-2 ml-2 text-sm text-center text-white transition-all border border-transparent rounded-md shadow-md bg-slate-800 hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
- -->
+</dui-button>
