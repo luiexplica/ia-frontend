@@ -1,49 +1,38 @@
+<div class="w-full ">
+  <div class="relative w-full">
 
-
-<!--
-<div class="w-full max-w-sm min-w-[200px]">
-  <input class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Type here..." />
-</div>
-
-<div class="w-full max-w-sm min-w-[200px]">
-  <input class="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow" placeholder="Type here..." />
-</div>
-
-<div class="w-full max-w-sm min-w-[200px]">
-  <input class="w-full px-3 py-3 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow" placeholder="Type here..." />
-</div>
- -->
-
-<div class="w-full">
-        <label [for]="id()" class="block w-full mb-2 font-sans text-sm antialiased font-medium leading-normal text-gray-900 text-inherit" >
-            {{ atts().label }}
-        </label>
-        <div class="relative w-full ">
-          <input
-            [id]="id()"
-            [type]="atts().type"
-            [name]="atts().name"
-            [placeholder]="atts().placeholder"
-            class="h-full w-full rounded-md border border-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-
-            [ngClass]="{
+    @if (!atts().labelInline) {
+      @if (atts().label != '') {
+    <label [for]="id()"
+      class="block w-full mb-2 font-sans text-sm antialiased font-medium leading-normal text-gray-900 text-inherit">
+      {{ atts().label }}
+    </label>
+      }
+    <input [id]="id()" [type]="atts().type" [name]="atts().name" [placeholder]="atts().placeholder"
+      class="h-full w-full rounded-md border border-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+      [ngClass]="{
               'py-1.5': atts().size === 'sm',
               'py-2': atts().size === 'md',
               'py-3': atts().size === 'lg',
-            }"
+            }" />
 
-          />
-        </div>
-      </div>
+    }
 
-
-<!-- <div class="w-full max-w-sm min-w-[200px]">
-  <div class="relative">
-    <input
+    @if (atts().labelInline) {
+     <input
+      type="text"
+      placeholder=" "
       class="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm peer placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
     />
-    <label class="absolute cursor-text bg-white px-1 left-2.5 top-2.5 text-slate-400 text-sm transition-all transform origin-left peer-focus:-top-2 peer-focus:left-2.5 peer-focus:text-xs peer-focus:text-slate-400 peer-focus:scale-90">
+    <label
+      class="absolute cursor-text bg-white px-1 left-2.5 top-2.5 text-slate-400 text-sm transition-all transform origin-left
+             peer-placeholder-shown:top-2.5 peer-placeholder-shown:left-2.5 peer-placeholder-shown:text-sm peer-placeholder-shown:scale-100
+             peer-focus:!-top-2 peer-focus:!left-2.5 peer-focus:!text-xs peer-focus:!scale-90"
+    >
       Type Here...
     </label>
+
+    }
+
   </div>
-</div> -->
+</div>

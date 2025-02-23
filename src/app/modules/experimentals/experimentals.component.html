@@ -1,7 +1,36 @@
-
-
 <div class="p-10 py-20 ">
-<app-form-layout [formRows]="formRows()">
 
-</app-form-layout>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <app-form-layout [formRows]="formRows()">
+    </app-form-layout>
+
+  </form>
+
+
+
+  <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div *ngFor="let row of formConfig">
+        <div [ngClass]="row.classes">
+          <div *ngFor="let field of row.fields">
+            <label [for]="field.props.name">{{ field.props.label }}</label>
+            <input
+              [type]="field.props.type"
+              [formControlName]="field.props.name"
+              [placeholder]="field.props.placeholder"
+              [ngClass]="field.props.classes"
+            />
+          </div>
+        </div>
+      </div>
+      <button type="submit">Enviar</button>
+    </form> -->
+
+
+
+
+
+
+
+
 </div>

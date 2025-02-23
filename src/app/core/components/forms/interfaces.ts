@@ -150,13 +150,13 @@ export interface TextField_I {
   disabled?: boolean;
   type: 'text' | 'email' | 'password' | 'tel';
   placeholder?: string;
-  size: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   labelInline?: boolean;
   icon?: Icon_I;
   value?: string;
   validation_rules?: ValidationRule_I[];
-  field_class?: string;
-  // [x: string]: any,
+  classes?: string;
+  [x: string]: any,
 }
 
 export interface Field_I<T = any> {
@@ -164,8 +164,13 @@ export interface Field_I<T = any> {
   props: T;
 }
 
+export type FieldUnion =
+  | Field_I<TextField_I> & { typeField: 'text' }
+  // | Field_I<Checkbox_I> & { typeField: 'checkbox' }
+  // | Field_I<Select_I> & { typeField: 'select' };
+
 export interface LayoutRow_I {
-  fields: Field_I[];
+  fields: FieldUnion[];
   classes?: string
 }
 

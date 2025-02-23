@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input, OnInit, signal } from '@angu
 import { TextField_I } from '../../interfaces';
 import { NgClass } from '@angular/common';
 
+
 @Component({
   selector: 'app-text-input-field',
   imports: [
@@ -12,25 +13,26 @@ import { NgClass } from '@angular/common';
 })
 export class TextInputFieldComponent implements OnInit {
 
-  id = signal<string>('');
-  atts = input<TextField_I>({
+  default: TextField_I = {
     label: 'Nombre',
     name: 'nombre',
     placeholder: '',
-    value: '',
+    value: '55',
     size: "md",
     type: "text",
     validation_rules: [],
-    field_class: 'w-full'
-
-  });
+    classes: 'w-full'
+  }
+  id = signal<string>('');
+  atts = input<TextField_I>(this.default);
 
   ngOnInit(): void {
     this.initComponent();
 
   }
 
-  initComponent(){
+  initComponent() {
+    this.setDefaults();
     this.setId();
 
   }
@@ -38,6 +40,15 @@ export class TextInputFieldComponent implements OnInit {
   setId() {
     const _id = 'text-field-' + Math.random().toString(36).substring(7);
     this.id.set(_id);
+
+  }
+
+  setDefaults() {
+    Object.keys(this.default).forEach((key) => {
+      if (!this.atts()[key]) {
+        this.atts()[key] = this.default[key];
+      }
+    });
 
   }
 
