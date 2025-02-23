@@ -1,0 +1,22 @@
+<div className="flex flex-col sm:items-center ">
+  <!-- {
+                    rows.map((row, i) => {
+                        return ( -->
+  <!-- <div class="grid w-full grid-cols-1 m-0 gap-x-5 lg:mb-s_15 last:mb-0 {{row.grid_columns}} " > -->
+  @for (row of formRows(); track $index) {
+
+    <div class="grid w-full grid-cols-1 m-0 gap-x-5 lg:mb-s_15 last:mb-0 {{ row.classes || '' }}">
+
+      @for (field of row.fields; track $index) {
+
+        @if (field.typeField === 'text') {
+        <app-text-input-field />
+        }
+
+      }
+
+    </div>
+
+  }
+
+</div>

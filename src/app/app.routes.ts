@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import PublicComponent from './modules/public/public.component';
 import { public_routes } from './modules/public/public.routes';
+import { ExperimentalsComponent } from './modules/experimentals/experimentals.component';
 // import { PublicComponent } from './modules/public/public.component';
 
 export const routes: Routes = [
@@ -25,6 +26,10 @@ export const routes: Routes = [
   //     ]
 
   // }
+  {
+    path: 'experimentals',
+    component: ExperimentalsComponent
+  },
   {
     path: '',
     component: PublicComponent,
