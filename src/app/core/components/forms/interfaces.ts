@@ -1,5 +1,8 @@
 import { Icon_I } from "@interfaces/globals.interface";
 
+export type FieldStatus_Type = 'error' | 'warning' | 'success' | 'info';
+
+
 type typeField =  'checkbox' | 'text' | 'select' | 'select_special' | 'textarea' | 'file' | 'file_wIcon' | 'date_picker';
 
 export interface ValidationsRule_Separate_I {

@@ -1,19 +1,27 @@
 
-<div className="flex flex-col sm:items-center ">
+<div
+[formGroup]="formRef()"
+className="flex flex-col sm:items-center ">
   @for (row of formRows(); track $index) {
     <div class="grid w-full grid-cols-1 m-0 gap-5 lg:mb-s_15 last:mb-0 {{ row.classes || '' }}">
       @for (field of row.fields; track $index) {
         @if (field.typeField === 'text') {
+              <!--
+               <input
+              placeholder="aaaa"
+              [type]="field.props.type"
+              [formControlName]="field.props.name"
+              />
+               -->
+          <!-- [formControlName]="field.props.name" -->
         <app-text-input-field
           [atts]="field.props"
+          [formRef]="formRef()"
          />
-
         }
 
       }
-
     </div>
-
   }
-
 </div>
+

@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component, input, OnInit, signal } from '@angular/core';
 import { TextField_I } from '../../interfaces';
 import { NgClass } from '@angular/common';
+import { DUIInput } from 'david-ui-angular';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-text-input-field',
   imports: [
+    DUIInput,
+    ReactiveFormsModule,
     NgClass
   ],
   templateUrl: './textInputField.component.html',
@@ -23,9 +27,10 @@ export class TextInputFieldComponent implements OnInit {
     validation_rules: [],
     classes: 'w-full'
   }
-  id = signal<string>('');
   atts = input<TextField_I>(this.default);
+  formRef = input<FormGroup>(new FormGroup({}));
 
+  id = signal<string>('');
   ngOnInit(): void {
     this.initComponent();
 
