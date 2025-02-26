@@ -1,9 +1,18 @@
 <div class="p-10 py-20 ">
 
-  <form [formGroup]="form()" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="form()" (ngSubmit)="onSubmit()" >
 
-    <app-form-layout [formRows]="formRows()" [formRef]="form()">
+    <app-form-layout
+      [formRows]="formRows()" [formRef]="form()">
     </app-form-layout>
+
+    <app-button
+      (onClick)="onSubmit()" [size]="'md'">
+      <span text>
+        Enviar
+      </span>
+    </app-button>
 
   </form>
 

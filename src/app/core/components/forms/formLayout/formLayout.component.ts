@@ -10,7 +10,7 @@ import { TextInputFieldComponent } from '../fields/textInputField/textInputField
   imports: [
     TextInputFieldComponent,
     ReactiveFormsModule,
-    JsonPipe
+    // JsonPipe
   ],
   templateUrl: './formLayout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

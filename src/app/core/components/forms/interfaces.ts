@@ -47,8 +47,8 @@ export interface ValidationRule_I {
   type: Validations_Type;
   message?: string;
   value?: number | string;
-  conditional?: ConditionalRule; // Añadido para soportar condiciones
 }
+  // conditional?: ConditionalRule; // Añadido para soportar condiciones
 
 export interface FieldValue_I {
   // field: string;

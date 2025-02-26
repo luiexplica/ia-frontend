@@ -10,8 +10,13 @@ export const formExperimental: LayoutRow_I[] = [
           label: 'Nombre',
           placeholder: 'Escribe tu nombre',
           type: "text",
-          labelInline: true,
-          validation_rules: [],
+          labelInline: false,
+          validation_rules: [
+            {
+              type: 'required',
+              message: 'Requerido field'
+            }
+          ],
           classes: 'w-full',
         }
       },
@@ -23,7 +28,13 @@ export const formExperimental: LayoutRow_I[] = [
           placeholder: 'Escribe tu dirección',
           size: "md",
           type: "text",
-          validation_rules: [],
+          validation_rules: [
+            {
+              type: 'minLength',
+              value: 2,
+              message: 'Debe tener al menos 2 caracteres'
+            }
+          ],
           classes: 'w-full'
         }
       },

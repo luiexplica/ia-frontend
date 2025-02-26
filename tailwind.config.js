@@ -1,6 +1,8 @@
 const withMT = require("@material-tailwind/html/utils/withMT");
+const colors = require("tailwindcss/colors");
 
 module.exports = withMT({
+// module.exports = {
   content: [
     "./src/**/*.{html,ts}",
      "./node_modules/david-ui-angular/**/*.{html,ts,js,mjs}"
@@ -19,9 +21,16 @@ module.exports = withMT({
   //       'thirdBlue',
   //       'darkPurple',
   //   ]),
+  // safelist: [
+  //   {
+  //     pattern: /^(bg|text|border|ring|fill|stroke)-(.+)-(\d{2,3})/, // Incluye todos los colores
+  //   },
+  // ],
+
   theme: {
     extend: {
       colors: {
+         ...colors,
         slate: {
           900: '#101D2D',
         },
@@ -226,4 +235,5 @@ module.exports = withMT({
     },
   },
   plugins: [],
+// };
 });

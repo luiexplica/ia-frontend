@@ -26,7 +26,6 @@ class="w-full text-input-field">
     }
 
     @if (atts().labelInline) {
-
        <dui-input
         [id]="id()"
         [label]="atts().label"
@@ -35,4 +34,10 @@ class="w-full text-input-field">
         [formControlName]="atts().name" />
 
     }
+
+  @if (errorMessage() != '') {
+    <app-error-message  [text]="errorMessage()" />
+
+  }
+
 </div>

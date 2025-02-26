@@ -1,27 +1,31 @@
 import { ChangeDetectionStrategy, Component, input, OnInit, signal } from '@angular/core';
-import { TextField_I } from '../../interfaces';
-import { NgClass } from '@angular/common';
+import { TextField_I } from '@components/forms/interfaces';
+import { JsonPipe, NgClass } from '@angular/common';
 import { DUIInput } from 'david-ui-angular';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FieldHandler } from '@components/forms/classes/fieldHandler';
+import { ErrorMessageComponent } from '@components/forms/errorMessage/errorMessage.component';
 
 
 @Component({
   selector: 'app-text-input-field',
   imports: [
     DUIInput,
+    ErrorMessageComponent,
     ReactiveFormsModule,
+    // JsonPipe,
     NgClass
   ],
   templateUrl: './textInputField.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextInputFieldComponent implements OnInit {
+export class TextInputFieldComponent extends FieldHandler implements OnInit {
 
   default: TextField_I = {
     label: 'Nombre',
     name: 'nombre',
     placeholder: '',
-    value: '55',
+    value: '',
     size: "md",
     type: "text",
     validation_rules: [],
@@ -39,6 +43,9 @@ export class TextInputFieldComponent implements OnInit {
   initComponent() {
     this.setDefaults();
     this.setId();
+    this.listenFieldChanges( this.formRef(), this.atts() );
+
+    // this.setMessage('hola mundo');
 
   }
 
@@ -56,5 +63,15 @@ export class TextInputFieldComponent implements OnInit {
     });
 
   }
+
+/*   listenFieldChanges() {
+
+    this.formRef().valueChanges.subscribe((value) => {
+      // get control
+      const control = this.formRef().get(this.atts().name);
+    })
+
+  }
+ */
 
 }
