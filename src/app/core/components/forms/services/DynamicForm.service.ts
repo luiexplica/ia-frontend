@@ -39,7 +39,7 @@ export class DynamicFormService {
         const rules = field.props.validation_rules || [];
         rules.forEach(rule => {
           if (rule.type === 'same_valueField') {
-            const _fp = sameValue_Validator(field.props.name, rule.value as string, rule.message)
+            const _fp = sameValue_Validator(field.props.name, rule )
             formGroup.setValidators(_fp);
 
           }
@@ -55,18 +55,66 @@ export class DynamicFormService {
     const rules = field.props.validation_rules || [];
     for (const [i, element] of rules.entries()) {
       if (element.type === 'required') {
-        validators.push(Validators.required);
+        // validators.push(Validators.required);
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.required(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El campo es requerido',
+                // customType: 'required'
+              }
+            };
+          }
+          return null;
+        });
       }
       if (element.type === 'min_length') {
         const n = Number(element.value);
-        validators.push(Validators.minLength(n));
+        // validators.push(Validators.minLength(n));
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.minLength(n)(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El formato de la URL no es válido',
+                // customType: 'url'
+              }
+            };
+          }
+          return null;
+        });
       }
       if (element.type === 'max_length') {
         const n = Number(element.value);
-        validators.push(Validators.maxLength(n));
+        // validators.push(Validators.maxLength(n));
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.maxLength(n)(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El formato de la URL no es válido',
+                // customType: 'url'
+              }
+            };
+          }
+          return null;
+        });
       }
       if (element.type === 'email') {
-        validators.push(Validators.email);
+        // validators.push(Validators.email);
+             validators.push((control: AbstractControl): ValidationErrors | null => {
+               const error = Validators.email(control);
+               if (error) {
+                 return {
+                   [element.type]: {
+                     message: element.message || 'El formato de correo no es válido',
+                     // customType: 'email'
+                   }
+                 };
+               }
+               return null;
+             });
       }
       if (element.type === 'tel') {
         // validators.push(Validators.pattern(/^\+?([0-9]{1,3})?[-. (]*([0-9]{3})[-. )]*[0-9]{3}[-. ]*[0-9]{4}$/));

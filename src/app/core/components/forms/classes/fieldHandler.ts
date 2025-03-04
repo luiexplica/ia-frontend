@@ -11,11 +11,11 @@ export class FieldHandler {
 
   }
 
-  listenFieldChanges(formRef: FormGroup, atts: any ) {
+  listenFieldChanges(formRef: FormGroup, atts: any) {
     formRef.valueChanges.subscribe((value) => {
       const control = formRef.get(atts.name);
       if (control) {
-        (control.invalid) ? this.catchErrors(control, atts) : this.clearErrorMessage();
+        (control.invalid) ? this.catchErrors(control) : this.clearErrorMessage();
       }
 
     })
@@ -30,27 +30,14 @@ export class FieldHandler {
 
   }
 
-  catchErrors(control: AbstractControl, atts: TextField_I) {
-
-    if (!atts.validation_rules || atts.validation_rules.length == 0) return;
+  catchErrors(control: AbstractControl) {
 
     const errors = control.errors;
-
     if (!errors) return;
 
-    const errorKey = Object.keys(errors).find(
-      (key) => atts.validation_rules!.find(
-        (rule) => this.compareErros(rule.type, key)
-      ));
-
     console.log('errors', errors);
-    console.log('errorKey', errorKey);
-    if (errorKey) {
-      const errorMessage = atts.validation_rules!.find(
-        (rule) => this.compareErros(rule.type, errorKey)
-      )!.message;
-      this.setMessage(errorMessage || '');
-    }
+    const errorMessage = errors[Object.keys(errors)[0]].message;
+    this.setMessage(errorMessage || '');
 
   }
 
