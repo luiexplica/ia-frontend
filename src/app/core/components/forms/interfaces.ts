@@ -13,26 +13,27 @@ const type_array_default = [
   "required",
   "select_single_required",
   "select_multi_required",
-  "notRequired",
+  "not_required",
   "conditional_required",
   "conditional_select_multi_required",
   "conditional_select_single_required",
-  "minLength",
-  "isArray_required",
-  "maxLength",
+  "is_array_required",
+  "min_length",
+  "max_length",
   "email",
   "tel",
   "pattern",
+  "password",
   "min",
   "max",
   "custom",
   "url",
-  "same_field",
-  "fileFormat_document",
-  "fileFormat_image",
-  "fileFormat_video",
-  "fileSize_5m",
-  "fileSize_10m"
+  "same_valueField",
+  "file_format_document",
+  "file_format_image",
+  "file_format_video",
+  "file_size_5m",
+  "file_size_10m"
 ] as const;
 export type Validations_Type = typeof type_array_default[number];
 
@@ -44,8 +45,9 @@ interface ConditionalRule {
 }
 
 export interface ValidationRule_I {
+  layer: 'global' | 'field';
   type: Validations_Type;
-  message?: string;
+  message: string;
   value?: number | string;
 }
   // conditional?: ConditionalRule; // Añadido para soportar condiciones
@@ -56,13 +58,6 @@ export interface FieldValue_I {
   [x: string]: any,
 }
 
-export interface CheckBoxField_Props_I {
-  label: string;
-  name: string;
-  validation_rules?: ValidationRule_I[];
-  field_class?: string;
-  [x: string]: any,
-}
 
 export interface SelectValue_I<T = string> {
   value: T;
@@ -151,7 +146,7 @@ export interface TextField_I {
   label: string;
   name: string;
   disabled?: boolean;
-  type: 'text' | 'email' | 'password' | 'tel';
+  type: 'text' | 'number' | 'email' | 'password' | 'tel';
   placeholder?: string;
   size?: 'sm' | 'md' | 'lg';
   labelInline?: boolean;
@@ -162,18 +157,25 @@ export interface TextField_I {
   [x: string]: any,
 }
 
+export interface CheckBoxField_I {
+  label: string;
+  name: string;
+  validation_rules?: ValidationRule_I[];
+  classes?: string;
+  [x: string]: any,
+}
+
 export interface Field_I<T = any> {
   typeField: typeField;
   props: T;
 }
 
-export type FieldUnion =
+export type FieldUnion_Type =
   | Field_I<TextField_I> & { typeField: 'text' }
-  // | Field_I<Checkbox_I> & { typeField: 'checkbox' }
-  // | Field_I<Select_I> & { typeField: 'select' };
+  | Field_I<CheckBoxField_I> & { typeField: 'checkbox' }
 
 export interface LayoutRow_I {
-  fields: FieldUnion[];
+  fields: FieldUnion_Type[];
   classes?: string
 }
 

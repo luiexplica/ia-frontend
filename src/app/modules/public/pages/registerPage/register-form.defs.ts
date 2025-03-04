@@ -1,6 +1,7 @@
-import { Field_I, LayoutRow_I, TextField_I } from "../../core/components/forms/interfaces";
 
-export const formExperimental: LayoutRow_I[] = [
+import { LayoutRow_I } from "@components/forms/interfaces";
+
+export const registerFormDef: LayoutRow_I[] = [
   {
     fields: [
       {
@@ -86,10 +87,11 @@ export const formExperimental: LayoutRow_I[] = [
               message: 'Contraseña requerida'
             },
             {
-              type: "password",
-              layer: "field",
-              message: 'Formato de contraseña no válido',
-            },
+              type: 'min_length',
+              layer: 'field',
+              value: 6,
+              message: 'Debe tener al menos 6 caracteres'
+            }
           ],
         }
       },
@@ -108,15 +110,10 @@ export const formExperimental: LayoutRow_I[] = [
               message: 'Confirmación de contraseña requerida'
             },
             {
-              type: "password",
-              layer: "field",
-              message: 'Formato de contraseña no válido',
-            },
-            {
-              type: 'same_valueField',
-              layer: 'global',
-              value: "password",
-              message: 'Las contraseñas no coinciden'
+              type: 'min_length',
+              layer: 'field',
+              value: 6,
+              message: 'Debe tener al menos 6 caracteres'
             }
           ],
         }
@@ -143,5 +140,3 @@ export const formExperimental: LayoutRow_I[] = [
     classes: 'grid-cols-1'
   }
 ]
-
-

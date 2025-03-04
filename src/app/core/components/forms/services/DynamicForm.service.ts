@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LayoutRow_I, ValidationRule_I } from '../interfaces';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FieldUnion_Type, LayoutRow_I, ValidationRule_I } from '../interfaces';
+import { sameValue_Validator } from '../customValidators/sameField.validator';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DynamicFormService {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+
+  }
 
   generateForm(layout: LayoutRow_I[]): FormGroup {
     const formGroup = this.fb.group({});
@@ -16,27 +20,48 @@ export class DynamicFormService {
       row.fields.forEach((field) => {
         const control = this.fb.control(
           field.props.value || '',
-          this.getValidators(field.props.validation_rules)
+          this.setFieldValidators(field)
         );
         formGroup.addControl(field.props.name, control);
       });
     });
+    this.setGlobalValidators(formGroup, layout);
 
     return formGroup;
 
   }
 
-  private getValidators(rules: ValidationRule_I[] = []) {
+  private setGlobalValidators(formGroup: FormGroup, layout: LayoutRow_I[]) {
+
+    layout.forEach((row) => {
+      row.fields.forEach((field) => {
+
+        const rules = field.props.validation_rules || [];
+        rules.forEach(rule => {
+          if (rule.type === 'same_valueField') {
+            const _fp = sameValue_Validator(field.props.name, rule.value as string, rule.message)
+            formGroup.setValidators(_fp);
+
+          }
+        });
+
+      });
+    });
+
+  }
+
+  private setFieldValidators(field: FieldUnion_Type) {
     const validators = [];
+    const rules = field.props.validation_rules || [];
     for (const [i, element] of rules.entries()) {
       if (element.type === 'required') {
         validators.push(Validators.required);
       }
-      if (element.type === 'minLength') {
+      if (element.type === 'min_length') {
         const n = Number(element.value);
         validators.push(Validators.minLength(n));
       }
-      if (element.type === 'maxLength') {
+      if (element.type === 'max_length') {
         const n = Number(element.value);
         validators.push(Validators.maxLength(n));
       }
@@ -44,10 +69,49 @@ export class DynamicFormService {
         validators.push(Validators.email);
       }
       if (element.type === 'tel') {
-        validators.push(Validators.pattern(/^\+?([0-9]{1,3})?[-. (]*([0-9]{3})[-. )]*[0-9]{3}[-. ]*[0-9]{4}$/));
+        // validators.push(Validators.pattern(/^\+?([0-9]{1,3})?[-. (]*([0-9]{3})[-. )]*[0-9]{3}[-. ]*[0-9]{4}$/));
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.pattern(/^\+?([0-9]{1,3})?[-. (]*([0-9]{3})[-. )]*[0-9]{3}[-. ]*[0-9]{4}$/)(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El formato de teléfono no es válido',
+                // customType: 'tel'
+              }
+            };
+          }
+          return null;
+        });
       }
       if (element.type === 'url') {
-        validators.push(Validators.pattern(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/));
+        // validators.push(Validators.pattern(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/));
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.pattern(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El formato de la URL no es válido',
+                // customType: 'url'
+              }
+            };
+          }
+          return null;
+        });
+      }
+      if (element.type === 'password') {
+        // validators.push(Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/));
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'La contraseña no cumple con el formato requerido',
+                // customType: 'password'
+              }
+            };
+          }
+          return null;
+        });
       }
 
     }

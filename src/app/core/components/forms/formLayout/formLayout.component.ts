@@ -4,11 +4,13 @@ import { LayoutRow_I } from '../interfaces';
 import { JsonPipe } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TextInputFieldComponent } from '../fields/textInputField/textInputField.component';
+import { CheckboxInputFieldComponent } from '../fields/checkboxInputField/checkboxInputField.component';
 
 @Component({
   selector: 'app-form-layout',
   imports: [
     TextInputFieldComponent,
+    CheckboxInputFieldComponent,
     ReactiveFormsModule,
     // JsonPipe
   ],

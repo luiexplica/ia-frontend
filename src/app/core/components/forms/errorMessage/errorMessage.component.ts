@@ -8,6 +8,9 @@ import { get_fieldStatusColor } from '../common/common';
   imports: [],
   templateUrl: './errorMessage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: " !h-fit w-full leading-normal"
+  }
 })
 export class ErrorMessageComponent {
 

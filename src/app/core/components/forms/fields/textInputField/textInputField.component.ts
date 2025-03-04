@@ -13,7 +13,6 @@ import { ErrorMessageComponent } from '@components/forms/errorMessage/errorMessa
     DUIInput,
     ErrorMessageComponent,
     ReactiveFormsModule,
-    // JsonPipe,
     NgClass
   ],
   templateUrl: './textInputField.component.html',
@@ -33,8 +32,8 @@ export class TextInputFieldComponent extends FieldHandler implements OnInit {
   }
   atts = input<TextField_I>(this.default);
   formRef = input<FormGroup>(new FormGroup({}));
-
   id = signal<string>('');
+
   ngOnInit(): void {
     this.initComponent();
 
@@ -44,8 +43,6 @@ export class TextInputFieldComponent extends FieldHandler implements OnInit {
     this.setDefaults();
     this.setId();
     this.listenFieldChanges( this.formRef(), this.atts() );
-
-    // this.setMessage('hola mundo');
 
   }
 
@@ -63,15 +60,5 @@ export class TextInputFieldComponent extends FieldHandler implements OnInit {
     });
 
   }
-
-/*   listenFieldChanges() {
-
-    this.formRef().valueChanges.subscribe((value) => {
-      // get control
-      const control = this.formRef().get(this.atts().name);
-    })
-
-  }
- */
 
 }

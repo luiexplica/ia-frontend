@@ -1,125 +1,46 @@
 <section class="grid items-center h-screen lg:grid-cols-2">
 
-  <div class="relative p-8 my-auto text-center sm:p-10 md:p-20 xl:px-32 xl:py-24" >
+  <div class="relative p-8 my-auto text-center sm:p-10 md:p-20 xl:px-32 xl:py-24">
 
-  <div class="absolute left-0 right-0 mx-auto -top-14 hover:cursor-pointer pcTab:-top-2 w-fit logoSection"
-  (click)="goTo('home')"
-  >
-    <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
-  </div>
+    <div class="absolute left-0 right-0 mx-auto -top-14 hover:cursor-pointer pcTab:-top-2 w-fit logoSection"
+      (click)="goTo('home')">
+      <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
+    </div>
 
-    <h3
-      class="block mb-2 font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
-    >
+    <h3 class="block mb-2 font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
       Registro de usuario
     </h3>
-    <p
-      class="block mb-12 font-sans text-base antialiased font-normal leading-relaxed text-gray-700"
-    >
+    <p class="block mb-12 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
       Enter your email and password to sign in
     </p>
-    <form  class="mx-auto max-w-[24rem] text-left">
-      <div class="mb-6">
-        <label for="email"
-          ><p
-            class="block mb-2 font-sans text-sm antialiased font-medium leading-normal text-gray-900 text-inherit"
-          >
-            Correo electrónico
-          </p></label
-        >
-        <div class="relative h-11 w-full min-w-[200px]">
-          <input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="name@mail.com"
-            class="h-full w-full rounded-md border border-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-          />
-        </div>
-      </div>
-      <div class="mb-6">
-        <label for="password"
-          ><p
-            class="block mb-2 font-sans text-sm antialiased font-medium leading-normal text-gray-900 text-inherit"
-          >
-            Contraseña
-          </p></label
-        >
-        <div class="relative h-11 w-full min-w-[200px]">
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="********"
-            class="h-full w-full rounded-md border border-blue-gray-200 bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:!border-t-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-          />
-        </div>
-        <div class="inline-flex items-center">
-          <label
-            class="relative flex items-center cursor-pointer p-3 rounded-full -ml-2.5"
-            htmlFor="ripple-on"
-            for=":r1:"
-            data-ripple-dark="true"
-          >
-            <input
-              id="ripple-on"
-              type="checkbox"
-              class="peer relative appearance-none w-5 h-5 border rounded-md border-blue-gray-200 cursor-pointer transition-all before:content[''] before:block before:bg-blue-gray-500 before:w-12 before:h-12 before:rounded-full before:absolute before:top-2/4 before:left-2/4 before:-translate-y-2/4 before:-translate-x-2/4 before:opacity-0 hover:before:opacity-10 before:transition-opacity checked:bg-gray-900 checked:border-gray-900 checked:before:bg-gray-900"
-              id=":r1:"
-            />
-            <span
-              class="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-3.5 w-3.5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                stroke="currentColor"
-                stroke-width="1"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </span>
-          </label>
-          <label
-            class="mt-px font-light text-gray-700 cursor-pointer select-none"
-            for=":r1:"
-            ><p
-              class="antialiased font-sans text-sm leading-normal flex font-medium items-center !text-gray-500"
-            >
-              I agree with the &nbsp;<a
-                class="block font-sans text-sm antialiased font-medium leading-normal underline text-blue-gray-900"
-                >Terms and Conditions</a
-              >
-            </p></label
-          >
-        </div>
+
+    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="mx-auto max-w-[24rem] text-left space-y-4">
+
+      <app-form-layout [formRows]="formRows()" [formRef]="form()">
+      </app-form-layout>
+
+      <div class="footerForm">
+        <app-button [fullWidth]="true" (onClick)="onSubmit()" [size]="'md'">
+          <span text>
+            Enviar
+          </span>
+        </app-button>
       </div>
 
+    </form>
+
+    <div class="mx-auto max-w-[24rem] text-left">
       <hr class="my-4">
-      <p
-        class="block font-sans text-base antialiased font-normal leading-relaxed text-left text-gray-700"
-      >
+      <p class="block font-sans text-base antialiased font-normal leading-relaxed text-center text-gray-700">
         ¿Ya tienes cuenta?
-        <a
-        [routerLink]="['/login']"
-         class="font-bold text-gray-900">
+        <a [routerLink]="['/login']" class="font-bold text-gray-900">
           Inicia sesión ahora
         </a>
       </p>
-    </form>
+    </div>
+
   </div>
 
-
-    <img
-    src="https://www.material-tailwind.com/img/bg-sign-in.avif"
-    alt="background image"
-    class="hidden object-cover w-full h-screen lg:block"
-  />
+  <img src="https://www.material-tailwind.com/img/bg-sign-in.avif" alt="background image" class="hidden object-cover w-full h-screen lg:block" />
 
 </section>

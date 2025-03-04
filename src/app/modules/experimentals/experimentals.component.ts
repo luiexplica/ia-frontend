@@ -30,6 +30,7 @@ export class ExperimentalsComponent implements OnInit {
     private dynamicFormService: DynamicFormService
   ) {
     this.form.set(this.dynamicFormService.generateForm(this.formRows()));
+
   }
 
   ngOnInit() {
@@ -38,22 +39,22 @@ export class ExperimentalsComponent implements OnInit {
   }
 
   onSubmit() {
-
-    this.form().markAllAsTouched();
-
+    // this.form().markAllAsTouched();
+    // emit validations now
     if (this.form().valid) {
       console.log('Formulario enviado:', this.form().value);
     } else {
+      this.form().updateValueAndValidity();
       console.log('Formulario inválido');
     }
 
   }
 
   listenChanges(){
-    // console.log('init');
     this.form().valueChanges.subscribe(value => {
       // console.log('form', this.form().controls);
     });
+
   }
 
 }
