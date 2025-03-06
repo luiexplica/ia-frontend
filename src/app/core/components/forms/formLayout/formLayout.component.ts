@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, input, OnInit } from '@angular/core';
-import { LayoutRow_I } from '../interfaces';
+import { LayoutRow_I, Meta_Form_I } from '../interfaces';
 
 import { JsonPipe } from '@angular/common';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -17,21 +17,10 @@ import { CheckboxInputFieldComponent } from '@components/forms/fields/checkboxIn
   templateUrl: './formLayout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormLayoutComponent implements AfterViewInit {
+export class FormLayoutComponent  {
 
   formRef = input<FormGroup>(new FormGroup({}));
   formRows = input<LayoutRow_I[]>([]);
 
-  // ngOnInit(): void {
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      Object.values(this.formRef().controls).forEach(control => {
-        control.markAsPristine();
-        control.markAsUntouched();
-      });
-
-    }, 500);
-
-  }
 
 }

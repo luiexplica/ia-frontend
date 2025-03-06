@@ -1,5 +1,5 @@
 import { AbstractControl, FormGroup } from "@angular/forms";
-import { TextField_I } from "../interfaces";
+import { Meta_Form_I, TextField_I } from "../interfaces";
 import { signal } from "@angular/core";
 
 export class FieldHandler {
@@ -25,7 +25,8 @@ export class FieldHandler {
 
     formRef.valueChanges.subscribe((value) => {
 
-      console.log('value', value);
+      let meta: Meta_Form_I = formRef.controls['metaForm'].value;
+      if(!meta.submitted) return;
 
       const control = formRef.get(atts.name);
       if (control) {
@@ -47,8 +48,6 @@ export class FieldHandler {
 
     const errors = control.errors;
     if (!errors) return;
-    // console.log('errors', errors);
-    // console.log('control', control);
 
     const errorMessage = errors[Object.keys(errors)[0]].message;
     this.setMessage(errorMessage || '');

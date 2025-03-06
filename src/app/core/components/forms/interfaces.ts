@@ -184,7 +184,7 @@ export interface Meta_Form_I {
   submitted: boolean;
 }
 
-export interface Form_I <T = any> {
-  data: T;
+export interface Form_I {
+  [x: string]: any,
   metaForm: Meta_Form_I;
  }

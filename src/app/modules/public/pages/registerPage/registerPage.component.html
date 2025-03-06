@@ -1,8 +1,8 @@
-<section class="grid items-center h-screen lg:grid-cols-2">
+<section class="grid lg:grid-cols-2">
 
-  <div class="relative p-8 my-auto text-center sm:p-10 md:p-20 xl:px-32 xl:py-24">
+  <div class="relative h-full p-8 py-20 pt-24 my-auto text-center md:p-20 xl:px-32 xl:py-24">
 
-    <div class="absolute left-0 right-0 mx-auto -top-14 hover:cursor-pointer pcTab:-top-2 w-fit logoSection"
+    <div class="absolute left-0 right-0 mx-auto top-2 md:top-4 hover:cursor-pointer w-fit logoSection"
       (click)="goTo('home')">
       <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
     </div>
@@ -10,7 +10,7 @@
     <h3 class="block mb-2 font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
       Registro de usuario
     </h3>
-    <p class="block mb-12 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+    <p class="block mb-6 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
       Enter your email and password to sign in
     </p>
 
@@ -41,6 +41,6 @@
 
   </div>
 
-  <img src="https://www.material-tailwind.com/img/bg-sign-in.avif" alt="background image" class="hidden object-cover w-full h-screen lg:block" />
+  <img src="https://www.material-tailwind.com/img/bg-sign-in.avif" alt="background image" class="hidden object-cover w-full h-max lg:block" />
 
 </section>

@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { FieldUnion_Type, LayoutRow_I, Meta_Form_I } from '../interfaces';
+import { FieldUnion_Type, Form_I, LayoutRow_I, Meta_Form_I } from '../interfaces';
 import { sameValue_Validator } from '@components/forms/customValidators/sameField.validator';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DynamicFormService {
+
 
   constructor(private fb: FormBuilder) {
 
@@ -15,6 +16,7 @@ export class DynamicFormService {
   generateForm(layout: LayoutRow_I[]): FormGroup {
 
     const formGroup = this.fb.group({});
+
     layout.forEach((row) => {
       row.fields.forEach((field) => {
         const control = this.fb.control(
@@ -26,7 +28,6 @@ export class DynamicFormService {
     });
 
     this.setMetaForm(formGroup);
-
     this.setGlobalValidators(formGroup, layout);
     return formGroup;
 
@@ -37,8 +38,16 @@ export class DynamicFormService {
     const metaForm: Meta_Form_I = {
       submitted: false
     }
-
     formGroup.addControl('metaForm', this.fb.control(metaForm));
+
+  }
+
+  setSubmitted(formGroup: FormGroup) {
+    let metaForm: Meta_Form_I = formGroup.controls['metaForm'].value;
+    formGroup.controls['metaForm'].setValue({
+      ...metaForm,
+      submitted: true
+    });
   }
 
   private setGlobalValidators(formGroup: FormGroup, layout: LayoutRow_I[]) {

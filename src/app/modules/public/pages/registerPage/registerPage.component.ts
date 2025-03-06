@@ -58,6 +58,7 @@ export class RegisterPageComponent {
   }
 
   onSubmit() {
+    this.dynamicFormService.setSubmitted(this.form());
     if (this.form().valid) {
       console.log('Formulario enviado:', this.form().value);
       this.emitSubmit();
