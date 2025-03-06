@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { FieldUnion_Type, LayoutRow_I, ValidationRule_I } from '../interfaces';
-import { sameValue_Validator } from '../customValidators/sameField.validator';
-
+import { FieldUnion_Type, LayoutRow_I, Meta_Form_I } from '../interfaces';
+import { sameValue_Validator } from '@components/forms/customValidators/sameField.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,8 @@ export class DynamicFormService {
   }
 
   generateForm(layout: LayoutRow_I[]): FormGroup {
-    const formGroup = this.fb.group({});
 
+    const formGroup = this.fb.group({});
     layout.forEach((row) => {
       row.fields.forEach((field) => {
         const control = this.fb.control(
@@ -25,10 +24,21 @@ export class DynamicFormService {
         formGroup.addControl(field.props.name, control);
       });
     });
-    this.setGlobalValidators(formGroup, layout);
 
+    this.setMetaForm(formGroup);
+
+    this.setGlobalValidators(formGroup, layout);
     return formGroup;
 
+  }
+
+  private setMetaForm(formGroup: FormGroup) {
+
+    const metaForm: Meta_Form_I = {
+      submitted: false
+    }
+
+    formGroup.addControl('metaForm', this.fb.control(metaForm));
   }
 
   private setGlobalValidators(formGroup: FormGroup, layout: LayoutRow_I[]) {
@@ -39,7 +49,7 @@ export class DynamicFormService {
         const rules = field.props.validation_rules || [];
         rules.forEach(rule => {
           if (rule.type === 'same_valueField') {
-            const _fp = sameValue_Validator(field.props.name, rule )
+            const _fp = sameValue_Validator(field.props.name, rule)
             formGroup.setValidators(_fp);
 
           }
@@ -51,6 +61,7 @@ export class DynamicFormService {
   }
 
   private setFieldValidators(field: FieldUnion_Type) {
+
     const validators = [];
     const rules = field.props.validation_rules || [];
     for (const [i, element] of rules.entries()) {
@@ -67,6 +78,7 @@ export class DynamicFormService {
             };
           }
           return null;
+
         });
       }
       if (element.type === 'min_length') {
@@ -83,6 +95,7 @@ export class DynamicFormService {
             };
           }
           return null;
+
         });
       }
       if (element.type === 'max_length') {
@@ -99,22 +112,24 @@ export class DynamicFormService {
             };
           }
           return null;
+
         });
       }
       if (element.type === 'email') {
         // validators.push(Validators.email);
-             validators.push((control: AbstractControl): ValidationErrors | null => {
-               const error = Validators.email(control);
-               if (error) {
-                 return {
-                   [element.type]: {
-                     message: element.message || 'El formato de correo no es válido',
-                     // customType: 'email'
-                   }
-                 };
-               }
-               return null;
-             });
+        validators.push((control: AbstractControl): ValidationErrors | null => {
+          const error = Validators.email(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El formato de correo no es válido',
+                // customType: 'email'
+              }
+            };
+          }
+          return null;
+
+        });
       }
       if (element.type === 'tel') {
         // validators.push(Validators.pattern(/^\+?([0-9]{1,3})?[-. (]*([0-9]{3})[-. )]*[0-9]{3}[-. ]*[0-9]{4}$/));
@@ -129,6 +144,7 @@ export class DynamicFormService {
             };
           }
           return null;
+
         });
       }
       if (element.type === 'url') {
@@ -144,6 +160,7 @@ export class DynamicFormService {
             };
           }
           return null;
+
         });
       }
       if (element.type === 'password') {
@@ -159,11 +176,26 @@ export class DynamicFormService {
             };
           }
           return null;
+
         });
       }
+      if (element.type === 'required_true') {
+        validators.push((control: AbstractControl): ValidationErrors | null => {
 
+          const error = Validators.requiredTrue(control);
+          if (error) {
+            return {
+              [element.type]: {
+                message: element.message || 'El campo es requerido',
+                // customType: 'required_true'
+              }
+            };
+          }
+          return null;
+
+        });
+      }
     }
-
     return validators;
 
   }

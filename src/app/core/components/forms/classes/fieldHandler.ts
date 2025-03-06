@@ -5,14 +5,28 @@ import { signal } from "@angular/core";
 export class FieldHandler {
 
   errorMessage = signal<string>('');
+  initField = signal<boolean>(false)
 
   constructor() {
     this.clearErrorMessage();
+    this.init();
+
+  }
+
+  init() {
+    setTimeout(() => {
+        this.initField.set(true);
+
+    }, 100);
 
   }
 
   listenFieldChanges(formRef: FormGroup, atts: any) {
+
     formRef.valueChanges.subscribe((value) => {
+
+      console.log('value', value);
+
       const control = formRef.get(atts.name);
       if (control) {
         (control.invalid) ? this.catchErrors(control) : this.clearErrorMessage();
@@ -27,15 +41,15 @@ export class FieldHandler {
     if (a.toLowerCase() === b.toLowerCase()) return true;
     if (a.replace('_', '') === b.replace('_', '')) return true;
     return false;
-
   }
 
   catchErrors(control: AbstractControl) {
 
     const errors = control.errors;
     if (!errors) return;
+    // console.log('errors', errors);
+    // console.log('control', control);
 
-    console.log('errors', errors);
     const errorMessage = errors[Object.keys(errors)[0]].message;
     this.setMessage(errorMessage || '');
 

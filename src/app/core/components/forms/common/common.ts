@@ -30,8 +30,3 @@ export const get_fieldStatusColor = (status: FieldStatus_Type) => {
   }
 
 }
-
-
-
-      // "text-rose-400"
-      // "text-emerald-400"

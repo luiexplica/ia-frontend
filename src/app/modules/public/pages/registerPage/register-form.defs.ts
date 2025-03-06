@@ -86,12 +86,11 @@ export const registerFormDef: LayoutRow_I[] = [
               layer: 'field',
               message: 'Contraseña requerida'
             },
-            {
-              type: 'min_length',
-              layer: 'field',
-              value: 6,
-              message: 'Debe tener al menos 6 caracteres'
-            }
+                {
+              type: "password",
+              layer: "field",
+              message: 'Formato de contraseña no válido',
+            },
           ],
         }
       },
@@ -109,12 +108,11 @@ export const registerFormDef: LayoutRow_I[] = [
               layer: 'field',
               message: 'Confirmación de contraseña requerida'
             },
-            {
-              type: 'min_length',
-              layer: 'field',
-              value: 6,
-              message: 'Debe tener al menos 6 caracteres'
-            }
+                {
+              type: "password",
+              layer: "field",
+              message: 'Formato de contraseña no válido',
+            },
           ],
         }
       },
@@ -128,7 +126,7 @@ export const registerFormDef: LayoutRow_I[] = [
           classes: "w-full",
           validation_rules: [
             {
-              type: 'required',
+              type: 'required_true',
               layer: 'field',
               message: 'Debes aceptar los términos y condiciones'
             }

@@ -16,33 +16,34 @@ import { FieldHandler } from '../../classes/fieldHandler';
 })
 export class CheckboxInputFieldComponent extends FieldHandler implements OnInit {
 
-   default: CheckBoxField_I = {
-       name: '--check--',
-       label: 'Checkbox',
-       validation_rules: [],
-       classes: 'w-full',
-    }
+  default: CheckBoxField_I = {
+    name: '--check--',
+    label: 'Checkbox',
+    validation_rules: [],
+    classes: 'w-full',
 
-    atts = input<CheckBoxField_I>(this.default);
-    formRef = input<FormGroup>(new FormGroup({}));
-    id = signal<string>('');
+  }
 
-    ngOnInit(): void {
-      this.initComponent();
+  atts = input<CheckBoxField_I>(this.default);
+  formRef = input<FormGroup>(new FormGroup({}));
+  id = signal<string>('');
 
-    }
+  ngOnInit(): void {
+    this.initComponent();
 
-    initComponent() {
-      this.setId();
-      this.listenFieldChanges( this.formRef(), this.atts() );
+  }
 
-    }
+  initComponent() {
+    this.setId();
+    this.listenFieldChanges(this.formRef(), this.atts());
 
-    setId() {
-      const _id = 'checkbox-field-' + Math.random().toString(36).substring(7);
-      this.id.set(_id);
+  }
 
-    }
+  setId() {
+    const _id = 'checkbox-field-' + Math.random().toString(36).substring(7);
+    this.id.set(_id);
+
+  }
 
 
 }

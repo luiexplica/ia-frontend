@@ -6,7 +6,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FieldHandler } from '@components/forms/classes/fieldHandler';
 import { ErrorMessageComponent } from '@components/forms/errorMessage/errorMessage.component';
 
-
 @Component({
   selector: 'app-text-input-field',
   imports: [

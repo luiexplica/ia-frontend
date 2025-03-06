@@ -11,6 +11,7 @@ export interface ValidationsRule_Separate_I {
 
 const type_array_default = [
   "required",
+  "required_true",
   "select_single_required",
   "select_multi_required",
   "not_required",
@@ -179,3 +180,11 @@ export interface LayoutRow_I {
   classes?: string
 }
 
+export interface Meta_Form_I {
+  submitted: boolean;
+}
+
+export interface Form_I <T = any> {
+  data: T;
+  metaForm: Meta_Form_I;
+ }

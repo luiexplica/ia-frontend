@@ -27,11 +27,15 @@ export class RegisterPageComponent {
   layoutGlobalService = inject(LayoutGlobalService);
 
   constructor(
-    private fb: FormBuilder,
+    // private fb: FormBuilder,
     private dynamicFormService: DynamicFormService,
     private router: Router
 
   ) {
+    this.initForm();
+  }
+
+  initForm(){
     this.form.set(this.dynamicFormService.generateForm(this.formRows()));
 
   }

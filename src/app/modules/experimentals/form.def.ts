@@ -131,7 +131,7 @@ export const formExperimental: LayoutRow_I[] = [
           classes: "w-full",
           validation_rules: [
             {
-              type: 'required',
+              type: 'required_true',
               layer: 'field',
               message: 'Debes aceptar los términos y condiciones'
             }
