@@ -2,3 +2,8 @@
 .trans {
   transition: all 0.25s ease-in-out;
 }
+
+.footerForm  {
+  // @apply mt-10
+  @apply pt-2;
+}
