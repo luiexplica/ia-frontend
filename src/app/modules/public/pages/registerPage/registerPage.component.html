@@ -1,6 +1,6 @@
-<section class="grid lg:grid-cols-2">
+<section class="grid h-screen gap-2 lg:grid-cols-2">
 
-  <div class="relative h-full p-8 py-20 pt-24 my-auto text-center md:p-20 xl:px-32 xl:py-24">
+  <div class="relative p-8 py-20 pt-24 my-auto text-center md:p-20 xl:px-32 xl:py-24">
 
     <div class="absolute left-0 right-0 mx-auto top-2 md:top-4 hover:cursor-pointer w-fit logoSection"
       (click)="goTo('home')">
@@ -41,6 +41,7 @@
 
   </div>
 
-  <img src="https://www.material-tailwind.com/img/bg-sign-in.avif" alt="background image" class="hidden object-cover w-full h-max lg:block" />
+  <div class="h-full" style="background-image: url('https://www.material-tailwind.com/img/bg-sign-in.avif'); background-size: cover;">
+  </div>
 
 </section>
