@@ -21,7 +21,7 @@ export class ToastsService {
     type: "default"
   }
 
-  duration: number = 2500;
+  duration: number = 3500;
 
   emitToast({ position, title, message, type }: Toast_I) {
 
