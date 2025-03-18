@@ -9,13 +9,9 @@ import { setFieldValidators } from './setValidators';
 })
 export class DynamicFormService {
 
-
-  constructor(private fb: FormBuilder) {
-
-  }
+  constructor(private fb: FormBuilder) {}
 
   generateForm(layout: LayoutRow_I[]): FormGroup {
-
     const formGroup = this.fb.group({});
 
     layout.forEach((row) => {
@@ -35,7 +31,6 @@ export class DynamicFormService {
   }
 
   private setMetaForm(formGroup: FormGroup) {
-
     const metaForm: Meta_Form_I = {
       submitted: false
     }
@@ -49,10 +44,10 @@ export class DynamicFormService {
       ...metaForm,
       submitted: true
     });
+
   }
 
   private setGlobalValidators(formGroup: FormGroup, layout: LayoutRow_I[]) {
-
     layout.forEach((row) => {
       row.fields.forEach((field) => {
 
@@ -72,6 +67,12 @@ export class DynamicFormService {
 
   getFormValues<T = any>(formGroup: FormGroup): T {
     return formGroup.value as T;
+
+  }
+
+  setFormValues<T = any>(formGroup: FormGroup, values: T) {
+    formGroup.patchValue(values as any);
+
   }
 
 }

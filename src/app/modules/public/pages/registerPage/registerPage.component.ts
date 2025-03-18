@@ -1,13 +1,14 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { RouterLink, Router } from '@angular/router';
-import { LayoutGlobalService } from '@services/layoutGlobal.service';
+import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
 import { LayoutRow_I } from '@components/forms/interfaces';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
 import { RegisterForm_I, registerFormDef } from './register-form.defs';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '@services/auth.service';
+import { ToastsService } from '@core/services/toasts.service';
 
 @Component({
   selector: 'app-register-page',
@@ -30,13 +31,14 @@ export class RegisterPageComponent {
   authService = inject(AuthService);
   router = inject(Router);
   dynamicFormService = inject(DynamicFormService);
+  toastService = inject(ToastsService);
 
   constructor(
   ) {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.form.set(this.dynamicFormService.generateForm(this.formRows()));
 
   }
@@ -46,6 +48,15 @@ export class RegisterPageComponent {
     this.layoutGlobalService.hideNavbar.set(true);
     this.layoutGlobalService.hideFooter.set(true);
 
+    this.dynamicFormService.setFormValues<RegisterForm_I>(this.form(), {
+      email: 'alvarosego01@gmail.com',
+      name: 'alvaro',
+      last_name: 'segovia',
+      password: 'Aa_12345',
+      password_confirm: 'Aa_12345',
+      terms_conditions: true
+    })
+
   }
 
   goTo(route: string) {
@@ -54,24 +65,22 @@ export class RegisterPageComponent {
 
   }
 
-  onSubmit() {
+  async onSubmit() {
 
     this.dynamicFormService.setSubmitted(this.form());
-    if (this.form().valid) {
-
-      const r = this.dynamicFormService.getFormValues<RegisterForm_I>(this.form());
-      this.authService.register({
-        email: r.email,
-        password: r.password,
-        name: r.name,
-        last_name: r.last_name
-      })
-
-    } else {
+    if (!this.form().valid) {
       this.form().updateValueAndValidity();
-      console.log('Formulario inválido');
-
+      return;
     }
+    const formValues = this.dynamicFormService.getFormValues<RegisterForm_I>(this.form());
+
+    await this.authService.register({
+      email: formValues.email,
+      password: formValues.password,
+      name: formValues.name,
+      last_name: formValues.last_name
+    })
+
 
   }
 

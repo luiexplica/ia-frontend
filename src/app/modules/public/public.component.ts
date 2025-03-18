@@ -1,5 +1,5 @@
 
-import { LayoutGlobalService } from '@services/layoutGlobal.service';
+import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
 import { ChangeDetectionStrategy, Component, signal, effect, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from '@components/shared/navBar/navBar.component';

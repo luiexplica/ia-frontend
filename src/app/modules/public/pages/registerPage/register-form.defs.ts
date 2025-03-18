@@ -8,6 +8,7 @@ export interface RegisterForm_I {
   email: string;
   password: string;
   password_confirm: string;
+  terms_conditions: boolean;
 
  }
 
