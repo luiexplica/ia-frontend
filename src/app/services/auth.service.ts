@@ -3,7 +3,8 @@ import { environment } from '@envs/environment.development';
 import { ApiHttpService } from '@core/services/api-http.service';
 
 import { AuthRegister_Dto, Response_I } from "@luiexplica/ia-dev-services"
-import { firstValueFrom } from 'rxjs';
+import Backend_Api from '../core/api/axiosBase';
+import { handlerError } from '../core/api/handlerError';
 
 @Injectable({
   providedIn: 'root',
@@ -11,19 +12,16 @@ import { firstValueFrom } from 'rxjs';
 export class AuthService {
 
   apiUrl = signal(environment._SERVICE + "/auth");
-  api = inject(ApiHttpService);
+  // api = inject(ApiHttpService);
 
-  register(data: AuthRegister_Dto): Promise<Response_I> {
+  register(data: AuthRegister_Dto) {
 
     const url = `${this.apiUrl()}/register`;
-    return new Promise(async (resolve, reject) => {
-      this.api._post(url, data).subscribe((resp: Response_I) => {
-        resolve(resp);
-      }, (err: Response_I) => {
-        reject(err as Response_I);
-      })
+    return Backend_Api.post(url, {
+      ...data
+    });
+    // let r: Response_I = handlerError(error);
 
-    })
   }
 
 }

@@ -9,6 +9,8 @@ import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.com
 import { RegisterForm_I, registerFormDef } from './register-form.defs';
 import { AuthService } from '@services/auth.service';
 import { ToastsService } from '@core/services/toasts.service';
+import { Response_I } from '@luiexplica/ia-dev-services';
+import { handlerError } from '../../../../core/api/handlerError';
 
 @Component({
   selector: 'app-register-page',
@@ -74,13 +76,30 @@ export class RegisterPageComponent {
     }
     const formValues = this.dynamicFormService.getFormValues<RegisterForm_I>(this.form());
 
-    await this.authService.register({
-      email: formValues.email,
-      password: formValues.password,
-      name: formValues.name,
-      last_name: formValues.last_name
-    })
+    try {
 
+      await this.authService.register({
+        email: formValues.email,
+        password: formValues.password,
+        name: formValues.name,
+        last_name: formValues.last_name
+      });
+
+      this.toastService.emitToast({
+        title: 'Usuario registrado',
+        type: 'success'
+      })
+
+    } catch (error) {
+
+      const err = handlerError(error);
+      const msg = err.message || 'Error al registrar usuario';
+      this.toastService.emitToast({
+        title: msg,
+        type: 'error'
+      });
+
+    }
 
   }
 
