@@ -1,6 +1,16 @@
 
 import { LayoutRow_I } from "@components/forms/interfaces";
 
+export interface RegisterForm_I {
+
+  name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  password_confirm: string;
+
+ }
+
 export const registerFormDef: LayoutRow_I[] = [
   {
     fields: [

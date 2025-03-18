@@ -6,7 +6,8 @@ import { LayoutGlobalService } from '@services/layoutGlobal.service';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
 import { LayoutRow_I } from '@components/forms/interfaces';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
-import { registerFormDef } from './register-form.defs';
+import { RegisterForm_I, registerFormDef } from './register-form.defs';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -26,11 +27,11 @@ export class RegisterPageComponent {
 
   layoutGlobalService = inject(LayoutGlobalService);
 
-  constructor(
-    // private fb: FormBuilder,
-    private dynamicFormService: DynamicFormService,
-    private router: Router
+  authService = inject(AuthService);
+  router = inject(Router);
+  dynamicFormService = inject(DynamicFormService);
 
+  constructor(
   ) {
     this.initForm();
   }
@@ -47,10 +48,6 @@ export class RegisterPageComponent {
 
   }
 
-  emitSubmit() {
-
-  }
-
   goTo(route: string) {
     this.layoutGlobalService.setLayoutDefault();
     this.router.navigate([route]);
@@ -58,13 +55,22 @@ export class RegisterPageComponent {
   }
 
   onSubmit() {
+
     this.dynamicFormService.setSubmitted(this.form());
     if (this.form().valid) {
-      console.log('Formulario enviado:', this.form().value);
-      this.emitSubmit();
+
+      const r = this.dynamicFormService.getFormValues<RegisterForm_I>(this.form());
+      this.authService.register({
+        email: r.email,
+        password: r.password,
+        name: r.name,
+        last_name: r.last_name
+      })
+
     } else {
       this.form().updateValueAndValidity();
       console.log('Formulario inválido');
+
     }
 
   }

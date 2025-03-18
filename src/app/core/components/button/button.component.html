@@ -1,15 +1,19 @@
 
 <dui-button
-className="{{ this.style_class() }} "
-[attr.className]="this.buttonClasses()"
-[variant]="this.variant()"
-[size]="this.size()"
-[rounded]="this.rouded()"
-[ripple]="this.ripple()"
-[fullWidth]="this.fullWidth()"
-(click)="click()"
-[attr.type]="'button'"
->
-  <ng-content select="[icon]"></ng-content>
+  className="{{ this.style_class() }} "
+  [attr.className]="this.buttonClasses()"
+  [variant]="this.variant()"
+  [size]="this.size()"
+  [rounded]="this.rouded()"
+  [ripple]="this.ripple()"
+  [fullWidth]="this.fullWidth()"
+  (click)="click()"
+  [attr.type]="'button'"
+  >
+  @if (!isLoading()) {
+    <ng-content select="[icon]"></ng-content>
+  } @else {
+
+  }
   <ng-content select="[text]"></ng-content>
 </dui-button>

@@ -14,7 +14,9 @@
       Enter your email and password to sign in
     </p>
 
-    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="mx-auto max-w-[24rem] text-left space-y-4">
+    <!-- (ngSubmit)="onSubmit()"  -->
+    <form [formGroup]="form()"
+    class="mx-auto max-w-[24rem] text-left ">
 
       <app-form-layout [formRows]="formRows()" [formRef]="form()">
       </app-form-layout>

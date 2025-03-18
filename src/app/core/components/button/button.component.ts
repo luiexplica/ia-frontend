@@ -27,6 +27,7 @@ export class ButtonComponent implements OnInit {
   rouded = input(false);
   ripple = input<boolean>(true);
   disabled = input<boolean>(false);
+  isLoading = input<boolean>(false);
   className = input<string>('');
 
   onClick = output();

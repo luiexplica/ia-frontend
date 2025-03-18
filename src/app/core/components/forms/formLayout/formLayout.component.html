@@ -1,7 +1,7 @@
 
 <div
 [formGroup]="formRef()"
-class="flex flex-col mb-2 sm:items-center ">
+class="flex flex-col sm:items-center ">
   @for (row of formRows(); track $index) {
     <div class="grid w-full grid-cols-1 m-0 gap-6 lg:mb-s_15 last:mb-0 {{ row.classes || '' }}">
       @for (field of row.fields; track $index) {
