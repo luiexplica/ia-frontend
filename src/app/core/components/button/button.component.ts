@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, Component, input, output, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, OnInit, signal, effect } from '@angular/core';
 import { DUIButton } from 'david-ui-angular';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
@@ -33,9 +33,14 @@ export class ButtonComponent implements OnInit {
   onClick = output();
   loaded = signal(false);
 
-  style_class = signal<string>('');
   variant = signal<ButtonVariant>('filled');
   buttonClasses = signal<string>('');
+
+  buttonEffect = effect(() => {
+
+    this.setButtonClasses();
+
+  })
 
   constructor() {
   }
@@ -52,25 +57,22 @@ export class ButtonComponent implements OnInit {
 
   setButtonClasses() {
     this.setStyle();
-    this.buttonClasses.set(`
-    ${this.style_class()}
-    `)
-
   }
 
   setStyle() {
+
     if (this.buttonStyle() === 'primary') {
-      this.style_class.set(`
+      this.buttonClasses.set(`
         ${this.className()}
         bg-primaryBlue
-        !text-white,
+        !text-white
       `);
       this.variant.set('filled');
 
     }
 
     if (this.buttonStyle() === 'secondary') {
-      this.style_class.set(`
+      this.buttonClasses.set(`
         ${this.className()}
       `);
       this.variant.set('outlined');
@@ -78,7 +80,7 @@ export class ButtonComponent implements OnInit {
     }
 
     if (this.buttonStyle() === 'text') {
-      this.style_class.set(`
+      this.buttonClasses.set(`
         ${this.className()}
       `);
       this.variant.set('text');

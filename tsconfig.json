@@ -11,8 +11,8 @@
         "@components/*": ["./src/app/core/components/*"],
         "@services/*": ["./src/app/services/*"],
         "@modules/*": ["./src/app/modules/*"],
-        "@dashboard/*": ["./src/app/dashboard/*"],
-        "@public/*": ["./src/app/public/*"],
+        "@dashboard/*": ["./src/app/modules/dashboard/*"],
+        "@public/*": ["./src/app/modules/public/*"],
 
     },
     "outDir": "./dist",

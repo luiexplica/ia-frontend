@@ -1,10 +1,13 @@
 
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
-import { ChangeDetectionStrategy, Component, signal, effect, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, effect, inject, OnInit, importProvidersFrom } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from '@components/shared/navBar/navBar.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
 import { MenuItem_I } from '@interfaces/menus.interface';
+import { StoreModule } from '@ngrx/store';
+import { PublicReducers } from './store/public.reducers';
+import { RegisterReducer } from './store/reducers/register.reducer';
 
 @Component({
   selector: 'public',
@@ -12,6 +15,9 @@ import { MenuItem_I } from '@interfaces/menus.interface';
     FooterComponent,
     NavBarComponent,
     RouterOutlet,
+  ],
+  providers: [
+
   ],
   templateUrl: './public.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,17 +67,17 @@ export default class PublicComponent implements OnInit {
     this.initComponent();
   }
 
-  initComponent(){
+  initComponent() {
     this.setActiveRoute();
 
   }
 
-  setActiveRoute(){
+  setActiveRoute() {
     this.public_routes.update((routes) => {
       routes.forEach((item) => {
         item.active = false;
 
-        if(this.router.url.includes(item.id)){
+        if (this.router.url.includes(item.id)) {
           item.active = true;
         }
       });

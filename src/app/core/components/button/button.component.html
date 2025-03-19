@@ -1,19 +1,24 @@
 
 <dui-button
-  className="{{ this.style_class() }} "
-  [attr.className]="this.buttonClasses()"
-  [variant]="this.variant()"
-  [size]="this.size()"
-  [rounded]="this.rouded()"
-  [ripple]="this.ripple()"
-  [fullWidth]="this.fullWidth()"
+  className="{{ buttonClasses() }} max-h-10 relative flex flex-row justify-center items-center "
+  [variant]="variant()"
+  [size]="size()"
+  [rounded]="rouded()"
+  [ripple]="ripple()"
+  [fullWidth]="fullWidth()"
   (click)="click()"
   [attr.type]="'button'"
+  [attr.disabled]="isLoading() || disabled()"
   >
   @if (!isLoading()) {
     <ng-content select="[icon]"></ng-content>
+     <ng-content select="[text]"></ng-content>
   } @else {
-
+    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+          <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+        </circle>
+      </svg>
   }
-  <ng-content select="[text]"></ng-content>
+
 </dui-button>

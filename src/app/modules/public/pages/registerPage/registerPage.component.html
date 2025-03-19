@@ -22,7 +22,9 @@
       </app-form-layout>
 
       <div class="footerForm">
-        <app-button [fullWidth]="true" (onClick)="onSubmit()" [size]="'md'">
+        <app-button
+        [isLoading]="this.isLoading()"
+        [fullWidth]="true" (onClick)="onSubmit()" [size]="'md'">
           <span text>
             Enviar
           </span>
@@ -30,6 +32,10 @@
       </div>
 
     </form>
+
+    <pre>
+      {{ this.isLoading() }}
+    </pre>
 
     <div class="mx-auto max-w-[24rem] text-left">
       <hr class="my-4">
