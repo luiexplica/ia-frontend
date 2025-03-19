@@ -9,8 +9,7 @@ import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.com
 import { RegisterForm_I, registerFormDef } from './register-form.defs';
 import { AuthService } from '@services/auth.service';
 import { ToastsService } from '@core/services/toasts.service';
-import { Response_I } from '@luiexplica/ia-dev-services';
-import { handlerError } from '../../../../core/api/handlerError';
+import { handlerError } from '@api/handlerError';
 
 @Component({
   selector: 'app-register-page',
