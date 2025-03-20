@@ -1,5 +1,5 @@
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { RouterLink, Router } from '@angular/router';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
@@ -22,9 +22,7 @@ import { handlerError } from '@api/handlerError';
   templateUrl: './registerPage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterPageComponent {
-
-  // private readonly store = inject(Store);
+export class RegisterPageComponent implements OnInit, OnDestroy {
 
   form = signal<FormGroup>(new FormGroup({}));
   formRows = signal<LayoutRow_I[]>([...registerFormDef])
@@ -49,11 +47,13 @@ export class RegisterPageComponent {
 
   }
 
-  ngOnInit(): void {
-    this.layoutGlobalService.layoutFullScreen.set(true);
-    this.layoutGlobalService.hideNavbar.set(true);
-    this.layoutGlobalService.hideFooter.set(true);
+  ngOnDestroy(): void {
+    this.layoutGlobalService.setLayoutDefault();
 
+  }
+
+  ngOnInit(): void {
+    this.layoutGlobalService.setLayoutFullScreen();
     // this.dynamicFormService.setFormValues<RegisterForm_I>(this.form(), {
     //   email: 'alvarosego01@gmail.com',
     //   name: 'alvaro',
@@ -72,7 +72,6 @@ export class RegisterPageComponent {
   }
 
   async onSubmit() {
-
     this.isLoading.set(true);
 
     this.dynamicFormService.setSubmitted(this.form());
@@ -83,7 +82,6 @@ export class RegisterPageComponent {
     const formValues = this.dynamicFormService.getFormValues<RegisterForm_I>(this.form());
 
     try {
-
       await this.authService.register({
         email: formValues.email,
         password: formValues.password,
@@ -97,7 +95,6 @@ export class RegisterPageComponent {
       })
 
     } catch (error) {
-
       const err = handlerError(error);
       const msg = err.message || 'Error al registrar usuario';
       this.toastService.emitToast({

@@ -18,4 +18,10 @@ export class LayoutGlobalService {
     this.hideFooter.set(false);
   }
 
+  setLayoutFullScreen(){
+    this.layoutFullScreen.set(true);
+    this.hideNavbar.set(true);
+    this.hideFooter.set(true);
+  }
+
 }

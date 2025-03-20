@@ -4,6 +4,7 @@ import { environment } from '@envs/environment.development';
 import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Auth_I } from "@luiexplica/ia-dev-services"
 import Backend_Api from '@api/axiosBase';
 import { SessionStoreService } from '@core/store/services/session.store.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,6 @@ export class AuthService {
 
         this.sessionStoreService.onLogin(resp.data!);
         this.setTokenLocalStorage(resp.data!.token);
-
 
         resolve(resp);
 

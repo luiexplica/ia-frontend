@@ -1,6 +1,6 @@
 import { LoginForm_I, loginFormDef } from './login-form.defs';
 
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
 import { ButtonComponent } from "@components/button/button.component";
 import { Router, RouterLink } from '@angular/router';
@@ -24,7 +24,7 @@ import { SessionStoreService } from '@app/core/store/services/session.store.serv
   templateUrl: './loginPage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   layoutGlobalService = inject(LayoutGlobalService);
   authService = inject(AuthService);
@@ -50,10 +50,13 @@ export class LoginPageComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+    this.layoutGlobalService.setLayoutDefault();
+
+  }
+
   ngOnInit(): void {
-    this.layoutGlobalService.layoutFullScreen.set(true);
-    this.layoutGlobalService.hideNavbar.set(true);
-    this.layoutGlobalService.hideFooter.set(true);
+    this.layoutGlobalService.setLayoutFullScreen();
 
   }
 
@@ -83,6 +86,8 @@ export class LoginPageComponent implements OnInit {
         title: 'Bienvenido',
         type: 'success'
       });
+
+      this.router.navigate(['/dashboard']);
 
     } catch (error) {
 
