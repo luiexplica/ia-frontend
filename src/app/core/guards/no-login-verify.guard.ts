@@ -1,95 +1,100 @@
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, OnDestroy } from "@angular/core";
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { CoreState_I } from "../store/app.reducers";
-
+import { filter, map, Observable, Subject, takeUntil } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class noLoginVerifyGuard {
+export class noLoginVerifyGuard implements OnDestroy {
 
-  readonly store = inject(Store)
-  readonly sessionState = this.store.selectSignal((state: CoreState_I) => state.core.session);
+  private ngUnsubscribe = new Subject()
+  readonly store: Store<CoreState_I> = inject(Store<CoreState_I>)
   router = inject(Router)
 
-  constructor(
-  ) {
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
 
   }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store.select('core', 'session').pipe(
+      takeUntil(this.ngUnsubscribe),
+      filter((sessionState) => sessionState.sessionChecked),
+      map((sessionState) => {
+        const {
+          status,
+          session: {
+            token
+          }
+        } = sessionState;
 
-    const {
-      status,
-      session: {
-        token
-      },
-      sessionChecked
-    } = this.sessionState();
+        if (
+          !(status === 'authenticated') &&
+          !token
+        ) {
+          return true;
+        }
+        this.router.navigate(['/home']);
+        return false;
 
-    console.log('estado',  this.sessionState());
-
-    if (
-      !(status === 'authenticated') &&
-      !token
-    ) {
-      return true;
-    }
-
-    this.router.navigate(['/home']);
-    console.log('fuera de aqui');
-    return false;
-
-  }
-
-  async canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-
-    const {
-      status,
-      session: {
-        token
-      },
-      sessionChecked
-    } = this.sessionState();
-
-    console.log('estado',  this.sessionState());
-
-    if (
-      !(status === 'authenticated') &&
-      !token
-    ) {
-      return true;
-    }
-
-    this.router.navigate(['/home']);
-    console.log('fuera de aqui');
-    return false;
+      })
+    )
 
   }
 
-  async canLoad(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store.select('core', 'session').pipe(
+      takeUntil(this.ngUnsubscribe),
+      filter((sessionState) => sessionState.sessionChecked),
+      map((sessionState) => {
+        const {
+          status,
+          session: {
+            token
+          }
+        } = sessionState;
 
-    const {
-      status,
-      session: {
-        token
-      },
-      sessionChecked
-    } = this.sessionState();
+        if (
+          !(status === 'authenticated') &&
+          !token
+        ) {
+          return true;
+        }
+        this.router.navigate(['/home']);
+        return false;
 
-    console.log('estado',  this.sessionState());
+      })
+    )
 
-    if (
-      !(status === 'authenticated') &&
-      !token
-    ) {
-      return true;
-    }
+  }
 
-    this.router.navigate(['/home']);
-    console.log('fuera de aqui');
-    return false;
+  canLoad(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store.select('core', 'session').pipe(
+      takeUntil(this.ngUnsubscribe),
+      filter((sessionState) => sessionState.sessionChecked),
+      map((sessionState) => {
+        const {
+          status,
+          session: {
+            token
+          }
+        } = sessionState;
+
+        if (
+          !(status === 'authenticated') &&
+          !token
+        ) {
+          return true;
+        }
+        this.router.navigate(['/home']);
+        return false;
+
+      })
+    )
 
   }
 

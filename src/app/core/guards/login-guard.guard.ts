@@ -1,88 +1,105 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { CoreState_I } from '../store/app.reducers';
-
+import { Observable, takeUntil, filter, map, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginVerifyGuard {
+export class LoginVerifyGuard implements OnDestroy {
 
-  readonly store = inject(Store)
-  readonly sessionState = this.store.selectSignal((state: CoreState_I) => state.core.session);
+  private ngUnsubscribe = new Subject()
+  readonly store: Store<CoreState_I> = inject(Store<CoreState_I>)
   router = inject(Router)
 
-  constructor(
-  ) {
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(true);
+    this.ngUnsubscribe.complete();
 
   }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store.select('core', 'session').pipe(
+      takeUntil(this.ngUnsubscribe),
+      filter((sessionState) => sessionState.sessionChecked),
+      map((sessionState) => {
+        const {
+          status,
+          sessionChecked,
+          session: {
+            token
+          }
+        } = sessionState;
 
-    const {
-      status,
-      session: {
-        token
-      },
-      sessionChecked
-    } = this.sessionState();
+        if (
+          !(status === 'authenticated') ||
+          !sessionChecked ||
+          !token
+        ) {
+          this.router.navigate(['/login']);
+          return false;
+        }
+        return true;
 
-    if (
-      !(status === 'authenticated') ||
-      !sessionChecked ||
-      !token
-    ) {
-      this.router.navigate(['/login']);
-      return false;
-    }
-
-    return true;
-
-  }
-
-  async canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-
-    const {
-      status,
-      session: {
-        token
-      },
-      sessionChecked
-    } = this.sessionState();
-
-    if (
-      !(status === 'authenticated') ||
-      !sessionChecked ||
-      !token
-    ) {
-      this.router.navigate(['/login']);
-      return false;
-    }
-
-    return true;
+      })
+    )
 
   }
 
-  async canLoad(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store.select('core', 'session').pipe(
+      takeUntil(this.ngUnsubscribe),
+      filter((sessionState) => sessionState.sessionChecked),
+      map((sessionState) => {
+        const {
+          status,
+          sessionChecked,
+          session: {
+            token
+          }
+        } = sessionState;
 
-    const {
-      status,
-      session: {
-        token
-      },
-      sessionChecked
-    } = this.sessionState();
-    if (
-      !(status === 'authenticated') ||
-      !sessionChecked ||
-      !token
-    ) {
-      this.router.navigate(['/login']);
-      return false;
-    }
+        if (
+          !(status === 'authenticated') ||
+          !sessionChecked ||
+          !token
+        ) {
+          this.router.navigate(['/login']);
+          return false;
+        }
+        return true;
 
-    return true;
+      })
+    )
+
+  }
+
+  canLoad(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store.select('core', 'session').pipe(
+      takeUntil(this.ngUnsubscribe),
+      filter((sessionState) => sessionState.sessionChecked),
+      map((sessionState) => {
+        const {
+          status,
+          sessionChecked,
+          session: {
+            token
+          }
+        } = sessionState;
+
+        if (
+          !(status === 'authenticated') ||
+          !sessionChecked ||
+          !token
+        ) {
+          this.router.navigate(['/login']);
+          return false;
+        }
+        return true;
+
+      })
+    )
 
   }
 
