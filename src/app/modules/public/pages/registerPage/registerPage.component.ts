@@ -1,5 +1,5 @@
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { RouterLink, Router } from '@angular/router';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
@@ -10,9 +10,6 @@ import { RegisterForm_I, registerFormDef } from './register-form.defs';
 import { AuthService } from '@services/auth.service';
 import { ToastsService } from '@core/services/toasts.service';
 import { handlerError } from '@api/handlerError';
-import { Store } from '@ngrx/store';
-import { PublicState_I } from '@public/store/public.reducers';
-import { registerActions } from '@public/store/actions/register.actions';
 
 @Component({
   selector: 'app-register-page',
@@ -27,7 +24,7 @@ import { registerActions } from '@public/store/actions/register.actions';
 })
 export class RegisterPageComponent {
 
-  private readonly store = inject(Store);
+  // private readonly store = inject(Store);
 
   form = signal<FormGroup>(new FormGroup({}));
   formRows = signal<LayoutRow_I[]>([...registerFormDef])
@@ -39,8 +36,7 @@ export class RegisterPageComponent {
   dynamicFormService = inject(DynamicFormService);
   toastService = inject(ToastsService);
 
-  readonly isLoading = this.store.selectSignal( (state: PublicState_I) =>  state.public.register.isLoading );
-
+  isLoading = signal(false);
 
   constructor(
   ) {
@@ -58,14 +54,14 @@ export class RegisterPageComponent {
     this.layoutGlobalService.hideNavbar.set(true);
     this.layoutGlobalService.hideFooter.set(true);
 
-    this.dynamicFormService.setFormValues<RegisterForm_I>(this.form(), {
-      email: 'alvarosego01@gmail.com',
-      name: 'alvaro',
-      last_name: 'segovia',
-      password: 'Aa_12345',
-      password_confirm: 'Aa_12345',
-      terms_conditions: true
-    })
+    // this.dynamicFormService.setFormValues<RegisterForm_I>(this.form(), {
+    //   email: 'alvarosego01@gmail.com',
+    //   name: 'alvaro',
+    //   last_name: 'segovia',
+    //   password: 'Aa_12345',
+    //   password_confirm: 'Aa_12345',
+    //   terms_conditions: true
+    // })
 
   }
 
@@ -77,9 +73,7 @@ export class RegisterPageComponent {
 
   async onSubmit() {
 
-    this.store.dispatch(registerActions.isLoading({isLoading: true}));
-
-    return
+    this.isLoading.set(true);
 
     this.dynamicFormService.setSubmitted(this.form());
     if (!this.form().valid) {
@@ -112,6 +106,8 @@ export class RegisterPageComponent {
       });
 
     }
+
+    this.isLoading.set(false);
 
   }
 

@@ -1,4 +1,4 @@
-import { loginFormDef } from './login-form.defs';
+import { LoginForm_I, loginFormDef } from './login-form.defs';
 
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
@@ -8,11 +8,15 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
 import { LayoutRow_I } from '@components/forms/interfaces';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
+import { ToastsService } from '@core/services/toasts.service';
+import { AuthService } from '@services/auth.service';
+import { handlerError } from '@api/handlerError';
+import { SessionStoreService } from '@app/core/store/services/session.store.service';
 
 @Component({
   selector: 'app-login-page',
   imports: [
-   ButtonComponent,
+    ButtonComponent,
     FormLayoutComponent,
     ReactiveFormsModule,
     RouterLink
@@ -22,22 +26,26 @@ import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.com
 })
 export class LoginPageComponent implements OnInit {
 
+  layoutGlobalService = inject(LayoutGlobalService);
+  authService = inject(AuthService);
+  sessionService = inject(SessionStoreService);
+  dynamicFormService = inject(DynamicFormService);
+  toastService = inject(ToastsService);
 
   form = signal<FormGroup>(new FormGroup({}));
   formRows = signal<LayoutRow_I[]>([...loginFormDef])
+  router = inject(Router);
 
-  layoutGlobalService = inject(LayoutGlobalService);
+  isLoading = signal(false);
 
   constructor(
-    // private fb: FormBuilder,
-    private dynamicFormService: DynamicFormService,
-    private router: Router
 
   ) {
     this.initForm();
+
   }
 
-  initForm(){
+  initForm() {
     this.form.set(this.dynamicFormService.generateForm(this.formRows()));
 
   }
@@ -49,25 +57,44 @@ export class LoginPageComponent implements OnInit {
 
   }
 
-  emitSubmit() {
-
-  }
-
   goTo(route: string) {
     this.layoutGlobalService.setLayoutDefault();
     this.router.navigate([route]);
 
   }
 
-  onSubmit() {
+  async onSubmit() {
+    this.isLoading.set(true);
+
     this.dynamicFormService.setSubmitted(this.form());
-    if (this.form().valid) {
-      console.log('Formulario enviado:', this.form().value);
-      this.emitSubmit();
-    } else {
+    if (!this.form().valid) {
       this.form().updateValueAndValidity();
-      console.log('Formulario inválido');
+      return;
     }
+    const formValues = this.dynamicFormService.getFormValues<LoginForm_I>(this.form());
+
+    try {
+      await this.authService.login({
+        email: formValues.email,
+        password: formValues.password
+      });
+
+      this.toastService.emitToast({
+        title: 'Bienvenido',
+        type: 'success'
+      });
+
+    } catch (error) {
+
+      const err = handlerError(error);
+      const msg = 'Error al iniciar sesión';
+      this.toastService.emitToast({
+        title: msg,
+        type: 'error'
+      });
+
+    }
+    this.isLoading.set(false);
 
   }
 

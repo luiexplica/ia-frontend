@@ -1,6 +1,11 @@
 
 import { LayoutRow_I } from "@components/forms/interfaces";
 
+export interface LoginForm_I {
+  email: string;
+  password: string;
+}
+
 export const loginFormDef: LayoutRow_I[] = [
   {
     fields: [
@@ -40,7 +45,7 @@ export const loginFormDef: LayoutRow_I[] = [
               layer: 'field',
               message: 'Contraseña requerida'
             },
-                {
+            {
               type: "password",
               layer: "field",
               message: 'Formato de contraseña no válido',

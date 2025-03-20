@@ -38,7 +38,12 @@ export class ButtonComponent implements OnInit {
 
   buttonEffect = effect(() => {
 
-    this.setButtonClasses();
+    // if (this.isLoading() || this.disabled()) {
+    //   this.buttonClasses.update(classes => `${classes} cursor-not-allowed`);
+
+    //   console.log('this.buttonClasses', this.buttonClasses());
+
+    // }
 
   })
 
@@ -47,26 +52,16 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.initComponent();
-
   }
 
   initComponent() {
-    this.setButtonClasses();
-
-  }
-
-  setButtonClasses() {
     this.setStyle();
   }
 
   setStyle() {
 
     if (this.buttonStyle() === 'primary') {
-      this.buttonClasses.set(`
-        ${this.className()}
-        bg-primaryBlue
-        !text-white
-      `);
+      this.buttonClasses.set(`${this.className()} bg-primaryBlue !text-white`);
       this.variant.set('filled');
 
     }
@@ -90,6 +85,10 @@ export class ButtonComponent implements OnInit {
   }
 
   click() {
+    if (this.disabled() || this.isLoading()) {
+      return;
+    }
+
     this.onClick.emit();
 
   }

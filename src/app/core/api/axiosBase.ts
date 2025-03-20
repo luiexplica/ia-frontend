@@ -7,9 +7,11 @@ const Backend_Api: AxiosInstance = axios.create({
     baseURL: baseURL
 });
 
-Backend_Api.interceptors.request.use((config: any) => {
 
-    const token = localStorage.getItem('token') || '';
+ Backend_Api.interceptors.request.use((config: any) => {
+
+    const token = localStorage.getItem(environment.localStorage.token) || '';
+    console.log('token', token);
     if (config.headers) {
         config.headers['Authorization'] = `Bearer ${token}`;
     } else {

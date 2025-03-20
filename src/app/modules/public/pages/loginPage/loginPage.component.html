@@ -1,6 +1,6 @@
 <section class="grid h-screen gap-2 lg:grid-cols-2">
 
-    <div class="h-full" style="background-image: url('https://www.material-tailwind.com/img/bg-sign-in.avif'); background-size: cover;">
+    <div class="hidden h-full lg:block" style="background-image: url('https://www.material-tailwind.com/img/bg-sign-in.avif'); background-size: cover;">
   </div>
 
   <div class="relative p-8 py-20 pt-24 my-auto text-center md:p-20 xl:px-32 xl:py-24">
@@ -17,13 +17,15 @@
       Enter your email and password to sign in
     </p>
 
-    <form [formGroup]="form()" (ngSubmit)="onSubmit()" class="mx-auto max-w-[24rem] text-left space-y-4">
+    <form [formGroup]="form()" class="mx-auto max-w-[24rem] text-left space-y-4">
 
       <app-form-layout [formRows]="formRows()" [formRef]="form()">
       </app-form-layout>
 
       <div class="footerForm">
-        <app-button [fullWidth]="true" (onClick)="onSubmit()" [size]="'md'">
+        <app-button
+        [isLoading]="isLoading()"
+        [fullWidth]="true" (onClick)="onSubmit()" [size]="'md'">
           <span text>
             Ingresar
           </span>
