@@ -2,10 +2,7 @@ import { Routes } from "@angular/router";
 import { HomePageComponent } from "./pages/homePage/homePage.component";
 import { RegisterPageComponent } from "./pages/registerPage/registerPage.component";
 import { LoginPageComponent } from "./pages/loginPage/loginPage.component";
-import { importProvidersFrom } from "@angular/core";
-import { StoreModule } from "@ngrx/store";
-import { PublicReducers } from "./store/public.reducers";
-import { RegisterReducer } from "./store/reducers/register.reducer";
+import { noLoginVerifyGuard } from "@guards/no-login-verify.guard";
 
 
 export const public_routes: Routes = [
@@ -23,15 +20,19 @@ export const public_routes: Routes = [
     data: {
       title: 'Lui explica | Registro',
     },
-
-
+    canActivate: [noLoginVerifyGuard],
+    canActivateChild: [noLoginVerifyGuard],
+    canLoad: [noLoginVerifyGuard]
   },
   {
     path: 'login',
     component: LoginPageComponent,
     data: {
       title: 'Lui explica | Iniciar sesión',
-    }
+    },
+    canActivate: [noLoginVerifyGuard],
+    canActivateChild: [noLoginVerifyGuard],
+    canLoad: [noLoginVerifyGuard]
   },
   {
     path: '**',

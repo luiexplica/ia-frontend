@@ -1,11 +1,9 @@
-import { SessionActions } from './../core/store/actions/session.actions';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@envs/environment.development';
 
 import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Auth_I } from "@luiexplica/ia-dev-services"
-import Backend_Api from '../core/api/axiosBase';
-import { Store } from '@ngrx/store';
-import { SessionStoreService } from '../core/store/services/session.store.service';
+import Backend_Api from '@api/axiosBase';
+import { SessionStoreService } from '@core/store/services/session.store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +55,11 @@ export class AuthService {
       this.sessionStoreService.onChecking();
 
       try {
+
+        if (!this.getTokenLocalStorage()) {
+          throw new Error('No token found in local storage');
+        }
+
         const resp: Response_I<Session_Auth_I> = await Backend_Api.get(url);
         this.sessionStoreService.onLogin(resp.data!);
         this.setTokenLocalStorage(resp.data!.token)
