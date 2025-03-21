@@ -9,7 +9,7 @@ import { SessionActions } from '../actions/session.actions';
 })
 export class SessionStoreService {
 
-  store = inject(Store)
+  store = inject(Store);
   state = this.store.selectSignal((state: CoreState_I) => state.core.session);
 
   onChecking() {
