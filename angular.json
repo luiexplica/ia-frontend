@@ -19,7 +19,9 @@
           "options": {
             "stylePreprocessorOptions": {
               "sass": {
-                "silenceDeprecations": ["import"]
+                "silenceDeprecations": [
+                  "import"
+                ]
               }
             },
             "outputPath": "dist/ia-frontend",
@@ -38,10 +40,10 @@
             ],
             "styles": [
               "src/styles.scss",
-                  "./node_modules/david-ui-angular/styles/_styles.scss"
-
+              "./node_modules/david-ui-angular/styles/_styles.scss"
             ],
             "scripts": [
+              "./node_modules/@material-tailwind/html/scripts/popover.js"
             ]
           },
           "configurations": {
@@ -106,10 +108,10 @@
             ],
             "styles": [
               "src/styles.scss",
-                  "./node_modules/david-ui-angular/styles/_styles.scss"
-
+              "./node_modules/david-ui-angular/styles/_styles.scss"
             ],
             "scripts": [
+              "./node_modules/@material-tailwind/html/scripts/popover.js"
             ]
           }
         }

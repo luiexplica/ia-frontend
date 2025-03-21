@@ -4,7 +4,6 @@ import { environment } from '@envs/environment.development';
 import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Auth_I } from "@luiexplica/ia-dev-services"
 import Backend_Api from '@api/axiosBase';
 import { SessionStoreService } from '@core/store/services/session.store.service';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   apiUrl = signal(environment._SERVICE + "/auth");
-  sessionStoreService = inject(SessionStoreService);
+  sessionStore = inject(SessionStoreService);
 
   register(data: AuthRegister_Dto) {
     const url = `${this.apiUrl()}/register`;
@@ -26,14 +25,14 @@ export class AuthService {
     const url = `${this.apiUrl()}/login`;
     return new Promise(async (resolve, reject) => {
 
-      this.sessionStoreService.onChecking();
+      this.sessionStore.onChecking();
 
       try {
         const resp: Response_I<Session_Auth_I> = await Backend_Api.post(url, {
           ...login
         });
 
-        this.sessionStoreService.onLogin(resp.data!);
+        this.sessionStore.onLogin(resp.data!);
         this.setTokenLocalStorage(resp.data!.token);
 
         resolve(resp);
@@ -52,7 +51,7 @@ export class AuthService {
     const url = `${this.apiUrl()}/verify`;
     return new Promise(async (resolve, reject) => {
 
-      this.sessionStoreService.onChecking();
+      this.sessionStore.onChecking();
 
       try {
 
@@ -61,7 +60,7 @@ export class AuthService {
         }
 
         const resp: Response_I<Session_Auth_I> = await Backend_Api.get(url);
-        this.sessionStoreService.onLogin(resp.data!);
+        this.sessionStore.onLogin(resp.data!);
         this.setTokenLocalStorage(resp.data!.token)
 
         resolve(resp);
@@ -78,7 +77,7 @@ export class AuthService {
   }
 
   logout() {
-    this.sessionStoreService.onLogout();
+    this.sessionStore.onLogout();
     this.removeTokenLocalStorage();
 
   }

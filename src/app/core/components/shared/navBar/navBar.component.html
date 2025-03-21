@@ -15,16 +15,20 @@
 
       <div class="hidden gap-2 buttonsSection pcTab:flex">
 
-        <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'">
-          <ng-content text>
-            Registrate
-          </ng-content>
-        </app-button>
-        <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'">
-          <ng-content text>
-            Iniciar sesión
-          </ng-content>
-        </app-button>
+        @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
+
+          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'">
+            <ng-content text>
+              Registrate
+            </ng-content>
+          </app-button>
+          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'">
+            <ng-content text>
+              Iniciar sesión
+            </ng-content>
+          </app-button>
+
+        }
 
       </div>
       <div class="flex gap-2 buttonsSection pcTab:hidden">
@@ -54,25 +58,26 @@
     <div class="p-0 py-6 mt-0 bg-white rounded-tl-none rounded-tr-none rounded-xl ">
       <div class="container flex flex-col items-center justify-between mx-auto">
 
-          <app-menu-list
-          class="w-full"
-          [orientation]="'vertical'"
-          [menuList]="this.menuItems()" />
-          <!-- [orientation]="'vertical'" -->
+        <app-menu-list class="w-full" [orientation]="'vertical'" [menuList]="this.menuItems()" />
+        <!-- [orientation]="'vertical'" -->
 
         <hr class="mt-2">
         <div class="flex flex-col w-full gap-4 buttonsSection">
 
-          <app-button (onClick)="goTo('register')" [fullWidth]="true" [buttonStyle]="'primary'">
-            <ng-content text>
-              Registrate
-            </ng-content>
-          </app-button>
-          <app-button (onClick)="goTo('login')" [fullWidth]="true" [buttonStyle]="'secondary'">
-            <ng-content text>
-              Iniciar sesión
-            </ng-content>
-          </app-button>
+        @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
+
+            <app-button (onClick)="goTo('register')" [fullWidth]="true" [buttonStyle]="'primary'">
+              <ng-content text>
+                Registrate ee
+              </ng-content>
+            </app-button>
+            <app-button (onClick)="goTo('login')" [fullWidth]="true" [buttonStyle]="'secondary'">
+              <ng-content text>
+                Iniciar sesión
+              </ng-content>
+            </app-button>
+
+          }
 
         </div>
       </div>
@@ -82,5 +87,5 @@
 </nav>
 
 <!-- <pre>
-            {{ this.menuItems() | json }}
-          </pre> -->
+  {{ this.sessionState() | json }}
+</pre> -->
