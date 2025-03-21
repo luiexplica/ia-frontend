@@ -29,4 +29,15 @@ export class SessionStoreService {
 
   }
 
+  isLoading(isLoading: boolean) {
+    this.store.dispatch(SessionActions.isLoading({
+      isLoading
+    }));
+
+  }
+  onDefault() {
+    this.store.dispatch(SessionActions.onDefault());
+
+  }
+
 }
