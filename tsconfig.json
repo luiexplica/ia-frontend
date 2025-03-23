@@ -9,6 +9,7 @@
         "@guards/*": ["./src/app/core/guards/*"],
         "@interfaces/*": ["./src/app/core/interfaces/*"],
         "@components/*": ["./src/app/core/components/*"],
+        "@directives/*": ["./src/app/core/directives/*"],
         "@services/*": ["./src/app/services/*"],
         "@modules/*": ["./src/app/modules/*"],
         "@envs/*": ["./src/environments/*"],
