@@ -1,8 +1,12 @@
 const withMT = require("@material-tailwind/html/utils/withMT");
 const colors = require("tailwindcss/colors");
 
+import PrimeUI from 'tailwindcss-primeui';
+
+
 module.exports = withMT({
 // module.exports = {
+    darkMode: ['selector', '[class="p-dark"]'],
   content: [
     "./src/**/*.{html,ts}",
      "./node_modules/david-ui-angular/**/*.{html,ts,js,mjs}"
@@ -234,6 +238,7 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [],
+    plugins: [PrimeUI]
+    // plugins: []
 // };
 });

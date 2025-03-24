@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --configuration development",
+    "dev": "ng serve --configuration development --port=4300",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.1.0",
+    "@angular/cdk": "^19.2.6",
     "@angular/common": "^19.1.0",
     "@angular/compiler": "^19.1.0",
     "@angular/core": "^19.1.0",
@@ -24,10 +25,13 @@
     "@material-tailwind/html": "2.3.2",
     "@ngrx/store": "^19.0.1",
     "@ngrx/store-devtools": "^19.0.1",
+    "@primeng/themes": "^19.0.10",
     "axios": "^1.8.3",
     "david-ui-angular": "^1.1.0",
     "ngx-sonner": "^3.0.0",
+    "primeng": "^19.0.10",
     "rxjs": "~7.8.0",
+    "tailwindcss-primeui": "^0.5.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

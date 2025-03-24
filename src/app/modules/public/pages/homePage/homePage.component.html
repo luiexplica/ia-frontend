@@ -1,3 +1,50 @@
 
 
-<app-drop-down-menu />
+<!-- <app-drop-down-menu /> -->
+
+<p-button label="Submit" />
+
+
+<p-button label="Toggle Dark Mode" (onClick)="toggleDarkMode()"/>
+
+
+
+<p-button type="button" [label]="'Select Member'" (onClick)="op.toggle($event)" styleClass="min-w-48" />
+
+<p-popover #op>
+    <div class="flex flex-col gap-4">
+        <div>
+            <span class="block mb-2 font-medium">Team Members</span>
+            <ul class="flex flex-col p-0 m-0 list-none">
+                <li  class="flex items-center gap-2 px-2 py-3 cursor-pointer hover:bg-emphasis rounded-border" >
+                    <img [src]="'https://primefaces.org/cdn/primeng/images/demo/avatar/2'" style="width: 32px" />
+                    <div>
+                        <span class="font-medium">FUlano</span>
+                        <div class="text-sm text-surface-500 dark:text-surface-400">emailxxxgoogle.com</div>
+                    </div>
+                </li>
+                <li  class="flex items-center gap-2 px-2 py-3 cursor-pointer hover:bg-emphasis rounded-border" >
+                    <img [src]="'https://primefaces.org/cdn/primeng/images/demo/avatar/222'" style="width: 32px" />
+                    <div>
+                        <span class="font-medium">FUlano</span>
+                        <div class="text-sm text-surface-500 dark:text-surface-400">emailxxxgoogle.com</div>
+                    </div>
+                </li>
+                <li  class="flex items-center gap-2 px-2 py-3 cursor-pointer hover:bg-emphasis rounded-border" >
+                    <img [src]="'https://primefaces.org/cdn/primeng/images/demo/avatar/222'" style="width: 32px" />
+                    <div>
+                        <span class="font-medium">FUlano</span>
+                        <div class="text-sm text-surface-500 dark:text-surface-400">emailxxxgoogle.com</div>
+                    </div>
+                </li>
+                <li  class="flex items-center gap-2 px-2 py-3 cursor-pointer hover:bg-emphasis rounded-border" >
+                    <img [src]="'https://primefaces.org/cdn/primeng/images/demo/avatar/222'" style="width: 32px" />
+                    <div>
+                        <span class="font-medium">FUlano</span>
+                        <div class="text-sm text-surface-500 dark:text-surface-400">emailxxxgoogle.com</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</p-popover>
