@@ -40,7 +40,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/david-ui-angular/styles/_styles.scss"
+              "./node_modules/david-ui-angular/styles/_styles.scss",
+              "./node_modules/boxicons/css/boxicons.min.css"
             ],
             "scripts": [
 
@@ -108,7 +109,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/david-ui-angular/styles/_styles.scss"
+              "./node_modules/david-ui-angular/styles/_styles.scss",
+              "./node_modules/boxicons/css/boxicons.min.css"
             ],
             "scripts": [
 

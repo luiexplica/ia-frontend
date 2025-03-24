@@ -1,11 +1,13 @@
 
 import { ChangeDetectionStrategy, Component, input, output, OnInit, signal, effect } from '@angular/core';
 import { DUIButton } from 'david-ui-angular';
+import { RippleDirective } from '../../directives/ripple.directive';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
 export type ButtonVariant = 'filled' | 'outlined' | 'gradient' | 'text';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
+export type ButtonTextAlign = 'left' | 'center' | 'right';
 export interface ButtonIcon_I {
   type: 'string' | 'html';
   value: string;
@@ -14,7 +16,8 @@ export interface ButtonIcon_I {
 @Component({
   selector: 'app-button',
   imports: [
-    DUIButton
+    // DUIButton,
+    RippleDirective
   ],
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,6 +32,8 @@ export class ButtonComponent implements OnInit {
   disabled = input<boolean>(false);
   isLoading = input<boolean>(false);
   className = input<string>('');
+  text = input<string>('');
+  align = input<ButtonTextAlign>('center');
 
   onClick = output();
   loaded = signal(false);
@@ -81,6 +86,13 @@ export class ButtonComponent implements OnInit {
       this.variant.set('text');
 
     }
+
+    console.log('v', this.align());
+
+    if(this.align() === 'left') {
+      this.buttonClasses.set(`${this.buttonClasses()} flex !items-left `);
+    }
+
 
   }
 

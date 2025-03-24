@@ -5,6 +5,7 @@ import { MenuItem_I } from '@interfaces/menus.interface';
 import { JsonPipe, NgClass } from '@angular/common';
 import { MenuListComponent } from '@components/menus/menuList/menuList.component';
 import { SessionStoreService } from '@core/store/services/session.store.service';
+import { UserDialogComponent } from './userDialog/userDialog.component';
 
 @Component({
   selector: 'nav-bar',
@@ -12,7 +13,8 @@ import { SessionStoreService } from '@core/store/services/session.store.service'
     ButtonComponent,
     MenuListComponent,
     NgClass,
-    JsonPipe
+    UserDialogComponent
+    // JsonPipe
   ],
   templateUrl: './navBar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -17,17 +17,17 @@
 
         @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
 
-          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'">
-            <ng-content text>
-              Registrate
-            </ng-content>
+          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'"
+            text="Registrate"
+          >
           </app-button>
-          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'">
-            <ng-content text>
-              Iniciar sesión
-            </ng-content>
+          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'"
+          text="Iniciar sesión"
+          >
           </app-button>
 
+        }@else {
+          <app-user-dialog />
         }
 
       </div>
@@ -66,15 +66,13 @@
 
         @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
 
-            <app-button (onClick)="goTo('register')" [fullWidth]="true" [buttonStyle]="'primary'">
-              <ng-content text>
-                Registrate ee
-              </ng-content>
+            <app-button (onClick)="goTo('register')" [fullWidth]="true" [buttonStyle]="'primary'"
+            text="Registrate"
+            >
             </app-button>
-            <app-button (onClick)="goTo('login')" [fullWidth]="true" [buttonStyle]="'secondary'">
-              <ng-content text>
-                Iniciar sesión
-              </ng-content>
+            <app-button (onClick)="goTo('login')" [fullWidth]="true" [buttonStyle]="'secondary'"
+            text="Iniciar sesión"
+            >
             </app-button>
 
           }

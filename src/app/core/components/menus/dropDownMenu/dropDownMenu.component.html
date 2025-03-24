@@ -1,5 +1,5 @@
 <!-- <button
-  appPopoverTrigger="miPopover"
+  PopoverTrigger="miPopover"
   popoverPlacement="top"
   class="px-6 py-3 font-sans text-xs font-bold text-center text-white uppercase bg-gray-900 rounded-lg shadow-md select-none">
   Show Popover
@@ -9,3 +9,39 @@
   class="absolute p-4 font-sans text-sm break-words bg-white border rounded-lg shadow-lg border-blue-gray-50 text-blue-gray-500">
   This is a very beautiful popover, show some love.
 </div> -->
+
+
+
+<p-button type="button" [label]="'Select Member'" (onClick)="op.toggle($event)" styleClass="min-w-48" />
+
+<p-popover #op>
+  <div class="flex flex-col gap-4">
+    <div>
+      <span class="block mb-2 font-medium">Team Members</span>
+      <ul class="flex flex-col p-0 m-0 list-none">
+        @for (item of menuList(); track $index) {
+        <!-- <li class="flex items-center gap-2 px-2 py-3 cursor-pointer hover:bg-emphasis rounded-border">
+          <i class='bx bxs-user'></i>
+          <span class="font-medium">
+            {{ item.title }}
+          </span>
+        </li> -->
+
+        <app-button
+          className="capitalize"
+          [fullWidth]="true"
+          align="left"
+          size="sm"
+          text="hola"
+          buttonStyle="text" >
+
+          </app-button>
+
+        }
+
+      </ul>
+    </div>
+  </div>
+</p-popover>|
+
+

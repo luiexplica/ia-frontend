@@ -1,5 +1,5 @@
 
-<dui-button
+<!-- <dui-button
   className="{{ buttonClasses() }} max-h-10 relative flex flex-row justify-center items-center "
   [attr.className]="buttonClasses()"
   [variant]="variant()"
@@ -13,7 +13,12 @@
   >
   @if (!isLoading()) {
     <ng-content select="[icon]"></ng-content>
-     <ng-content select="[text]"></ng-content>
+
+     @if(text()){
+     <span class="w-full">
+      {{ text() }}
+     </span>
+     }
   } @else {
     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
         <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
@@ -23,3 +28,14 @@
   }
 
 </dui-button>
+
+ -->
+
+
+
+
+<!-- type="button" -->
+<button [RippleColor]="'light'" class="px-4 py-2 ml-2 text-sm text-center text-white transition-all border border-transparent rounded-md shadow-md bg-slate-800 hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+>
+  Ripple Effect On
+</button>

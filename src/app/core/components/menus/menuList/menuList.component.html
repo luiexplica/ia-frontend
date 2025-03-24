@@ -15,11 +15,8 @@
         (onClick)="item.action($index)"
         [className]="'capitalize px-4 ' + ( item.active  ? ' bg-[rgb(33_33_33_/_0.075)]' : '')"
         [fullWidth]="this.setFullWidth()"
+        [text]="item.title"
         >
-
-        <ng-content text>
-          {{ item.title }}
-        </ng-content>
 
       </app-button>
     </li>
