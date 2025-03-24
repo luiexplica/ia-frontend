@@ -67,13 +67,15 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    this.isLoading.set(true);
 
     this.dynamicFormService.setSubmitted(this.form());
     if (!this.form().valid) {
       this.form().updateValueAndValidity();
       return;
     }
+
+    this.isLoading.set(true);
+
     const formValues = this.dynamicFormService.getFormValues<LoginForm_I>(this.form());
 
     try {

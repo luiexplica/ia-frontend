@@ -16,7 +16,7 @@ export interface ButtonIcon_I {
 @Component({
   selector: 'app-button',
   imports: [
-    // DUIButton,
+    DUIButton,
     RippleDirective
   ],
   templateUrl: './button.component.html',
