@@ -12,16 +12,17 @@ interface Toast_I {
 @Injectable({
   providedIn: 'root'
 })
-export class ToastsService {
+export class uiService {
 
   private toastDefault: Toast_I = {
     position: "top-right",
     title: "Title",
     message: "",
     type: "default"
+
   }
 
-  duration: number = 3500;
+  private readonly duration: number = 3500;
 
   emitToast({ position, title, message, type }: Toast_I) {
 
@@ -30,12 +31,14 @@ export class ToastsService {
       title: title || this.toastDefault.title,
       message: message || this.toastDefault.message,
       type: type || this.toastDefault.type
+
     }
 
     const toastOptions = {
       position: toastData.position,
       description: toastData.message,
       duration: this.duration
+
     };
 
     switch (type) {
@@ -54,6 +57,7 @@ export class ToastsService {
       default:
         toast(toastData.title, toastOptions);
         break;
+
     }
 
   }

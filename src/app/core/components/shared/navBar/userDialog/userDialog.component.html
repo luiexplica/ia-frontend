@@ -1,1 +1,12 @@
-<p>userDialog works!</p>,
+
+
+<app-drop-down-menu
+  [menuList]="options()"
+  [title]="'Opciones'"
+ >
+  <app-button button
+  [buttonStyle]="'text'"
+  [icon]="iconButton()"
+   text="Alvaro Segovia" />
+
+</app-drop-down-menu>

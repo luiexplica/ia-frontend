@@ -1,40 +1,33 @@
-<!-- <button
-  PopoverTrigger="miPopover"
-  popoverPlacement="top"
-  class="px-6 py-3 font-sans text-xs font-bold text-center text-white uppercase bg-gray-900 rounded-lg shadow-md select-none">
-  Show Popover
-</button>
 
-<div data-popover="miPopover"
-  class="absolute p-4 font-sans text-sm break-words bg-white border rounded-lg shadow-lg border-blue-gray-50 text-blue-gray-500">
-  This is a very beautiful popover, show some love.
-</div> -->
-
-
-
-<p-button type="button" [label]="'Select Member'" (onClick)="op.toggle($event)" styleClass="min-w-48" />
+<div class="popover-trigger" (click)="op.toggle($event)">
+  <ng-content select="[button]"></ng-content>
+</div>
 
 <p-popover #op>
   <div class="flex flex-col gap-4">
     <div>
-      <span class="block mb-2 font-medium">Team Members</span>
-      <ul class="flex flex-col p-0 m-0 list-none">
-        @for (item of menuList(); track $index) {
-        <!-- <li class="flex items-center gap-2 px-2 py-3 cursor-pointer hover:bg-emphasis rounded-border">
-          <i class='bx bxs-user'></i>
-          <span class="font-medium">
-            {{ item.title }}
-          </span>
-        </li> -->
+
+      @if(title()){
+        <span class="block mb-2 text-sm font-semibold">
+          {{ title() }}
+        </span>
+      }
+      <ul class="flex flex-col p-0 mt-2 list-none">
+        @for (button of menuList(); track $index) {
 
         <app-button
-          className="capitalize"
           [fullWidth]="true"
           align="left"
           size="sm"
-          text="hola"
-          buttonStyle="text" >
-
+          [text]="button.title"
+          buttonStyle="text"
+          [icon]="button.icon"
+          (onClick)="button.action($index)"
+          [ngClass]="{
+            'border-t pt-2 mt-2 border-gray-200': button?.divider?.up,
+            'border-b pb-2 mb-2 border-gray-200': button?.divider?.bottom
+          }"
+           >
           </app-button>
 
         }
@@ -42,6 +35,4 @@
       </ul>
     </div>
   </div>
-</p-popover>|
-
-
+</p-popover>

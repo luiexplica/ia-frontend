@@ -8,7 +8,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
 import { LayoutRow_I } from '@components/forms/interfaces';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
-import { ToastsService } from '@core/services/toasts.service';
+import { uiService } from '@app/core/services/ui.service';
 import { AuthService } from '@services/auth.service';
 import { handlerError } from '@api/handlerError';
 import { SessionStoreService } from '@app/core/store/services/session.store.service';
@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   authService = inject(AuthService);
   sessionService = inject(SessionStoreService);
   dynamicFormService = inject(DynamicFormService);
-  toastService = inject(ToastsService);
+  uiService = inject(uiService);
 
   form = signal<FormGroup>(new FormGroup({}));
   formRows = signal<LayoutRow_I[]>([...loginFormDef])
@@ -83,7 +83,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         password: formValues.password
       });
 
-      this.toastService.emitToast({
+      this.uiService.emitToast({
         title: 'Bienvenido',
         type: 'success'
       });
@@ -94,7 +94,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
       const err = handlerError(error);
       const msg = 'Error al iniciar sesión';
-      this.toastService.emitToast({
+      this.uiService.emitToast({
         title: msg,
         type: 'error'
       });

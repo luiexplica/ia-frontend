@@ -1,21 +1,20 @@
 
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output, OnInit, signal, effect } from '@angular/core';
 import { RippleColor, RippleDirective } from '@directives/ripple.directive';
+import { Icon_I } from '@interfaces/globals.interface';
+import { IconComponent } from '../icon/icon.component';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
 export type ButtonVariant = 'filled' | 'outlined' | 'gradient' | 'text';
 export type ButtonSize = 'xm' | 'sm' | 'md' | 'lg' | 'xl';
-
 export type ButtonTextAlign = 'left' | 'center' | 'right';
-export interface ButtonIcon_I {
-  type: 'string' | 'html';
-  value: string;
-}
 
 @Component({
   selector: 'app-button',
   imports: [
-    // DUIButton,
+    IconComponent,
+    NgClass,
     RippleDirective
   ],
   templateUrl: './button.component.html',
@@ -32,12 +31,16 @@ export class ButtonComponent implements OnInit {
   isLoading = input<boolean>(false);
   className = input<string>('');
   text = input<string>('');
+  icon = input<Icon_I>();
   align = input<ButtonTextAlign>('center');
+  uppercase = input<boolean>(false);
+  bold = input<boolean>(false);
 
   onClick = output();
   loaded = signal(false);
 
   buttonClasses = signal<string>('');
+  iconClasses = signal<string>('');
   rippleStyle = signal<RippleColor>('none');
   buttonEffect = effect(() => {
 
@@ -58,11 +61,12 @@ export class ButtonComponent implements OnInit {
 
   initComponent() {
     this.setStyle();
-    this.setAlign();
     this.setSize();
     this.setRipple();
     this.setRounded();
     this.setFullWidth();
+    this.setAlign();
+    this.setIconClasses();
 
   }
 
@@ -88,35 +92,63 @@ export class ButtonComponent implements OnInit {
 
   setAlign() {
     if (this.align() === 'left') {
-      this.buttonClasses.set(`${this.buttonClasses()} flex !items-left
+      this.buttonClasses.set(`${this.buttonClasses()} flex !justify-left
       `);
+      return
     }
+    this.buttonClasses.set(`${this.buttonClasses()} flex !justify-center `);
 
   }
 
   setSize() {
     if (this.size() === 'xm') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-1 px-2.5 text-sm `);
+      this.buttonClasses.set(`${this.buttonClasses()} py-1 px-2.5 text-sm h-8`);
     }
     if (this.size() === 'sm') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-1.5 px-3 text-sm `);
+      this.buttonClasses.set(`${this.buttonClasses()} py-1.5 px-3 text-sm h-9`);
     }
     if (this.size() === 'md') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-2 px-4 text-sm `);
+      this.buttonClasses.set(`${this.buttonClasses()} py-2 px-4 text-sm h-10`);
     }
     if (this.size() === 'lg') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-2.5 px-5 text-base `);
+      this.buttonClasses.set(`${this.buttonClasses()} py-2.5 px-5 text-base h-12`);
     }
     if (this.size() === 'xl') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-3.5 px-6 text-base `);
+      this.buttonClasses.set(`${this.buttonClasses()} py-3.5 px-6 text-base h-14`);
+    }
+
+  }
+
+  setIconClasses() {
+
+    if (!this.icon()) return;
+
+    if (this.size() === 'xm') {
+      this.iconClasses.set('text-base');
+
+    }
+    if (this.size() === 'sm') {
+      this.iconClasses.set('text-base');
+    }
+    if (this.size() === 'md') {
+      this.iconClasses.set('text-lg');
+
+    }
+    if (this.size() === 'lg') {
+      this.iconClasses.set('text-lg');
+
+    }
+    if (this.size() === 'xl') {
+      this.iconClasses.set('text-xl');
+
     }
 
   }
 
   setRipple() {
     if (this.ripple()) {
-      const caseLight: ButtonStyle[] = ['primary'];
-      const caseDark: ButtonStyle[] = ['secondary', 'text'];
+      const caseLight: ButtonStyle[] = ['primary', 'secondary'];
+      const caseDark: ButtonStyle[] = ['text'];
 
       if (caseLight.includes(this.buttonStyle())) {
         this.rippleStyle.set('light');

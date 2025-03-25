@@ -1,4 +1,4 @@
-import { Directive, effect, ElementRef, HostListener, input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, input, Renderer2 } from '@angular/core';
 
 export type RippleColor = 'light' | 'dark' | 'none';
 
@@ -17,7 +17,6 @@ export class RippleDirective {
 
   @HostListener('mouseup', ['$event'])
   onMouseUp(event: MouseEvent): void {
-    console.log('rippleColor', this.rippleColor());
     this.createRipple(event);
 
   }

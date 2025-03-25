@@ -4,6 +4,7 @@ import { environment } from '@envs/environment.development';
 import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Auth_I } from "@luiexplica/ia-dev-services"
 import Backend_Api from '@api/axiosBase';
 import { SessionStoreService } from '@core/store/services/session.store.service';
+import { uiService } from '../core/services/ui.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class AuthService {
 
   apiUrl = signal(environment._SERVICE + "/auth");
   sessionStore = inject(SessionStoreService);
+  uiService = inject(uiService);
 
   register(data: AuthRegister_Dto) {
     const url = `${this.apiUrl()}/register`;
@@ -79,6 +81,10 @@ export class AuthService {
   logout() {
     this.sessionStore.onLogout();
     this.removeTokenLocalStorage();
+    this.uiService.emitToast({
+      title: 'Vuelva pronto..!',
+      type: 'success'
+    })
 
   }
 

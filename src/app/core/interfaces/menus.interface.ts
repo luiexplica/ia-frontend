@@ -11,4 +11,8 @@ export interface MenuItem_I {
   active: boolean;
   icon?: Icon_I;
   action: (index: number) => void;
+  divider?: {
+    up?: boolean;
+    bottom?: boolean;
+  }
 }

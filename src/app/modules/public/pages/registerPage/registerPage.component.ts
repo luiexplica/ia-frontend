@@ -8,7 +8,7 @@ import { LayoutRow_I } from '@components/forms/interfaces';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
 import { RegisterForm_I, registerFormDef } from './register-form.defs';
 import { AuthService } from '@services/auth.service';
-import { ToastsService } from '@core/services/toasts.service';
+import { uiService } from '@app/core/services/ui.service';
 import { handlerError } from '@api/handlerError';
 
 @Component({
@@ -32,7 +32,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   authService = inject(AuthService);
   router = inject(Router);
   dynamicFormService = inject(DynamicFormService);
-  toastService = inject(ToastsService);
+  uiService = inject(uiService);
 
   isLoading = signal(false);
 
@@ -90,7 +90,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         last_name: formValues.last_name
       });
 
-      this.toastService.emitToast({
+      this.uiService.emitToast({
         title: 'Usuario registrado',
         type: 'success'
       })
@@ -98,7 +98,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     } catch (error) {
       const err = handlerError(error);
       const msg = err.message || 'Error al registrar usuario';
-      this.toastService.emitToast({
+      this.uiService.emitToast({
         title: msg,
         type: 'error'
       });

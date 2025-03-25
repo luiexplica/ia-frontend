@@ -1,14 +1,78 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MenuItem_I } from '@interfaces/menus.interface';
+import { DropDownMenuComponent } from '@components/menus/dropDownMenu/dropDownMenu.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { Icon_I } from '@interfaces/globals.interface';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-user-dialog',
-  imports: [],
+  imports: [
+    ButtonComponent,
+    DropDownMenuComponent
+  ],
   templateUrl: './userDialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDialogComponent {
 
-  userDialogOptions = signal<MenuItem_I[]>([])
+  authService = inject(AuthService);
 
- }
+  iconButton = signal<Icon_I>({
+    type: 'html',
+    value: `
+      <div class="relative inline-flex">
+    <img
+      src="https://docs.material-tailwind.com/img/face-2.jpg"
+      alt="avatar"
+      class="inline-block relative object-cover object-center rounded-full w-6 h-6"
+    /><span
+      class="absolute min-w-[10px] min-h-[10px] rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[14%] right-[14%] translate-x-2/4 -translate-y-2/4 bg-green-500 text-white border border-white"
+    ></span>
+  </div>
+    `
+  });
+
+  options = signal<MenuItem_I[]>([
+    {
+      title: 'Configuraciones',
+      active: false,
+      icon: {
+        type: 'html',
+        value: "<i class='bx bxs-cog' ></i>"
+      },
+      action: (index: number) => {
+        this.listenAction(this.options()[index]);
+
+      },
+      id: 'config',
+      divider: {
+        bottom: true
+      }
+    },
+    {
+      title: 'Cerrar sesión',
+      active: false,
+      icon: {
+        type: 'html',
+        value: "<i class='bx bx-log-out'></i>"
+      },
+      action: (index: number) => {
+        this.listenAction(this.options()[index]);
+
+      },
+      id: 'logout',
+    },
+
+  ])
+
+  listenAction(event: MenuItem_I) {
+
+    if(event.id === 'logout') {
+      this.authService.logout();
+
+    }
+
+  }
+
+}

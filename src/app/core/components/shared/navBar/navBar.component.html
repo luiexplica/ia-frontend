@@ -9,7 +9,7 @@
 
     </div>
 
-    <div class="flex gap-6 buttonGroup">
+    <div class="flex gap-4 buttonGroup">
 
       <app-menu-list class="hidden pcTab:flex" [menuList]="this.menuItems()" />
 
@@ -17,17 +17,12 @@
 
         @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
 
-          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'"
-            text="Registrate"
-          >
-          </app-button>
-          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'"
-          text="Iniciar sesión"
-          >
-          </app-button>
+          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
+          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
 
         }@else {
-          <app-user-dialog />
+          <app-user-dialog class="pl-4 ml-0 border-l border-gray-200" />
+
         }
 
       </div>
@@ -75,7 +70,9 @@
             >
             </app-button>
 
-          }
+        }@else {
+        <app-user-dialog />
+        }
 
         </div>
       </div>
