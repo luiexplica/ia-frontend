@@ -5,7 +5,7 @@ import { DropDownMenuComponent } from '../../../../core/components/menus/dropDow
 @Component({
   selector: 'app-home-page',
   imports: [
-    DropDownMenuComponent,
+    // DropDownMenuComponent,
   ],
   templateUrl: './homePage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

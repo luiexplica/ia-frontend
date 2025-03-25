@@ -6,19 +6,21 @@ import { StoreModule } from '@ngrx/store';
 import { PublicReducers } from './modules/public/store/public.reducers';
 import { noLoginVerifyGuard } from '@guards/no-login-verify.guard';
 import { LoginVerifyGuard } from './core/guards/login-guard.guard';
-import { MainComponent } from './modules/main/main.component';
 import { Routes } from '@angular/router';
+import { ApplicationComponent } from './modules/application/application.component';
+import { application_routes } from './modules/application/application.routes';
 
 
 export const routes: Routes = [
+
 
   {
     path: 'experimentals',
     component: ExperimentalsComponent
   },
   {
-    path: 'main',
-    component: MainComponent,
+    path: 'app',
+    component: ApplicationComponent,
     // loadComponent: () =>
     //   import(
     //     './modules/public/public.component'
@@ -28,7 +30,7 @@ export const routes: Routes = [
       //   StoreModule.forFeature('public', PublicReducers)
       // ),
     ],
-    children: public_routes,
+    children: application_routes,
     canActivate: [LoginVerifyGuard],
     canActivateChild: [LoginVerifyGuard],
     canLoad: [LoginVerifyGuard]
@@ -47,9 +49,9 @@ export const routes: Routes = [
       ),
     ],
     children: public_routes,
-        canActivate: [noLoginVerifyGuard],
-        canActivateChild: [noLoginVerifyGuard],
-        canLoad: [noLoginVerifyGuard]
+    canActivate: [noLoginVerifyGuard],
+    canActivateChild: [noLoginVerifyGuard],
+    canLoad: [noLoginVerifyGuard]
 
   },
   {

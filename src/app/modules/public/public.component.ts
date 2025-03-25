@@ -1,20 +1,17 @@
 
-import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
-import { ChangeDetectionStrategy, Component, signal, effect, inject, OnInit, importProvidersFrom } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, inject, OnInit, computed } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { MenuItem_I } from '@interfaces/menus.interface';
+import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { NavBarComponent } from '@components/shared/navBar/navBar.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
-import { MenuItem_I } from '@interfaces/menus.interface';
-import { StoreModule } from '@ngrx/store';
-import { PublicReducers } from './store/public.reducers';
-import { RegisterReducer } from './store/reducers/register.reducer';
 
 @Component({
   selector: 'public',
   imports: [
-    FooterComponent,
-    NavBarComponent,
     RouterOutlet,
+    NavBarComponent,
+    FooterComponent
   ],
   providers: [
 
@@ -43,28 +40,20 @@ export default class PublicComponent implements OnInit {
       active: false,
       action: (index: number) => this.listenClick(index)
     }
-  ])
+  ]);
 
-  fullWidth = signal<boolean>(false);
-  hideNavbar = signal<boolean>(false);
-  hideFooter = signal<boolean>(false);
-
-  layoutGlobalService = inject(LayoutGlobalService);
 
   router = inject(Router);
 
-  logEffect = effect(() => {
-    this.fullWidth.set(this.layoutGlobalService.layoutFullScreen());
-    this.hideNavbar.set(this.layoutGlobalService.hideNavbar());
-    this.hideFooter.set(this.layoutGlobalService.hideFooter());
-    // return () => {
-    // console.log('logEffect disposed');
-    // };
+  layoutGlobalService = inject(LayoutGlobalService);
+  fullWidth = computed( () => this.layoutGlobalService.layoutFullScreen() );
+  hideNavbar = computed( () => this.layoutGlobalService.hideNavbar() );
+  hideFooter = computed( () => this.layoutGlobalService.hideFooter() );
 
-  });
 
   ngOnInit(): void {
     this.initComponent();
+
   }
 
   initComponent() {
@@ -101,6 +90,7 @@ export default class PublicComponent implements OnInit {
 
   isActive(item: MenuItem_I) {
     return this.router.url.includes(item.id);
+
   }
 
 }

@@ -38,7 +38,7 @@ export class noLoginVerifyGuard implements OnDestroy {
         ) {
           return true;
         }
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app/panel']);
         return false;
 
       })
@@ -64,7 +64,7 @@ export class noLoginVerifyGuard implements OnDestroy {
         ) {
           return true;
         }
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app/panel']);
         return false;
 
       })
@@ -90,7 +90,7 @@ export class noLoginVerifyGuard implements OnDestroy {
         ) {
           return true;
         }
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app/panel']);
         return false;
 
       })

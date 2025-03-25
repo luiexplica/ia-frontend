@@ -13,7 +13,7 @@
         "@services/*": ["./src/app/services/*"],
         "@modules/*": ["./src/app/modules/*"],
         "@envs/*": ["./src/environments/*"],
-        "@dashboard/*": ["./src/app/modules/dashboard/*"],
+        "@application/*": ["./src/app/modules/application/*"],
         "@public/*": ["./src/app/modules/public/*"],
 
     },

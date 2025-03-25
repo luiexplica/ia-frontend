@@ -1,13 +1,14 @@
 
 @if (!this.hideNavbar()) {
-  <nav-bar [menuItems]="this.public_routes()" />
+  <!-- <nav-bar [menuItems]="this.public_routes()" /> -->
+  navbar
 }
 
 <section class="container !mx-auto  h-screen place-items-center"
   [class]="{
     'max-w-full': this.fullWidth()
   }">
-  <router-outlet />
+  <!-- <router-outlet /> -->
 </section>
 
 @if (!this.hideFooter()) {
