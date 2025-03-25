@@ -30,9 +30,9 @@ export class SessionStoreService {
 
   }
 
-  isLoading(isLoading: boolean) {
-    this.store.dispatch(SessionActions.isLoading({
-      isLoading
+  isLoading(onLoading: boolean) {
+    this.store.dispatch(SessionActions.onLoading({
+      onLoading
     }));
 
   }

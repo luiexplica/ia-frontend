@@ -4,7 +4,7 @@ import { environment } from '@envs/environment.development';
 import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Response_I } from "@luiexplica/ia-dev-services"
 import Backend_Api from '@api/axiosBase';
 import { SessionStoreService } from '@core/store/services/session.store.service';
-import { uiService } from '../core/services/ui.service';
+import { uiService } from '@core/services/ui.service';
 
 @Injectable({
   providedIn: 'root',

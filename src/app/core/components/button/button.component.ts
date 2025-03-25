@@ -1,5 +1,5 @@
 
-import { NgClass } from '@angular/common';
+import { JsonPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output, OnInit, signal, effect } from '@angular/core';
 import { RippleColor, RippleDirective } from '@directives/ripple.directive';
 import { Icon_I } from '@interfaces/globals.interface';
@@ -15,7 +15,7 @@ export type ButtonTextAlign = 'left' | 'center' | 'right';
   imports: [
     IconComponent,
     NgClass,
-    RippleDirective
+    RippleDirective,
   ],
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

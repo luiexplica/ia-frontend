@@ -2,20 +2,30 @@ import { createReducer, on } from "@ngrx/store"
 import { uiActions } from "../actions/ui.actions"
 
 export interface UiState_I {
-  isLoading: boolean,
+  onLoading: boolean;
+  drawer: boolean;
 }
 
 const initialState: UiState_I = {
-  isLoading: false,
+  onLoading: false,
+  drawer: false
 }
 
 export const UiReducer = createReducer(initialState,
 
-  on(uiActions.isLoading, (state, props) => {
+  on(uiActions.onLoading, (state, props) => {
 
     return {
       ...state,
-      isLoading: props.isLoading
+      onLoading: props.onLoading
+    }
+
+  }),
+  on(uiActions.onToggleDrawer, (state, props) => {
+
+    return {
+      ...state,
+      drawer: !state.drawer
     }
 
   }),

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSonnerToaster } from 'ngx-sonner';
 import { AuthService } from './services/auth.service';
+import { UiStoreService } from './core/store/services/ui.store.service';
 @Component({
   selector: 'app-root',
   imports: [
@@ -15,6 +16,13 @@ export class AppComponent implements OnInit {
 
   title = 'ia-frontend';
   authService = inject(AuthService);
+
+  uiStore = inject(UiStoreService);
+
+  open(){
+    this.uiStore.onToggleDrawer();
+
+  }
 
   ngOnInit(): void {
     this.initComponent();

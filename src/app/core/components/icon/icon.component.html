@@ -5,6 +5,6 @@
     <img  src="{{ value() }}" alt="icon" [class]="className() + ' ' + this.icon().type" />
   }
   @if(type() === 'html'){
-    <div [innerHTML]="value()" [class]="className() + ' flex justify-center items-center ' + this.icon().type"></div>
+    <div [innerHTML]="safeIconValue()" [class]="className() + ' flex justify-center items-center ' + this.icon().type"></div>
   }
 </div>

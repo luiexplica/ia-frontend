@@ -5,7 +5,7 @@ import { Session_Auth_I, Session_Client_I } from "@luiexplica/ia-dev-services"
 type Status_Session_Type = "checking" | "authenticated" | "not-authenticated";
 
 export interface SessionState_I {
-  isLoading: boolean;
+  onLoading: boolean;
   session: Session_Auth_I;
   client: Session_Client_I;
   status: Status_Session_Type;
@@ -13,7 +13,7 @@ export interface SessionState_I {
 }
 
 const initialState: SessionState_I = {
-  isLoading: false,
+  onLoading: false,
   session: {} as Session_Auth_I,
   client: {} as Session_Client_I,
   status: 'not-authenticated',
@@ -28,10 +28,10 @@ export const SessionReducer = createReducer(initialState,
     }
 
   }),
-  on(SessionActions.isLoading, (state, props) => {
+  on(SessionActions.onLoading, (state, props) => {
     return {
       ...state,
-      isLoading: props.isLoading
+      onLoading: props.onLoading
     }
 
   }),
@@ -41,7 +41,7 @@ export const SessionReducer = createReducer(initialState,
       ...state,
       session: props.session,
       client: props.client,
-      isLoading: false,
+      onLoading: false,
       sessionChecked: true,
       status
 
@@ -54,7 +54,7 @@ export const SessionReducer = createReducer(initialState,
       ...state,
       session: {} as Session_Auth_I,
       sessionChecked: true,
-      isLoading: false,
+      onLoading: false,
       status
     }
 
@@ -63,7 +63,7 @@ export const SessionReducer = createReducer(initialState,
     const status: Status_Session_Type = 'checking';
     return {
       ...state,
-      isLoading: true,
+      onLoading: true,
       sessionChecked: false,
       status
     }

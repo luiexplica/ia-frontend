@@ -5,11 +5,13 @@ import { MenuItem_I } from '@interfaces/menus.interface';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { NavBarComponent } from '@components/shared/navBar/navBar.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
+import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
 
 @Component({
   selector: 'public',
   imports: [
     RouterOutlet,
+    SidebarComponent,
     NavBarComponent,
     FooterComponent
   ],

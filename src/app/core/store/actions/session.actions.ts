@@ -4,8 +4,8 @@ import { createActionGroup, props, emptyProps } from "@ngrx/store";
 export const SessionActions = createActionGroup({
   source: `Session`,
   events: {
-    'isLoading': props<{
-      isLoading: boolean;
+    'onLoading': props<{
+      onLoading: boolean;
     }>(),
     'onLogin': props<{
       session: Session_Auth_I;

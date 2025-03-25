@@ -1,12 +1,13 @@
-import { createActionGroup, props } from "@ngrx/store";
+import { createActionGroup, emptyProps, props } from "@ngrx/store";
 
 
 export const uiActions = createActionGroup({
   source: 'UI',
   events: {
-    'isLoading': props<{
-      isLoading: boolean;
+    'onLoading': props<{
+      onLoading: boolean;
     }>(),
+    'onToggleDrawer': emptyProps()
 
   }
 

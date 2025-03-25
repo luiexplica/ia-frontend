@@ -15,51 +15,35 @@
 
       <div class="hidden gap-2 buttonsSection pcTab:flex">
 
-        @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
-
           <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
           <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
-
-        }@else {
-          <app-user-dialog class="pl-4 ml-0 border-l border-gray-200" />
-
-        }
 
       </div>
       <div class="flex gap-2 buttonsSection pcTab:hidden">
 
-        <app-button [className]="'relative '" [size]="'sm'" [buttonStyle]="'text'"
-          [attr.data-collapse-target]="'navbar'" (onClick)="this.toggleCollapseMenu()">
-          <ng-content icon>
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                stroke="currentColor" aria-hidden="true" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5">
-                </path>
-              </svg>
-            </span>
-
-          </ng-content>
-        </app-button>
+        <app-button
+          [className]="'relative '"
+          [size]="'sm'"
+          [buttonStyle]="'text'"
+          (onClick)="toggleDrawerSidebar()"
+          [icon]="collapseIcon"
+        />
 
       </div>
 
     </div>
   </div>
 
-  <div class="block w-full h-0 overflow-hidden transition-all duration-300 ease-in basis-full pcTab:hidden " [ngClass]="{
+  <!-- <div class="block w-full h-0 overflow-hidden transition-all duration-300 ease-in basis-full pcTab:hidden " [ngClass]="{
       'h-full': this.collapseMenu()
     }">
     <div class="p-0 py-6 mt-0 bg-white rounded-tl-none rounded-tr-none rounded-xl ">
       <div class="container flex flex-col items-center justify-between mx-auto">
 
         <app-menu-list class="w-full" [orientation]="'vertical'" [menuList]="this.menuItems()" />
-        <!-- [orientation]="'vertical'" -->
 
         <hr class="mt-2">
         <div class="flex flex-col w-full gap-4 buttonsSection">
-
-        @if ( this.sessionState().status != 'authenticated' && this.sessionState().sessionChecked ) {
 
             <app-button (onClick)="goTo('register')" [fullWidth]="true" [buttonStyle]="'primary'"
             text="Registrate"
@@ -70,17 +54,12 @@
             >
             </app-button>
 
-        }@else {
-        <app-user-dialog />
-        }
+
 
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </nav>
 
-<!-- <pre>
-  {{ this.sessionState() | json }}
-</pre> -->

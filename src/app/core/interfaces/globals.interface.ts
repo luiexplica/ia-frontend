@@ -1,7 +1,5 @@
-
 export interface Icon_I {
-
-  type: 'src' | 'html' | 'i';
+  type: 'src' | 'html';
   value: string;
 
 }

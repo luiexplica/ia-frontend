@@ -1,41 +1,46 @@
 import { Router } from '@angular/router';
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { JsonPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MenuListComponent } from '@components/menus/menuList/menuList.component';
-import { SessionStoreService } from '@core/store/services/session.store.service';
-import { UserDialogComponent } from './userDialog/userDialog.component';
+import { Icon_I } from '@interfaces/globals.interface';
+import { UiStoreService } from '@core/store/services/ui.store.service';
 
 @Component({
   selector: 'nav-bar',
   imports: [
     ButtonComponent,
     MenuListComponent,
-    NgClass,
-    UserDialogComponent
-    // JsonPipe
   ],
   templateUrl: './navBar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBarComponent  {
+export class NavBarComponent {
 
   menuItems = input.required<MenuItem_I[]>();
   router = inject(Router);
 
-  sessionStore = inject(SessionStoreService);
-  sessionState = computed(() => this.sessionStore.state());
+  uiStore = inject(UiStoreService);
 
-  collapseMenu = signal(false);
+  collapseIcon: Icon_I = {
+    type: 'html',
+    value: `
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+      stroke="currentColor" aria-hidden="true" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5">
+      </path>
+    </svg>
+    `
+  }
 
   goTo(route: string) {
     this.router.navigate([route]);
 
   }
 
-  toggleCollapseMenu() {
-    this.collapseMenu.set(!this.collapseMenu());
+  toggleDrawerSidebar(){
+    this.uiStore.onToggleDrawer();
 
   }
 
