@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CoreState_I } from '../app.reducers';
-import { Session_Auth_I } from '@luiexplica/ia-dev-services';
+import { Session_Auth_I, Session_Client_I } from '@luiexplica/ia-dev-services';
 import { SessionActions } from '../actions/session.actions';
 
 @Injectable({
@@ -17,9 +17,10 @@ export class SessionStoreService {
 
   }
 
-  onLogin(session: Session_Auth_I) {
+  onLogin(session: Session_Auth_I, client: Session_Client_I) {
     this.store.dispatch(SessionActions.onLogin({
-      session
+      session,
+      client
     }));
 
   }

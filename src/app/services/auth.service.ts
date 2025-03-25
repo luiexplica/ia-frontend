@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@envs/environment.development';
 
-import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Auth_I } from "@luiexplica/ia-dev-services"
+import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Response_I } from "@luiexplica/ia-dev-services"
 import Backend_Api from '@api/axiosBase';
 import { SessionStoreService } from '@core/store/services/session.store.service';
 import { uiService } from '../core/services/ui.service';
@@ -23,19 +23,21 @@ export class AuthService {
 
   }
 
-  async login(login: LoginAuth_Dto): Promise<Response_I<Session_Auth_I>> {
+  async login(login: LoginAuth_Dto): Promise<Response_I<Session_Response_I>> {
     const url = `${this.apiUrl()}/login`;
     return new Promise(async (resolve, reject) => {
 
       this.sessionStore.onChecking();
 
       try {
-        const resp: Response_I<Session_Auth_I> = await Backend_Api.post(url, {
+        const resp: Response_I<Session_Response_I> = await Backend_Api.post(url, {
           ...login
         });
+        const auth = resp.data!.auth;
+        const client = resp.data!.client;
 
-        this.sessionStore.onLogin(resp.data!);
-        this.setTokenLocalStorage(resp.data!.token);
+        this.sessionStore.onLogin(auth, client);
+        this.setTokenLocalStorage(auth.token);
 
         resolve(resp);
 
@@ -61,9 +63,11 @@ export class AuthService {
           throw new Error('No token found in local storage');
         }
 
-        const resp: Response_I<Session_Auth_I> = await Backend_Api.get(url);
-        this.sessionStore.onLogin(resp.data!);
-        this.setTokenLocalStorage(resp.data!.token)
+        const resp: Response_I<Session_Response_I> = await Backend_Api.get(url);
+        const auth = resp.data!.auth;
+        const client = resp.data!.client;
+        this.sessionStore.onLogin(auth, client);
+        this.setTokenLocalStorage(auth.token);
 
         resolve(resp);
 

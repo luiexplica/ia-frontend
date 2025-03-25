@@ -14,7 +14,6 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
 
   title = 'ia-frontend';
-
   authService = inject(AuthService);
 
   ngOnInit(): void {
@@ -23,7 +22,7 @@ export class AppComponent implements OnInit {
   }
 
   async initComponent() {
-      await this.authService.checkSession();
+    await this.authService.checkSession();
 
   }
 

@@ -1,12 +1,13 @@
 import { createReducer, on } from "@ngrx/store"
 import { SessionActions } from "../actions/session.actions"
-import { Session_Auth_I } from "@luiexplica/ia-dev-services"
+import { Session_Auth_I, Session_Client_I } from "@luiexplica/ia-dev-services"
 
 type Status_Session_Type = "checking" | "authenticated" | "not-authenticated";
 
 export interface SessionState_I {
   isLoading: boolean;
   session: Session_Auth_I;
+  client: Session_Client_I;
   status: Status_Session_Type;
   sessionChecked: boolean;
 }
@@ -14,6 +15,7 @@ export interface SessionState_I {
 const initialState: SessionState_I = {
   isLoading: false,
   session: {} as Session_Auth_I,
+  client: {} as Session_Client_I,
   status: 'not-authenticated',
   sessionChecked: false
 }
@@ -38,6 +40,7 @@ export const SessionReducer = createReducer(initialState,
     return {
       ...state,
       session: props.session,
+      client: props.client,
       isLoading: false,
       sessionChecked: true,
       status

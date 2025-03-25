@@ -39,8 +39,8 @@ importers:
         specifier: ^1.6.13
         version: 1.6.13
       '@luiexplica/ia-dev-services':
-        specifier: ^1.0.109
-        version: 1.0.109(@formkit/tempo@0.1.2)(rxjs@7.8.1)(typescript@5.7.3)
+        specifier: ^1.0.111
+        version: 1.0.111(@formkit/tempo@0.1.2)(rxjs@7.8.1)(typescript@5.7.3)
       '@material-tailwind/html':
         specifier: 2.3.2
         version: 2.3.2
@@ -1175,8 +1175,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@luiexplica/ia-dev-services@1.0.109':
-    resolution: {integrity: sha512-1hPWJyVZoFg0r4aTFmy59XCwsT2bzM8NiM5DwMCeOkf15iWUoNNKRLEMifPv5eddXwwDTZBKPtr9g8aAbSly2Q==, tarball: https://npm.pkg.github.com/download/@luiexplica/ia-dev-services/1.0.109/7d519fafa84368bd0b19bd6f6691ee4024221d8c}
+  '@luiexplica/ia-dev-services@1.0.111':
+    resolution: {integrity: sha512-O79uYVugURU3L7qRyUg0yozUSJXElsgYOENFv5ie3p8qbrHLumQq5gYSjuAg2W7hkw4c9bAn5XR9gJhzh3sj3Q==, tarball: https://npm.pkg.github.com/download/@luiexplica/ia-dev-services/1.0.111/4ee3330ef821ffe553749be4fdb9e9575708a4dd}
     peerDependencies:
       '@formkit/tempo': ^0.1.2
       rxjs: ^7.8.2
@@ -6388,7 +6388,7 @@ snapshots:
   '@lmdb/lmdb-win32-x64@3.2.2':
     optional: true
 
-  '@luiexplica/ia-dev-services@1.0.109(@formkit/tempo@0.1.2)(rxjs@7.8.1)(typescript@5.7.3)':
+  '@luiexplica/ia-dev-services@1.0.111(@formkit/tempo@0.1.2)(rxjs@7.8.1)(typescript@5.7.3)':
     dependencies:
       '@formkit/tempo': 0.1.2
       rxjs: 7.8.1

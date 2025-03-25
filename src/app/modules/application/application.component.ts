@@ -7,17 +7,17 @@ import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
   selector: 'app-application',
   imports: [
     FooterComponent,
-    NavBarComponent
+    // NavBarComponent
   ],
   templateUrl: './application.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicationComponent {
 
-    layoutGlobalService = inject(LayoutGlobalService);
+  layoutGlobalService = inject(LayoutGlobalService);
 
-    fullWidth = computed( () => this.layoutGlobalService.layoutFullScreen() );
-    hideNavbar = computed( () => this.layoutGlobalService.hideNavbar() );
-    hideFooter = computed( () => this.layoutGlobalService.hideFooter() );
+  fullWidth = computed(() => this.layoutGlobalService.layoutFullScreen());
+  hideNavbar = computed(() => this.layoutGlobalService.hideNavbar());
+  hideFooter = computed(() => this.layoutGlobalService.hideFooter());
 
 }
