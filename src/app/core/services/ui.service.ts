@@ -15,7 +15,7 @@ interface Toast_I {
 export class uiService {
 
   private toastDefault: Toast_I = {
-    position: "top-right",
+    position: "bottom-right",
     title: "Title",
     message: "",
     type: "default"

@@ -77,7 +77,7 @@ export class ButtonComponent implements OnInit {
     }
     if (this.buttonStyle() === 'secondary') {
       this.buttonClasses.set(`
-        ${this.className()} border shadow-sm border-slate-300 hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
+        ${this.className()} border shadow-sm border-slate-300 hover:shadow-lg text-slate-600 hover:text-primaryBlue  hover:border-primaryBlue  focus:text-primaryBlue  focus:border-primaryBlue active:text-primaryBlue active:border-primaryBlue  disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
       `);
 
     }

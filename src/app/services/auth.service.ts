@@ -81,10 +81,6 @@ export class AuthService {
   logout() {
     this.sessionStore.onLogout();
     this.removeTokenLocalStorage();
-    this.uiService.emitToast({
-      title: 'Vuelva pronto..!',
-      type: 'success'
-    })
 
   }
 
@@ -94,7 +90,14 @@ export class AuthService {
   }
 
   removeTokenLocalStorage() {
-    localStorage.removeItem(environment.localStorage.token);
+    const token = this.getTokenLocalStorage();
+    if(token){
+      localStorage.removeItem(environment.localStorage.token)
+      this.uiService.emitToast({
+        title: 'Vuelva pronto..!',
+        type: 'success',
+      })
+    }
 
   }
 
