@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { toast } from 'ngx-sonner';
 
 interface Toast_I {

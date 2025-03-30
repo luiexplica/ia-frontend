@@ -1,18 +1,38 @@
 
 @if (!this.hideNavbar()) {
   <nav-bar [menuItems]="this.public_routes()" />
+
 }
 
 <section class="container !mx-auto  h-screen place-items-center"
   [class]="{
     'max-w-full': this.fullWidth()
   }">
+
   <router-outlet />
+
 </section>
 
 @if (!this.hideFooter()) {
   <footer-bar />
+
 }
 
+<app-sidebar >
+  <app-menu-list menu
+    class="w-full"
+    [orientation]="'vertical'"
+    [menuList]="this.public_routes()"
+   />
 
-<app-sidebar />
+  <div footer class="flex flex-col gap-2">
+    <app-button
+    [fullWidth]="true"
+    (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
+    <app-button
+    [fullWidth]="true"
+    (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
+
+  </div>
+
+</app-sidebar>

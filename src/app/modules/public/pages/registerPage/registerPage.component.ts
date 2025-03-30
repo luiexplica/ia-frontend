@@ -1,5 +1,5 @@
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, OnInit } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { RouterLink, Router } from '@angular/router';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
@@ -22,7 +22,7 @@ import { handlerError } from '@api/handlerError';
   templateUrl: './registerPage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterPageComponent implements OnInit, OnDestroy {
+export class RegisterPageComponent implements OnInit {
 
   form = signal<FormGroup>(new FormGroup({}));
   formRows = signal<LayoutRow_I[]>([...registerFormDef])
@@ -44,11 +44,6 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.form.set(this.dynamicFormService.generateForm(this.formRows()));
-
-  }
-
-  ngOnDestroy(): void {
-    this.layoutGlobalService.setLayoutDefault();
 
   }
 
@@ -104,7 +99,6 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
       });
 
     }
-
     this.isLoading.set(false);
 
   }

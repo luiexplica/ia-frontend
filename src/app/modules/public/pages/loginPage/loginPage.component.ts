@@ -1,6 +1,6 @@
 import { LoginForm_I, loginFormDef } from './login-form.defs';
 
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
 import { ButtonComponent } from "@components/button/button.component";
 import { Router, RouterLink } from '@angular/router';
@@ -24,7 +24,7 @@ import { SessionStoreService } from '@core/store/services/session.store.service'
   templateUrl: './loginPage.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginPageComponent implements OnInit, OnDestroy {
+export class LoginPageComponent implements OnInit {
 
   layoutGlobalService = inject(LayoutGlobalService);
   authService = inject(AuthService);
@@ -47,11 +47,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.form.set(this.dynamicFormService.generateForm(this.formRows()));
-
-  }
-
-  ngOnDestroy(): void {
-    this.layoutGlobalService.setLayoutDefault();
 
   }
 

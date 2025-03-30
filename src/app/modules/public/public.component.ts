@@ -6,11 +6,17 @@ import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { NavBarComponent } from '@components/shared/navBar/navBar.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
 import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
+import { MenuListComponent } from '@components/menus/menuList/menuList.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { DropDownMenuComponent } from '../../core/components/menus/dropDownMenu/dropDownMenu.component';
 
 @Component({
   selector: 'public',
   imports: [
     RouterOutlet,
+    MenuListComponent,
+    // DropDownMenuComponent,
+    ButtonComponent,
     SidebarComponent,
     NavBarComponent,
     FooterComponent
@@ -60,6 +66,11 @@ export default class PublicComponent implements OnInit {
 
   initComponent() {
     this.setActiveRoute();
+
+  }
+
+  goTo(route: string) {
+    this.router.navigate([route]);
 
   }
 
