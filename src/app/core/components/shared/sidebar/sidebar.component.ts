@@ -1,20 +1,24 @@
 import { Icon_I } from '@interfaces/globals.interface';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
-import { UiStoreService } from '@core/store/services/ui.store.service';
+import { UiStoreService } from '@app/core/store/store-services/ui.store.service';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@components/button/button.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   imports: [
     ButtonComponent,
+    NgClass,
     DrawerModule
   ],
   templateUrl: './sidebar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
+
+  headerLogo = input<boolean>(false);
 
   uiStore = inject(UiStoreService);
   visible = computed(() => this.uiStore.state().drawer);

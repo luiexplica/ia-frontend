@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSonnerToaster } from 'ngx-sonner';
 import { AuthService } from './services/auth.service';
-import { UiStoreService } from './core/store/services/ui.store.service';
+import { UiStoreService } from './core/store/store-services/ui.store.service';
 import { RouterUtilsService } from './core/services/routerUtils.service';
 
 @Component({

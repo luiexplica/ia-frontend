@@ -14,7 +14,6 @@ const initialState: UiState_I = {
 export const UiReducer = createReducer(initialState,
 
   on(uiActions.onLoading, (state, props) => {
-
     return {
       ...state,
       onLoading: props.onLoading
@@ -22,10 +21,16 @@ export const UiReducer = createReducer(initialState,
 
   }),
   on(uiActions.onToggleDrawer, (state, props) => {
-
     return {
       ...state,
       drawer: !state.drawer
+    }
+
+  }),
+  on(uiActions.onCloseDrawers, (state, props) => {
+    return {
+      ...state,
+      drawer: false
     }
 
   }),

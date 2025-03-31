@@ -1,9 +1,15 @@
 
 <p-drawer #drawerRef [visible]="visible()" (onHide)="onHide()">
   <ng-template #headless>
-    <div class="flex flex-col h-full px-4">
-      <div class="flex items-center justify-between pt-4 mb-8 shrink-0">
+    <div class="flex flex-col h-full px-4 py-4">
+      <div class="relative flex items-center justify-between shrink-0"
+        [ngClass]="{
+          'mb-12': !headerLogo(),
+          'mb-4': headerLogo()
+        }"
+      >
 
+        @if(headerLogo()){
         <span class="inline-flex items-center gap-2">
           <div class="logoSection hover:cursor-pointer">
             <img src="assets/images/logo_lui.png" class="w-16 h-16 pcTab:h-20 pcTab:w-20" alt="logo" />
@@ -11,7 +17,9 @@
           </div>
 
         </span>
-        <span>
+
+        }
+        <span class="absolute top-0 right-0">
           <app-button [buttonStyle]="'text'" [icon]="iconButtonClose()" [size]="'sm'" (onClick)="close()" />
 
         </span>
@@ -22,7 +30,7 @@
 
       </div>
 
-      <div class="mt-auto mb-4 ">
+      <div class="mt-auto ">
         <hr class="mx-4 mb-4 border-0 border-t border-surface" />
         <ng-content select="[footer]"></ng-content>
 

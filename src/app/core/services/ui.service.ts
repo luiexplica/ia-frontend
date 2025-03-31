@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { toast } from 'ngx-sonner';
+import { UiStoreService } from '../store/store-services/ui.store.service';
 
 interface Toast_I {
   position?: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
@@ -13,6 +14,8 @@ interface Toast_I {
   providedIn: 'root'
 })
 export class uiService {
+
+  private uiStore = inject(UiStoreService);
 
   private toastDefault: Toast_I = {
     position: "bottom-right",
@@ -59,6 +62,11 @@ export class uiService {
         break;
 
     }
+
+  }
+
+  sidebarsClose(){
+    this.uiStore.onCloseDrawers()
 
   }
 

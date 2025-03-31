@@ -8,7 +8,6 @@
   [class]="{
     'max-w-full': this.fullWidth()
   }">
-
   <router-outlet />
 
 </section>
@@ -18,7 +17,9 @@
 
 }
 
-<app-sidebar >
+<app-sidebar
+  [headerLogo]="true"
+ >
   <app-menu-list menu
     class="w-full"
     [orientation]="'vertical'"

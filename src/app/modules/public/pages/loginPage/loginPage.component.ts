@@ -11,7 +11,7 @@ import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.com
 import { uiService } from '@app/core/services/ui.service';
 import { AuthService } from '@services/auth.service';
 import { handlerError } from '@api/handlerError';
-import { SessionStoreService } from '@core/store/services/session.store.service';
+import { SessionStoreService } from '@app/core/store/store-services/session.store.service';
 
 @Component({
   selector: 'app-login-page',
@@ -78,21 +78,10 @@ export class LoginPageComponent implements OnInit {
         password: formValues.password
       });
 
-      this.uiService.emitToast({
-        title: 'Bienvenido',
-        type: 'success'
-      });
-
       this.router.navigate(['/dashboard']);
 
     } catch (error) {
-
-      const err = handlerError(error);
-      const msg = 'Error al iniciar sesión';
-      this.uiService.emitToast({
-        title: msg,
-        type: 'error'
-      });
+      // const err = handlerError(error);
 
     }
     this.isLoading.set(false);

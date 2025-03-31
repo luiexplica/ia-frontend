@@ -3,8 +3,9 @@ import { environment } from '@envs/environment.development';
 
 import { AuthRegister_Dto, LoginAuth_Dto, Response_I, Session_Response_I } from "@luiexplica/ia-dev-services"
 import Backend_Api from '@api/axiosBase';
-import { SessionStoreService } from '@core/store/services/session.store.service';
+import { SessionStoreService } from '@app/core/store/store-services/session.store.service';
 import { uiService } from '@core/services/ui.service';
+import { ApiHttpService } from '@core/services/api-http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,10 @@ import { uiService } from '@core/services/ui.service';
 export class AuthService {
 
   apiUrl = signal(environment._SERVICE + "/auth");
+
   sessionStore = inject(SessionStoreService);
   uiService = inject(uiService);
+  apiService = inject(ApiHttpService)
 
   register(data: AuthRegister_Dto) {
     const url = `${this.apiUrl()}/register`;
@@ -25,30 +28,39 @@ export class AuthService {
 
   async login(login: LoginAuth_Dto): Promise<Response_I<Session_Response_I>> {
     const url = `${this.apiUrl()}/login`;
-    return new Promise(async (resolve, reject) => {
 
+    try {
       this.sessionStore.onChecking();
 
-      try {
-        const resp: Response_I<Session_Response_I> = await Backend_Api.post(url, {
-          ...login
-        });
-        const auth = resp.data!.auth;
-        const client = resp.data!.client;
+      const resp: Response_I<Session_Response_I> = await this.apiService._post(url, {
+        ...login
+      });
+      const auth = resp.data!.auth;
+      const client = resp.data!.client;
 
-        this.sessionStore.onLogin(auth, client);
-        this.setTokenLocalStorage(auth.token);
+      this.sessionStore.onLogin(auth, client);
+      this.setTokenLocalStorage(auth.token);
 
-        resolve(resp);
+      this.uiService.emitToast({
+        title: 'Bienvenido',
+        type: 'success'
+      });
 
-      } catch (error) {
+      return resp;
 
-        this.logout();
-        reject(error);
+    } catch (error) {
+      this.logout();
+      const err = error as Response_I;
+      const msg = err.message || 'Error al iniciar sesión';
+      this.uiService.emitToast({
+        title: msg,
+        type: 'error'
+      });
 
-      }
+      throw error;
 
-    })
+    }
+
   }
 
   async checkSession() {
@@ -95,7 +107,7 @@ export class AuthService {
 
   removeTokenLocalStorage() {
     const token = this.getTokenLocalStorage();
-    if(token){
+    if (token) {
       localStorage.removeItem(environment.localStorage.token)
       this.uiService.emitToast({
         title: 'Vuelva pronto..!',

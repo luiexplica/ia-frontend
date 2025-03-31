@@ -1,4 +1,4 @@
-import { CoreState_I } from './../app.reducers';
+import { CoreState_I } from '../app.reducers';
 import { inject, Injectable } from '@angular/core';
 import { UiState_I } from '../reducers/ui.reducer';
 import { Store } from '@ngrx/store';
@@ -21,6 +21,11 @@ export class UiStoreService {
 
   onToggleDrawer() {
     this.store.dispatch(uiActions.onToggleDrawer());
+
+  }
+
+  onCloseDrawers() {
+    this.store.dispatch(uiActions.onCloseDrawers());
 
   }
 

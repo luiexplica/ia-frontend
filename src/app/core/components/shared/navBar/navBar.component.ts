@@ -5,7 +5,7 @@ import { MenuItem_I } from '@interfaces/menus.interface';
 import { NgClass } from '@angular/common';
 import { MenuListComponent } from '@components/menus/menuList/menuList.component';
 import { Icon_I } from '@interfaces/globals.interface';
-import { UiStoreService } from '@core/store/services/ui.store.service';
+import { UiStoreService } from '@app/core/store/store-services/ui.store.service';
 
 @Component({
   selector: 'nav-bar',

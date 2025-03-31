@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { LayoutGlobalService } from './layoutGlobal.service';
+import { uiService } from './ui.service';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class RouterUtilsService {
   router = inject(Router);
 
   private layoutGlobalService = inject(LayoutGlobalService)
+  private uiService = inject(uiService)
 
   private routerEventsSubscription: Subscription = new Subscription();
 
@@ -23,6 +25,7 @@ export class RouterUtilsService {
       if (event instanceof NavigationStart) {
         console.log('Navigation started to:', event.url);
         this.layoutGlobalService.setLayoutDefault();
+        this.uiService.sidebarsClose()
       }
       if (event instanceof NavigationEnd) {
         console.log('Navigation ended at:', event.url);
