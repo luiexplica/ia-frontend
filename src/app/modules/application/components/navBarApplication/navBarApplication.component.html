@@ -1,5 +1,5 @@
 <nav
-  class="block w-full max-w-full px-4 py-4 text-white bg-white border rounded-none backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80">
+  class="block w-full max-w-full px-4 py-4 text-white bg-white border rounded-none pcTab:px-10 backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80">
   <div class="flex items-center justify-between mx-auto ">
     <div class="flex ">
 
@@ -14,8 +14,10 @@
       <app-nav-bar-menu class="hidden pcTab:flex" [menuList]="this.menuItems()" />
 
       <div class="hidden gap-2 buttonsSection pcTab:flex">
-          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
-          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
+          <!-- <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
+          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" /> -->
+
+          <app-user-dialog />
 
       </div>
       <div class="flex gap-2 buttonsSection pcTab:hidden">

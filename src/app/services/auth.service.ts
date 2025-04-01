@@ -6,11 +6,14 @@ import Backend_Api from '@api/axiosBase';
 import { SessionStoreService } from '@app/core/store/store-services/session.store.service';
 import { uiService } from '@core/services/ui.service';
 import { ApiHttpService } from '@core/services/api-http.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+
+  router = inject(Router);
 
   apiUrl = signal(environment._SERVICE + "/auth");
 
@@ -117,6 +120,7 @@ export class AuthService {
   logout() {
     this.sessionStore.onLogout();
     this.removeTokenLocalStorage();
+    this.router.navigate(['/home']);
 
   }
 

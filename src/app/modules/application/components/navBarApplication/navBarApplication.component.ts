@@ -5,11 +5,13 @@ import { MenuItem_I } from '@interfaces/menus.interface';
 import { UiStoreService } from '@core/store/store-services/ui.store.service';
 import { ButtonComponent } from '@components/button/button.component';
 import { NavBarMenuComponent } from '@components/shared/navBarMenu/navBarMenu.component';
+import { UserDialogComponent } from '../userDialog/userDialog.component';
 
 @Component({
   selector: 'nav-bar-application',
   imports: [
     ButtonComponent,
+    UserDialogComponent,
     NavBarMenuComponent
   ],
   templateUrl: './navBarApplication.component.html',
