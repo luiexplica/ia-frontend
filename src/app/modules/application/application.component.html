@@ -1,16 +1,34 @@
 
 @if (!this.hideNavbar()) {
   <nav-bar-application [menuItems]="this.application_routes()" />
-  <!-- navbar -->
+
 }
 
 <section class="container !mx-auto  h-screen place-items-center"
   [class]="{
     'max-w-full': this.fullWidth()
   }">
-  <!-- <router-outlet /> -->
+  <router-outlet />
 </section>
 
 @if (!this.hideFooter()) {
   <footer-bar />
+
 }
+
+<app-sidebar
+  [headerLogo]="true"
+ >
+  <!-- <app-menu-list menu
+    class="w-full"
+    [orientation]="'vertical'"
+    [menuList]="this.public_routes()"
+   /> -->
+
+  <div footer class="flex flex-col gap-2">
+
+    <!-- <app-user-dialog /> -->
+
+  </div>
+
+</app-sidebar>

@@ -11,7 +11,7 @@
 
     <div class="flex gap-4 buttonGroup">
 
-      <app-menu-list class="hidden pcTab:flex" [menuList]="this.menuItems()" />
+      <app-nav-bar-menu class="hidden pcTab:flex" [menuList]="this.menuItems()" />
 
       <div class="hidden gap-2 buttonsSection pcTab:flex">
           <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />

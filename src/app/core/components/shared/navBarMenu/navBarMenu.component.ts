@@ -1,20 +1,21 @@
-import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
+import { NgClass } from '@angular/common';
 import { MenuItem_I } from '@interfaces/menus.interface';
 
 type MenuOrientation_Type = 'horizontal' | 'vertical';
 type ItemsAlign = 'center' | 'start' | 'end';
+
 @Component({
-  selector: 'app-menu-list',
+  selector: 'app-nav-bar-menu',
   imports: [
     ButtonComponent,
     NgClass,
   ],
-  templateUrl: './menuList.component.html',
+  templateUrl: './navBarMenu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuListComponent {
+export class NavBarMenuComponent {
 
   orientation = input<MenuOrientation_Type>('horizontal');
   menuList = input<MenuItem_I[]>([]);

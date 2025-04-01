@@ -4,7 +4,7 @@ import { application_panel_routes } from "./pages/panel/panel.routes";
 
 export const application_routes: Routes = [
   {
-    path: 'panel',
+    path: 'settings',
     component: PanelComponent,
     data: {
       // icon: 'fa-solid fa-spell-check',
@@ -14,7 +14,7 @@ export const application_routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'panel',
+    redirectTo: 'settings',
     pathMatch: 'full',
 
   },

@@ -3,13 +3,18 @@ import { FooterComponent } from '@components/shared/footer/footer.component';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { RouterUtilsService } from '@core/services/routerUtils.service';
 import { NavBarApplicationComponent } from './components/navBarApplication/navBarApplication.component';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem_I } from '@interfaces/menus.interface';
+import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
+import { UserDialogComponent } from './components/userDialog/userDialog.component';
 
 @Component({
   selector: 'app-application',
   imports: [
+    RouterOutlet,
     FooterComponent,
+    SidebarComponent,
+    UserDialogComponent,
     NavBarApplicationComponent
   ],
   templateUrl: './application.component.html',
@@ -25,17 +30,12 @@ export class ApplicationComponent {
       action: (index: number) => this.listenClick(index)
     },
     {
-      id: 'services',
-      title: 'Servicios',
+      id: 'settings',
+      title: 'Configuraciones',
       active: false,
       action: (index: number) => this.listenClick(index)
     },
-    {
-      id: 'contact',
-      title: 'Contacto',
-      active: false,
-      action: (index: number) => this.listenClick(index)
-    }
+
   ]);
 
 

@@ -1,23 +1,22 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { MenuItem_I } from '@interfaces/menus.interface';
-
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
+import { MenuItem_I } from '@interfaces/menus.interface';
 import { ButtonComponent } from '@components/button/button.component';
-import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-drop-down-menu',
+  selector: 'app-drop-down-popover',
   imports: [
     ButtonModule,
     PopoverModule,
     ButtonComponent,
     NgClass
   ],
-  templateUrl: './dropDownMenu.component.html',
+  templateUrl: './dropDownPopover.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropDownMenuComponent {
+export class DropDownPopoverComponent {
 
   title = input<string>('');
   menuList = input<MenuItem_I[]>([

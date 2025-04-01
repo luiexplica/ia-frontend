@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuListComponent } from '@components/menus/menuList/menuList.component';
 import { Icon_I } from '@interfaces/globals.interface';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { UiStoreService } from '@core/store/store-services/ui.store.service';
 import { ButtonComponent } from '@components/button/button.component';
+import { NavBarMenuComponent } from '@components/shared/navBarMenu/navBarMenu.component';
 
 @Component({
   selector: 'nav-bar-application',
   imports: [
     ButtonComponent,
-    MenuListComponent,
+    NavBarMenuComponent
   ],
   templateUrl: './navBarApplication.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

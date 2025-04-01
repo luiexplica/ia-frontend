@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { DropDownMenuComponent } from '@components/menus/dropDownMenu/dropDownMenu.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { Icon_I } from '@interfaces/globals.interface';
 import { AuthService } from '@services/auth.service';
+import { DropDownPopoverComponent } from '@components/menus/dropDownPopover/dropDownPopover.component';
 
 @Component({
   selector: 'app-user-dialog',
   imports: [
     ButtonComponent,
-    DropDownMenuComponent
+    DropDownPopoverComponent
   ],
   templateUrl: './userDialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

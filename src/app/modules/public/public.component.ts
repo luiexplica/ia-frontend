@@ -5,16 +5,16 @@ import { MenuItem_I } from '@interfaces/menus.interface';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { FooterComponent } from '@components/shared/footer/footer.component';
 import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
-import { MenuListComponent } from '@components/menus/menuList/menuList.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { RouterUtilsService } from '@core/services/routerUtils.service';
 import { NavBarPublicComponent } from './components/navBarPublic/navBarPublic.component';
+import { NavBarMenuComponent } from '@components/shared/navBarMenu/navBarMenu.component';
 
 @Component({
   selector: 'public',
   imports: [
     RouterOutlet,
-    MenuListComponent,
+    NavBarMenuComponent,
     ButtonComponent,
     SidebarComponent,
     NavBarPublicComponent,
