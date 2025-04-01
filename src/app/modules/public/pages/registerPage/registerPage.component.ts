@@ -9,7 +9,6 @@ import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.com
 import { RegisterForm_I, registerFormDef } from './register-form.defs';
 import { AuthService } from '@services/auth.service';
 import { uiService } from '@app/core/services/ui.service';
-import { handlerError } from '@api/handlerError';
 
 @Component({
   selector: 'app-register-page',
@@ -85,18 +84,7 @@ export class RegisterPageComponent implements OnInit {
         last_name: formValues.last_name
       });
 
-      this.uiService.emitToast({
-        title: 'Usuario registrado',
-        type: 'success'
-      })
-
     } catch (error) {
-      const err = handlerError(error);
-      const msg = err.message || 'Error al registrar usuario';
-      this.uiService.emitToast({
-        title: msg,
-        type: 'error'
-      });
 
     }
     this.isLoading.set(false);

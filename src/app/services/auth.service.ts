@@ -18,11 +18,31 @@ export class AuthService {
   uiService = inject(uiService);
   apiService = inject(ApiHttpService)
 
-  register(data: AuthRegister_Dto) {
+  async register(data: AuthRegister_Dto) {
+
     const url = `${this.apiUrl()}/register`;
-    return Backend_Api.post(url, {
-      ...data
-    });
+    try {
+      const resp: Response_I = await this.apiService._post(url, {
+        ...data
+      });
+
+      this.uiService.emitToast({
+        title: 'Usuario registrado exitosamente',
+        type: 'success'
+      })
+
+      return resp;
+
+    } catch (error) {
+      const err = error as Response_I;
+      const msg = err.message || 'Error al iniciar sesión';
+      this.uiService.emitToast({
+        title: msg,
+        type: 'error'
+      });
+      throw error;
+
+    }
 
   }
 
@@ -75,7 +95,7 @@ export class AuthService {
           throw new Error('No token found in local storage');
         }
 
-        const resp: Response_I<Session_Response_I> = await Backend_Api.get(url);
+        const resp: Response_I<Session_Response_I> = await this.apiService._get(url);
         const auth = resp.data!.auth;
         const client = resp.data!.client;
         this.sessionStore.onLogin(auth, client);
