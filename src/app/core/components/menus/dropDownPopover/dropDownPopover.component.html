@@ -6,33 +6,13 @@
 <p-popover #op>
   <div class="flex flex-col gap-4">
     <div>
-
       @if(title()){
         <span class="block mb-2 text-sm font-semibold">
           {{ title() }}
         </span>
       }
-      <ul class="flex flex-col p-0 mt-2 list-none">
-        @for (button of menuList(); track $index) {
+      <app-nested-menu [menu]="menu()" />
 
-        <app-button
-          [fullWidth]="true"
-          align="left"
-          size="sm"
-          [text]="button.title"
-          buttonStyle="text"
-          [icon]="button.icon"
-          (onClick)="button.action($index)"
-          [ngClass]="{
-            'border-t pt-2 mt-2 border-gray-200': button?.divider?.up,
-            'border-b pb-2 mb-2 border-gray-200': button?.divider?.bottom
-          }"
-           >
-          </app-button>
-
-        }
-
-      </ul>
     </div>
   </div>
 </p-popover>
