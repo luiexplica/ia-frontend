@@ -3,12 +3,12 @@ import { ChangeDetectionStrategy, Component, signal, inject, OnInit, computed } 
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
-import { NavBarComponent } from '@components/shared/navBar/navBar.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
 import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
 import { MenuListComponent } from '@components/menus/menuList/menuList.component';
 import { ButtonComponent } from '@components/button/button.component';
 import { RouterUtilsService } from '@core/services/routerUtils.service';
+import { NavBarPublicComponent } from './components/navBarPublic/navBarPublic.component';
 
 @Component({
   selector: 'public',
@@ -17,7 +17,7 @@ import { RouterUtilsService } from '@core/services/routerUtils.service';
     MenuListComponent,
     ButtonComponent,
     SidebarComponent,
-    NavBarComponent,
+    NavBarPublicComponent,
     FooterComponent
   ],
   providers: [
@@ -56,7 +56,6 @@ export default class PublicComponent implements OnInit {
   fullWidth = computed( () => this.layoutGlobalService.layoutFullScreen() );
   hideNavbar = computed( () => this.layoutGlobalService.hideNavbar() );
   hideFooter = computed( () => this.layoutGlobalService.hideFooter() );
-
 
   ngOnInit(): void {
     this.initComponent();

@@ -1,0 +1,37 @@
+<nav
+  class="block w-full max-w-full px-4 py-4 text-white bg-white border rounded-none backdrop-saturate-200 backdrop-blur-2xl bg-opacity-80 border-white/80">
+  <div class="flex items-center justify-between mx-auto ">
+    <div class="flex ">
+
+      <div (click)="goTo('home')" class="logoSection hover:cursor-pointer">
+        <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
+      </div>
+
+    </div>
+
+    <div class="flex gap-4 buttonGroup">
+
+      <app-menu-list class="hidden pcTab:flex" [menuList]="this.menuItems()" />
+
+      <div class="hidden gap-2 buttonsSection pcTab:flex">
+          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
+          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
+
+      </div>
+      <div class="flex gap-2 buttonsSection pcTab:hidden">
+
+        <app-button
+          [className]="'relative '"
+          [size]="'sm'"
+          [buttonStyle]="'text'"
+          (onClick)="toggleDrawerSidebar()"
+          [icon]="collapseIcon"
+        />
+
+      </div>
+
+    </div>
+  </div>
+
+</nav>
+

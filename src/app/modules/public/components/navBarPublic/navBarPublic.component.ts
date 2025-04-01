@@ -2,21 +2,20 @@ import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { NgClass } from '@angular/common';
 import { MenuListComponent } from '@components/menus/menuList/menuList.component';
 import { Icon_I } from '@interfaces/globals.interface';
 import { UiStoreService } from '@app/core/store/store-services/ui.store.service';
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'nav-bar-public',
   imports: [
     ButtonComponent,
     MenuListComponent,
   ],
-  templateUrl: './navBar.component.html',
+  templateUrl: './navBarPublic.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBarComponent {
+export class NavBarPublicComponent {
 
   menuItems = input.required<MenuItem_I[]>();
   router = inject(Router);
