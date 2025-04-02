@@ -1,34 +1,31 @@
 
-@if (!this.hideNavbar()) {
-  <nav-bar-application [menuItems]="this.application_routes()" />
 
-}
+<div class="relative grid h-screen grid-cols-1 gap-10 application md:grid-cols-10">
 
-<section class="container !mx-auto  h-screen place-items-center"
-  [class]="{
-    'max-w-full': this.fullWidth()
-  }">
-  <router-outlet />
+  <section class="absolute w-full h-full md:col-span-3 md:relative sidebar ">
+    <app-sidebar-application />
+  </section>
 
-</section>
+  <div class="h-full col-span-1 md:col-span-7 content">
 
-@if (!this.hideFooter()) {
-  <footer-bar />
+    @if (!this.hideNavbar()) {
+      <nav-bar-application  />
 
-}
+    }
 
-<app-sidebar
-  [headerLogo]="true"
- >
-  <!-- <app-menu-list menu
-    class="w-full"
-    [orientation]="'vertical'"
-    [menuList]="this.public_routes()"
-   /> -->
+    <section class="container !mx-auto my-10  h-screen place-items-center"
+      [class]="{
+        'max-w-full': this.fullWidth()
+      }">
+      <router-outlet />
 
-  <div footer class="flex flex-col gap-2">
-    <!-- <app-user-dialog /> -->
+    </section>
+
+    @if (!this.hideFooter()) {
+      <footer-bar />
+
+    }
 
   </div>
 
-</app-sidebar>
+</div>

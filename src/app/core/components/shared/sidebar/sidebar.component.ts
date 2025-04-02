@@ -18,12 +18,12 @@ import { NgClass } from '@angular/common';
 })
 export class SidebarComponent {
 
+  router = inject(Router);
+
   headerLogo = input<boolean>(false);
 
   uiStore = inject(UiStoreService);
   visible = computed(() => this.uiStore.state().drawer);
-
-  router = inject(Router);
 
   iconButtonClose = signal<Icon_I>({
     type: 'html',

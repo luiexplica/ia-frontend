@@ -5,17 +5,15 @@ import { RouterUtilsService } from '@core/services/routerUtils.service';
 import { NavBarApplicationComponent } from './components/navBarApplication/navBarApplication.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
-import { UserDialogComponent } from './components/userDialog/userDialog.component';
+import { SidebarApplicationComponent } from './components/sidebarApplication/sidebarApplication.component';
 
 @Component({
   selector: 'app-application',
   imports: [
     RouterOutlet,
     FooterComponent,
-    SidebarComponent,
-    UserDialogComponent,
-    NavBarApplicationComponent
+    NavBarApplicationComponent,
+    SidebarApplicationComponent
   ],
   templateUrl: './application.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,24 +3,26 @@
   <div class="flex items-center justify-between mx-auto ">
     <div class="flex ">
 
-      <div (click)="goTo('home')" class="logoSection hover:cursor-pointer">
+      <!--
+       <div (click)="goTo('home')" class="logoSection hover:cursor-pointer">
         <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
       </div>
+       -->
 
     </div>
 
     <div class="flex gap-4 buttonGroup">
 
-      <app-nav-bar-menu class="hidden pcTab:flex" [menuList]="this.menuItems()" />
+      <!-- <app-nav-bar-menu class="hidden pcTab:flex" [menuList]="this.menuItems()" /> -->
 
-      <div class="hidden gap-2 buttonsSection pcTab:flex">
+      <div class="flex gap-2 buttonsSection ">
           <!-- <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
           <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" /> -->
 
           <app-user-dialog />
 
       </div>
-      <div class="flex gap-2 buttonsSection pcTab:hidden">
+      <!-- <div class="flex gap-2 buttonsSection pcTab:hidden">
 
         <app-button
           [className]="'relative '"
@@ -30,7 +32,7 @@
           [icon]="collapseIcon"
         />
 
-      </div>
+      </div> -->
 
     </div>
   </div>
