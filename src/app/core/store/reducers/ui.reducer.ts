@@ -3,12 +3,12 @@ import { uiActions } from "../actions/ui.actions"
 
 export interface UiState_I {
   onLoading: boolean;
-  drawer: boolean;
+  sidebar: boolean;
 }
 
 const initialState: UiState_I = {
   onLoading: false,
-  drawer: false
+  sidebar: false
 }
 
 export const UiReducer = createReducer(initialState,
@@ -20,17 +20,24 @@ export const UiReducer = createReducer(initialState,
     }
 
   }),
-  on(uiActions.onToggleDrawer, (state, props) => {
+  on(uiActions.onSetSidebar, (state, props) => {
     return {
       ...state,
-      drawer: !state.drawer
+      sidebar: props.status
+    }
+
+  }),
+  on(uiActions.onToggleSidebar, (state, props) => {
+    return {
+      ...state,
+      sidebar: !state.sidebar
     }
 
   }),
   on(uiActions.onCloseDrawers, (state, props) => {
     return {
       ...state,
-      drawer: false
+      sidebar: false
     }
 
   }),

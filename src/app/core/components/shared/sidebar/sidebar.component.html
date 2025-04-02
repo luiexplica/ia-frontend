@@ -1,7 +1,15 @@
 
 <p-drawer #drawerRef [visible]="visible()" (onHide)="onHide()">
   <ng-template #headless>
-    <div class="flex flex-col h-full px-4 py-4">
+    <div class="relative flex flex-col h-full px-4 py-4">
+
+        <span class="absolute z-10 top-6 right-4">
+          <app-button [buttonStyle]="'text'" [icon]="iconButtonClose()" [size]="'sm'" (onClick)="close()" />
+
+        </span>
+
+      @if (!fullSpace()) {
+
       <div class="relative flex items-center justify-between shrink-0"
         [ngClass]="{
           'mb-12': !headerLogo(),
@@ -19,10 +27,6 @@
         </span>
 
         }
-        <span class="absolute top-0 right-0">
-          <app-button [buttonStyle]="'text'" [icon]="iconButtonClose()" [size]="'sm'" (onClick)="close()" />
-
-        </span>
 
       </div>
       <div class="overflow-y-auto ">
@@ -35,6 +39,12 @@
         <ng-content select="[footer]"></ng-content>
 
       </div>
+
+      } @else {
+        <ng-content select="[content]"></ng-content>
+
+      }
+
     </div>
   </ng-template>
 </p-drawer>

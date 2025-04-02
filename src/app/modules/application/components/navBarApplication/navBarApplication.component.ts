@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Icon_I } from '@interfaces/globals.interface';
-import { MenuItem_I } from '@interfaces/menus.interface';
 import { UiStoreService } from '@core/store/store-services/ui.store.service';
 import { UserDialogComponent } from '../userDialog/userDialog.component';
+import { ButtonComponent } from '@components/button/button.component';
 
 @Component({
   selector: 'nav-bar-application',
   imports: [
+    ButtonComponent,
     UserDialogComponent,
   ],
   templateUrl: './navBarApplication.component.html',
@@ -36,7 +37,7 @@ export class NavBarApplicationComponent {
   }
 
   toggleDrawerSidebar() {
-    this.uiStore.onToggleDrawer();
+    this.uiStore.onToggleSidebar();
 
   }
 

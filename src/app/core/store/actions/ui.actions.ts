@@ -7,7 +7,10 @@ export const uiActions = createActionGroup({
     'onLoading': props<{
       onLoading: boolean;
     }>(),
-    'onToggleDrawer': emptyProps(),
+    'onToggleSidebar': emptyProps(),
+    'onSetSidebar': props<{
+      status: boolean
+    }>(),
     'onCloseDrawers': emptyProps(),
 
   }

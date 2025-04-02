@@ -39,7 +39,7 @@ export class NavBarPublicComponent {
   }
 
   toggleDrawerSidebar(){
-    this.uiStore.onToggleDrawer();
+    this.uiStore.onToggleSidebar();
 
   }
 

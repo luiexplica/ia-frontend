@@ -21,9 +21,10 @@ export class SidebarComponent {
   router = inject(Router);
 
   headerLogo = input<boolean>(false);
+  fullSpace = input<boolean>(false);
 
   uiStore = inject(UiStoreService);
-  visible = computed(() => this.uiStore.state().drawer);
+  visible = computed(() => this.uiStore.state().sidebar);
 
   iconButtonClose = signal<Icon_I>({
     type: 'html',
@@ -31,12 +32,12 @@ export class SidebarComponent {
   })
 
   onHide() {
-    this.uiStore.onToggleDrawer();
+    this.uiStore.onToggleSidebar();
 
   }
 
   close(){
-    this.uiStore.onToggleDrawer();
+    this.uiStore.onToggleSidebar();
 
   }
 
