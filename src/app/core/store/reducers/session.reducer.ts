@@ -10,6 +10,7 @@ export interface SessionState_I {
   client: Session_Client_I;
   status: Status_Session_Type;
   sessionChecked: boolean;
+
 }
 
 const initialState: SessionState_I = {
@@ -18,6 +19,7 @@ const initialState: SessionState_I = {
   client: {} as Session_Client_I,
   status: 'not-authenticated',
   sessionChecked: false
+
 }
 
 export const SessionReducer = createReducer(initialState,
@@ -32,6 +34,7 @@ export const SessionReducer = createReducer(initialState,
     return {
       ...state,
       onLoading: props.onLoading
+
     }
 
   }),
@@ -53,9 +56,11 @@ export const SessionReducer = createReducer(initialState,
     return {
       ...state,
       session: {} as Session_Auth_I,
+      client: {} as Session_Client_I,
       sessionChecked: true,
       onLoading: false,
       status
+
     }
 
   }),
@@ -66,6 +71,7 @@ export const SessionReducer = createReducer(initialState,
       onLoading: true,
       sessionChecked: false,
       status
+
     }
 
   })

@@ -9,7 +9,7 @@
       [text]="item.title"
       buttonStyle="text"
       [icon]="item.icon"
-      (onClick)="item.action($index)"
+      (onClick)="item.action(item)"
       [ngClass]="{
         'border-t pt-2 mt-2 border-gray-200': item?.divider?.up,
         'border-b pb-2 mb-2 border-gray-200': item?.divider?.bottom

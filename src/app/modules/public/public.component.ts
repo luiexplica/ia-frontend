@@ -33,19 +33,25 @@ export default class PublicComponent implements OnInit {
       id: 'home',
       title: 'Inicio',
       active: false,
-      action: (index: number) => this.listenClick(index)
+      action: (item) => {
+        this.goTo(item.id);
+      }
     },
     {
       id: 'services',
       title: 'Servicios',
       active: false,
-      action: (index: number) => this.listenClick(index)
+      action: (item) => {
+        this.goTo(item.id);
+      }
     },
     {
       id: 'contact',
       title: 'Contacto',
       active: false,
-      action: (index: number) => this.listenClick(index)
+      action: (item) => {
+        this.goTo(item.id);
+      }
     }
   ]);
 
@@ -63,7 +69,7 @@ export default class PublicComponent implements OnInit {
   }
 
   initComponent() {
-    this.setActiveRoute();
+    // this.setActiveRoute();
 
   }
 
@@ -72,32 +78,19 @@ export default class PublicComponent implements OnInit {
 
   }
 
-  setActiveRoute() {
-    this.public_routes.update((routes) => {
-      routes.forEach((item) => {
-        item.active = false;
+  // setActiveRoute() {
+  //   this.public_routes.update((routes) => {
+  //     routes.forEach((item) => {
+  //       item.active = false;
 
-        if (this.router.url.includes(item.id)) {
-          item.active = true;
-        }
-      });
-      return routes;
-    });
+  //       if (this.router.url.includes(item.id)) {
+  //         item.active = true;
+  //       }
+  //     });
+  //     return routes;
+  //   });
 
-  }
-
-  listenClick(index: number) {
-    const item = this.public_routes()[index];
-    this.router.navigate([item.id]);
-
-    this.public_routes.update((routes) => {
-      routes.forEach((item) => {
-        item.active = false;
-      });
-      return routes;
-    });
-
-  }
+  // }
 
   isActive(item: MenuItem_I) {
     return this.router.url.includes(item.id);

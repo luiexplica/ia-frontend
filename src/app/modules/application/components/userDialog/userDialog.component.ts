@@ -18,6 +18,19 @@ import { SessionStoreService } from '@core/store/store-services/session.store.se
 export class UserDialogComponent {
 
   options = signal<MenuItem_I[]>([
+       {
+      title: 'Perfil de usuario',
+      active: false,
+      icon: {
+        type: 'html',
+        value: "<i class='bx bx-user' ></i>"
+      },
+     action: (index: number) => {
+        this.listenAction(this.options()[index]);
+
+      },
+      id: 'profile',
+    },
     {
       title: 'Configuraciones',
       active: false,

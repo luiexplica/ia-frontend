@@ -3,18 +3,23 @@
   <div class="flex items-center ">
 
     <div class="logoSection hover:cursor-pointer">
-      <img src="assets/images/logo_lui.png" class="w-20 h-w-20" alt="logo" />
+      <img src="assets/images/logo_lui.png" class="w-14 h-14 md:w-20 md:h-20" alt="logo" />
 
     </div>
 
   </div>
   <hr class="w-full mx-auto my-4 border-blue-gray-50" />
 
+  <app-nested-menu [menu]="application_routes()" />
+
+  <hr class="w-full mx-auto my-4 border-blue-gray-50" />
+
+  <app-nested-menu [menu]="options()" />
 
 </ng-template>
 
 <div class="hidden w-full h-full desktop md:block">
-  <div class="relative flex flex-col w-full h-full p-4 px-2 text-gray-700 shadow-md bg-surface-50 bg-clip-border ">
+  <div class="relative flex flex-col w-full h-full p-2 text-gray-700 rounded-tl-none rounded-bl-none shadow-md pcTab:p-4 bg-clip-border bg-surface-50 rounded-xl">
     <ng-container *ngTemplateOutlet="content"></ng-container>
 
   </div>

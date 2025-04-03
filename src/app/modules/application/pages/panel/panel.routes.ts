@@ -1,12 +1,22 @@
 
 import { Routes } from "@angular/router";
-import { AccountComponent } from "./pages/account/account.component";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
+import { ConfigurationsComponent } from "./pages/configurations/configurations.component";
 
 export const application_panel_routes: Routes = [
   {
-    path: 'account',
-    component: AccountComponent,
+    path: 'profile',
+    component: ProfileComponent,
+    data: {
+      // icon: 'fa-solid fa-spell-check',
+      // title: 'Lui explica | Lexia',
+    },
+
+  },
+  {
+    path: 'configurations',
+    component: ConfigurationsComponent,
     data: {
       // icon: 'fa-solid fa-spell-check',
       // title: 'Lui explica | Lexia',
@@ -24,7 +34,7 @@ export const application_panel_routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'account',
+    redirectTo: 'profile',
     pathMatch: 'full',
 
   },

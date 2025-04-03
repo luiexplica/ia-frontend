@@ -1,12 +1,12 @@
 
 
-<div class="relative grid h-screen grid-cols-1 gap-10 application md:grid-cols-10">
+<div class="relative grid h-screen grid-cols-1 gap-10 application md:grid-cols-12">
 
-  <section class="absolute w-full h-full md:col-span-3 md:relative sidebar ">
+  <section class="absolute w-full h-full md:col-span-3 md:relative xl:col-span-2 sidebar">
     <app-sidebar-application   />
   </section>
 
-  <div class="h-full col-span-1 md:col-span-7 content">
+  <div class="h-full col-span-1 md:col-span-9 xl:col-span-10 content">
 
     @if (!this.hideNavbar()) {
       <nav-bar-application  />
