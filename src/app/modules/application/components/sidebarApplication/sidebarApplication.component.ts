@@ -22,7 +22,6 @@ import { RouterUtilsService } from '@core/services/routerUtils.service';
 export class SidebarApplicationComponent {
 
   application_routes = signal<MenuItem_I[]>([
-
     {
       id: 'chat-ia',
       title: 'Chat I.A',
@@ -77,6 +76,7 @@ export class SidebarApplicationComponent {
         this.goTo(item.id);
       },
       id: 'app/settings/profile',
+
     },
     {
       title: 'Configuraciones',
@@ -89,6 +89,7 @@ export class SidebarApplicationComponent {
         this.goTo(item.id);
       },
       id: 'app/settings/configurations',
+
     },
     {
       title: 'Notificaciones',
@@ -101,6 +102,7 @@ export class SidebarApplicationComponent {
         this.goTo(item.id);
       },
       id: 'app/settings/notifications',
+
     },
     {
       title: 'Cerrar sesión',
@@ -109,10 +111,14 @@ export class SidebarApplicationComponent {
         type: 'html',
         value: "<i class='bx bx-log-out'></i>"
       },
+      divider: {
+        up: true
+      },
       action: () => {
          this.authService.logout();
       },
       id: 'logout',
+
     },
 
   ]);

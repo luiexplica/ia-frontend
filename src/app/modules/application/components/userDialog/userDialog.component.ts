@@ -19,18 +19,18 @@ import { Router } from '@angular/router';
 export class UserDialogComponent {
 
   options = signal<MenuItem_I[]>([
-       {
+    {
       title: 'Perfil de usuario',
       active: false,
       icon: {
         type: 'html',
         value: "<i class='bx bx-user' ></i>"
       },
-     action: (item) => {
+      id: 'app/settings/profile',
+      action: (item: MenuItem_I) => {
         this.goTo(item.id);
-
       },
-      id: 'profile',
+
     },
     {
       title: 'Configuraciones',
@@ -39,14 +39,24 @@ export class UserDialogComponent {
         type: 'html',
         value: "<i class='bx bxs-cog' ></i>"
       },
-      action: (item) => {
+      id: 'app/settings/configurations',
+      action: (item: MenuItem_I) => {
         this.goTo(item.id);
-
       },
-      id: 'config',
-      divider: {
-        bottom: true
-      }
+
+    },
+    {
+      title: 'Notificaciones',
+      active: false,
+      icon: {
+        type: 'html',
+        value: "<i class='bx bx-bell'></i>"
+      },
+      id: 'app/settings/notifications',
+      action: (item: MenuItem_I) => {
+        this.goTo(item.id);
+      },
+
     },
     {
       title: 'Cerrar sesión',
@@ -55,11 +65,14 @@ export class UserDialogComponent {
         type: 'html',
         value: "<i class='bx bx-log-out'></i>"
       },
-      action: () => {
-        this.authService.logout();
-
+      divider: {
+        up: true
       },
       id: 'logout',
+      action: () => {
+        this.authService.logout();
+      },
+
     },
 
   ]);
@@ -91,11 +104,15 @@ export class UserDialogComponent {
 
   })
 
-    goTo(route: string) {
+  goTo(route: string) {
     console.log('route', route);
     this.router.navigate([route]);
 
   }
 
+  setActiveRoute() {
+    this.options.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
+
+  }
 
 }
