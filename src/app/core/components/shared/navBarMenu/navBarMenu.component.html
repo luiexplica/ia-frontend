@@ -10,8 +10,9 @@
       <app-button
         [buttonStyle]="'text'"
         (onClick)="item.action(item)"
-        [className]="'capitalize px-4 ' + ( item.active  ? ' bg-[rgb(33_33_33_/_0.075)]' : '')"
+        [className]="'capitalize px-4 '"
         [fullWidth]="this.setFullWidth()"
+        [active]="item.active || false"
         [text]="item.title"
         >
 

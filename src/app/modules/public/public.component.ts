@@ -62,12 +62,12 @@ export default class PublicComponent implements OnInit {
 
   routerUtilsService = inject(RouterUtilsService);
   layoutGlobalService = inject(LayoutGlobalService);
-  fullWidth = computed( () => this.layoutGlobalService.layoutFullScreen() );
-  hideNavbar = computed( () => this.layoutGlobalService.hideNavbar() );
-  hideFooter = computed( () => this.layoutGlobalService.hideFooter() );
+  fullWidth = computed(() => this.layoutGlobalService.layoutFullScreen());
+  hideNavbar = computed(() => this.layoutGlobalService.hideNavbar());
+  hideFooter = computed(() => this.layoutGlobalService.hideFooter());
 
-  effect = effect( () => {
-    const p = this.routerUtilsService.currentRoute();
+  effect = effect(() => {
+    this.routerUtilsService.currentRoute();
     this.setActiveRoute();
 
   })
@@ -87,16 +87,7 @@ export default class PublicComponent implements OnInit {
   }
 
   setActiveRoute() {
-    this.public_routes.update((routes) => {
-      routes.forEach((item) => {
-        item.active = false;
-
-        if (this.router.url.includes(item.id)) {
-          item.active = true;
-        }
-      });
-      return routes;
-    });
+    this.public_routes.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
 
   }
 

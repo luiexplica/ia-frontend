@@ -132,10 +132,8 @@ export class SidebarApplicationComponent {
       this.uiStore.onSetSidebar(false);
 
     }
-    const p = this.routerUtilsService.currentRoute();
+    this.routerUtilsService.currentRoute();
     this.setActiveRoute();
-
-    console.log('options', this.options());
 
   });
 
@@ -157,43 +155,9 @@ export class SidebarApplicationComponent {
   }
 
   setActiveRoute() {
-    this.application_routes.update((routes) => {
-      routes.forEach((item) => {
-        item.active = false;
-        if (this.router.url.includes(item.id)) {
-          item.active = true;
-
-        }
-      });
-      return routes;
-
-    });
-    this.options.update((routes) => {
-      routes.forEach((item) => {
-        item.active = false;
-        if (this.router.url.includes(item.id)) {
-          item.active = true;
-
-        }
-      });
-      return routes;
-
-    });
+    this.application_routes.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
+    this.options.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
 
   }
-
-  // listenClick(index: number) {
-  //   console.log('index', index);
-  //   const item = this.application_routes()[index];
-  //   this.router.navigate([item.id]);
-
-  //   this.application_routes.update((routes) => {
-  //     routes.forEach((item) => {
-  //       item.active = false;
-  //     });
-  //     return routes;
-  //   });
-
-  // }
 
 }
