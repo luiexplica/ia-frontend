@@ -10,10 +10,7 @@ import { Routes } from '@angular/router';
 import { ApplicationComponent } from './modules/application/application.component';
 import { application_routes } from './modules/application/application.routes';
 
-
 export const routes: Routes = [
-
-
   {
     path: 'experimentals',
     component: ExperimentalsComponent
@@ -39,10 +36,6 @@ export const routes: Routes = [
   {
     path: '',
     component: PublicComponent,
-    // loadComponent: () =>
-    //   import(
-    //     './modules/public/public.component'
-    //   ),
     providers: [
       importProvidersFrom(
         StoreModule.forFeature('public', PublicReducers)

@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, Component, signal, inject, OnInit, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, inject, OnInit, computed, effect } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
@@ -35,6 +35,7 @@ export default class PublicComponent implements OnInit {
       active: false,
       action: (item) => {
         this.goTo(item.id);
+
       }
     },
     {
@@ -43,6 +44,7 @@ export default class PublicComponent implements OnInit {
       active: false,
       action: (item) => {
         this.goTo(item.id);
+
       }
     },
     {
@@ -51,6 +53,7 @@ export default class PublicComponent implements OnInit {
       active: false,
       action: (item) => {
         this.goTo(item.id);
+
       }
     }
   ]);
@@ -63,13 +66,18 @@ export default class PublicComponent implements OnInit {
   hideNavbar = computed( () => this.layoutGlobalService.hideNavbar() );
   hideFooter = computed( () => this.layoutGlobalService.hideFooter() );
 
+  effect = effect( () => {
+    const p = this.routerUtilsService.currentRoute();
+    this.setActiveRoute();
+
+  })
+
   ngOnInit(): void {
     this.initComponent();
 
   }
 
   initComponent() {
-    // this.setActiveRoute();
 
   }
 
@@ -78,19 +86,19 @@ export default class PublicComponent implements OnInit {
 
   }
 
-  // setActiveRoute() {
-  //   this.public_routes.update((routes) => {
-  //     routes.forEach((item) => {
-  //       item.active = false;
+  setActiveRoute() {
+    this.public_routes.update((routes) => {
+      routes.forEach((item) => {
+        item.active = false;
 
-  //       if (this.router.url.includes(item.id)) {
-  //         item.active = true;
-  //       }
-  //     });
-  //     return routes;
-  //   });
+        if (this.router.url.includes(item.id)) {
+          item.active = true;
+        }
+      });
+      return routes;
+    });
 
-  // }
+  }
 
   isActive(item: MenuItem_I) {
     return this.router.url.includes(item.id);

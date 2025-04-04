@@ -7,8 +7,7 @@ export const application_routes: Routes = [
     path: 'settings',
     component: PanelComponent,
     data: {
-      // icon: 'fa-solid fa-spell-check',
-      // title: 'Lui explica | Lexia',
+      title: 'Lui explica | Configuraciones',
     },
     children: application_panel_routes,
   },

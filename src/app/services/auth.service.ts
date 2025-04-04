@@ -97,7 +97,6 @@ export class AuthService {
         if (!this.getTokenLocalStorage()) {
           throw new Error('No token found in local storage');
         }
-
         const resp: Response_I<Session_Response_I> = await this.apiService._get(url);
         const auth = resp.data!.auth;
         const client = resp.data!.client;
@@ -107,8 +106,7 @@ export class AuthService {
         resolve(resp);
 
       } catch (error) {
-
-        this.logout();
+        this.wipeByLogout();
         reject(error);
 
       }
@@ -117,9 +115,14 @@ export class AuthService {
 
   }
 
-  logout() {
+  wipeByLogout() {
     this.sessionStore.onLogout();
     this.removeTokenLocalStorage();
+
+  }
+
+  logout() {
+    this.wipeByLogout();
     this.router.navigate(['/home']);
 
   }

@@ -5,6 +5,7 @@ import { Icon_I } from '@interfaces/globals.interface';
 import { AuthService } from '@services/auth.service';
 import { DropDownPopoverComponent } from '@components/menus/dropDownPopover/dropDownPopover.component';
 import { SessionStoreService } from '@core/store/store-services/session.store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-dialog',
@@ -25,8 +26,8 @@ export class UserDialogComponent {
         type: 'html',
         value: "<i class='bx bx-user' ></i>"
       },
-     action: (index: number) => {
-        this.listenAction(this.options()[index]);
+     action: (item) => {
+        this.goTo(item.id);
 
       },
       id: 'profile',
@@ -38,8 +39,8 @@ export class UserDialogComponent {
         type: 'html',
         value: "<i class='bx bxs-cog' ></i>"
       },
-      action: (index: number) => {
-        this.listenAction(this.options()[index]);
+      action: (item) => {
+        this.goTo(item.id);
 
       },
       id: 'config',
@@ -54,14 +55,16 @@ export class UserDialogComponent {
         type: 'html',
         value: "<i class='bx bx-log-out'></i>"
       },
-      action: (index: number) => {
-        this.listenAction(this.options()[index]);
+      action: () => {
+        this.authService.logout();
 
       },
       id: 'logout',
     },
 
   ]);
+
+  router = inject(Router);
 
   iconButton = signal<Icon_I>({
     type: 'html',
@@ -88,12 +91,11 @@ export class UserDialogComponent {
 
   })
 
-  listenAction(event: MenuItem_I) {
-    if (event.id === 'logout') {
-      this.authService.logout();
-
-    }
+    goTo(route: string) {
+    console.log('route', route);
+    this.router.navigate([route]);
 
   }
+
 
 }

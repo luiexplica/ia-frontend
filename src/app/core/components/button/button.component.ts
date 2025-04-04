@@ -26,6 +26,7 @@ export class ButtonComponent implements OnInit {
   fullWidth = input(false);
   size = input<ButtonSize>('md');
   rounded = input(false);
+  active = input(false);
   ripple = input<boolean>(true);
   disabled = input<boolean>(false);
   isLoading = input<boolean>(false);
@@ -50,7 +51,8 @@ export class ButtonComponent implements OnInit {
     //   console.log('this.buttonClasses', this.buttonClasses());
 
     // }
-
+    this.active();
+    // this.setStyle();
   })
 
 
@@ -147,8 +149,8 @@ export class ButtonComponent implements OnInit {
 
   setRipple() {
     if (this.ripple()) {
-      const caseLight: ButtonStyle[] = ['primary', 'secondary'];
-      const caseDark: ButtonStyle[] = ['text'];
+      const caseLight: ButtonStyle[] = ['primary'];
+      const caseDark: ButtonStyle[] = ['text', 'secondary'];
 
       if (caseLight.includes(this.buttonStyle())) {
         this.rippleStyle.set('light');

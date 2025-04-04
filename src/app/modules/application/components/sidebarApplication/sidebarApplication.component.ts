@@ -6,6 +6,8 @@ import { UiStoreService } from '@core/store/store-services/ui.store.service';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { NestedMenuComponent } from '@components/menus/nestedMenu/nestedMenu.component';
 import { Router } from '@angular/router';
+import { AuthService } from '@services/auth.service';
+import { RouterUtilsService } from '@core/services/routerUtils.service';
 
 @Component({
   selector: 'app-sidebar-application',
@@ -74,7 +76,7 @@ export class SidebarApplicationComponent {
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
       },
-      id: 'app/settings/configurations',
+      id: 'app/settings/profile',
     },
     {
       title: 'Configuraciones',
@@ -89,6 +91,18 @@ export class SidebarApplicationComponent {
       id: 'app/settings/configurations',
     },
     {
+      title: 'Notificaciones',
+      active: false,
+      icon: {
+        type: 'html',
+        value: "<i class='bx bx-bell'></i>"
+      },
+      action: (item: MenuItem_I) => {
+        this.goTo(item.id);
+      },
+      id: 'app/settings/notifications',
+    },
+    {
       title: 'Cerrar sesión',
       active: false,
       icon: {
@@ -96,20 +110,21 @@ export class SidebarApplicationComponent {
         value: "<i class='bx bx-log-out'></i>"
       },
       action: () => {
-        // this.goTo(item.id);
+         this.authService.logout();
       },
       id: 'logout',
     },
 
   ]);
 
-
-
   router = inject(Router);
 
   uiStore = inject(UiStoreService);
 
   layoutGlobalService = inject(LayoutGlobalService);
+  routerUtilsService = inject(RouterUtilsService);
+
+  authService = inject(AuthService);
 
   componentEffect = effect(() => {
 
@@ -117,8 +132,14 @@ export class SidebarApplicationComponent {
       this.uiStore.onSetSidebar(false);
 
     }
+    const p = this.routerUtilsService.currentRoute();
+    this.setActiveRoute();
+
+    console.log('options', this.options());
 
   });
+
+
 
   ngOnInit(): void {
     this.initComponent();
@@ -126,7 +147,6 @@ export class SidebarApplicationComponent {
   }
 
   initComponent() {
-    this.setActiveRoute();
 
   }
 
@@ -140,12 +160,24 @@ export class SidebarApplicationComponent {
     this.application_routes.update((routes) => {
       routes.forEach((item) => {
         item.active = false;
-
         if (this.router.url.includes(item.id)) {
           item.active = true;
+
         }
       });
       return routes;
+
+    });
+    this.options.update((routes) => {
+      routes.forEach((item) => {
+        item.active = false;
+        if (this.router.url.includes(item.id)) {
+          item.active = true;
+
+        }
+      });
+      return routes;
+
     });
 
   }

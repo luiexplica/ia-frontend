@@ -9,7 +9,7 @@
     <li >
       <app-button
         [buttonStyle]="'text'"
-        (onClick)="item.action($index)"
+        (onClick)="item.action(item)"
         [className]="'capitalize px-4 ' + ( item.active  ? ' bg-[rgb(33_33_33_/_0.075)]' : '')"
         [fullWidth]="this.setFullWidth()"
         [text]="item.title"

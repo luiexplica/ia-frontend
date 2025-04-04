@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { NgClass } from '@angular/common';
 import { MenuItem_I } from '@interfaces/menus.interface';
+import { RouterUtilsService } from '../../../services/routerUtils.service';
 
 type MenuOrientation_Type = 'horizontal' | 'vertical';
 type ItemsAlign = 'center' | 'start' | 'end';
@@ -21,8 +22,11 @@ export class NavBarMenuComponent {
   menuList = input<MenuItem_I[]>([]);
   align = input<ItemsAlign>('center');
 
+  routerUtilsService = inject(RouterUtilsService);
+
   setFullWidth() {
     return this.orientation() === 'vertical';
+
   }
 
 }
