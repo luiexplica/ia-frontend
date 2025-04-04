@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-openai',
+  selector: 'app-lexia-agent',
   imports: [],
-  templateUrl: './openai.component.html',
+  templateUrl: './lexia-agent.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OpenaiComponent { }
+export class LexiaAgentComponent { }
