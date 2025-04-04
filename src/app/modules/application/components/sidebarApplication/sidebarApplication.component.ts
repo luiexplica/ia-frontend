@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
 import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
@@ -14,7 +14,8 @@ import { RouterUtilsService } from '@core/services/routerUtils.service';
   imports: [
     NgTemplateOutlet,
     NestedMenuComponent,
-    SidebarComponent
+    SidebarComponent,
+    JsonPipe
   ],
   templateUrl: './sidebarApplication.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -132,16 +133,24 @@ export class SidebarApplicationComponent {
 
   authService = inject(AuthService);
 
+    // if (this.layoutGlobalService.checkSize('pcTab')) {
+    //   this.uiStore.onSetSidebar(false);
+
+    // }
   componentEffect = effect(() => {
 
-    if (this.layoutGlobalService.checkSize('pcTab')) {
-      this.uiStore.onSetSidebar(false);
-
-    }
-    this.routerUtilsService.currentRoute();
+    const l = this.routerUtilsService.currentRoute();
     this.setActiveRoute();
 
   });
+
+
+  setActiveRoute() {
+
+    console.log('sidebar application', this.options());
+
+  }
+
 
 
 
@@ -157,12 +166,6 @@ export class SidebarApplicationComponent {
   goTo(route: string) {
     console.log('route', route);
     this.router.navigate([route]);
-
-  }
-
-  setActiveRoute() {
-    this.application_routes.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
-    this.options.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
 
   }
 
