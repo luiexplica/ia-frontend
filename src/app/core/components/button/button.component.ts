@@ -26,7 +26,8 @@ export class ButtonComponent implements OnInit {
   fullWidth = input(false);
   size = input<ButtonSize>('md');
   rounded = input(false);
-  active = input(false);
+  active = input<boolean>(false);
+  activeStyle = input<string>('');
   ripple = input<boolean>(true);
   disabled = input<boolean>(false);
   isLoading = input<boolean>(false);
@@ -40,6 +41,7 @@ export class ButtonComponent implements OnInit {
   onClick = output();
   loaded = signal(false);
 
+  // activeStyle = input<string>('');
   buttonClasses = signal<string>('');
   iconClasses = signal<string>('');
   rippleStyle = signal<RippleColor>('none');
@@ -51,8 +53,6 @@ export class ButtonComponent implements OnInit {
     //   console.log('this.buttonClasses', this.buttonClasses());
 
     // }
-    this.active();
-    // this.setStyle();
   })
 
 
@@ -72,6 +72,8 @@ export class ButtonComponent implements OnInit {
 
   }
 
+
+
   setStyle() {
     if (this.buttonStyle() === 'primary') {
       this.buttonClasses.set(`${this.className()} bg-primaryBlue !text-white border border-transparent shadow-md hover:shadow-lg focus:shadow-none active:bg-primaryBlue hover:bg-primaryBlue active:shadow-none`);
@@ -89,6 +91,29 @@ export class ButtonComponent implements OnInit {
       `);
 
     }
+
+  }
+
+  setActiveStyle(): string{
+
+    if(!this.active()) return '';
+
+    if (this.buttonStyle() === 'primary') {
+
+    }
+    if (this.buttonStyle() === 'primary') {
+
+    }
+    if (this.buttonStyle() === 'text') {
+      return `bg-[rgb(33_33_33_/_0.075)]`;
+
+    }
+    if(this.activeStyle() != '') {
+      return this.activeStyle();
+
+    }
+
+    return '';
 
   }
 

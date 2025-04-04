@@ -30,10 +30,8 @@
 </dui-button>
 -->
 
-{{ className() }}
-
 <button
-  class="{{ buttonClasses() }} transition-all  relative flex flex-row items-center  hover:cursor-pointer outline-none"
+  class="{{ buttonClasses() }} transition-all  relative flex flex-row items-center  hover:cursor-pointer outline-none {{ setActiveStyle() }}"
   type="button"
   (click)="click()"
   [RippleColor]="rippleStyle()"

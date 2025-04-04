@@ -2,7 +2,6 @@
 <ul class="flex flex-col p-0 mt-2 list-none">
 
   @for (item of menu(); track $index) {
-    {{ item.active }}
     <app-button
       [fullWidth]="true"
       align="left"
@@ -11,7 +10,7 @@
       buttonStyle="text"
       [icon]="item.icon"
       (onClick)="item.action(item)"
-      [className]=" item.active ? ' bg-[rgb(33_33_33_/_0.075)]' : '' "
+      [active]="item.active || false"
       [ngClass]="{
         'border-t pt-2 mt-2 border-gray-200': item?.divider?.up,
         'border-b pb-2 mb-2 border-gray-200': item?.divider?.bottom
