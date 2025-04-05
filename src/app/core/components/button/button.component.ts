@@ -105,7 +105,7 @@ export class ButtonComponent implements OnInit {
 
     }
     if (this.buttonStyle() === 'text') {
-      return `bg-[rgb(33_33_33_/_0.075)]`;
+      return `bg-slate-100`;
 
     }
     if(this.activeStyle() != '') {
