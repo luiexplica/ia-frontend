@@ -1,6 +1,6 @@
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, inject, signal, OnInit } from '@angular/core';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { RouterLink, Router } from '@angular/router';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';

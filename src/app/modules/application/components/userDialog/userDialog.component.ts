@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { Icon_I } from '@interfaces/globals.interface';
 import { AuthService } from '@services/auth.service';
 import { DropDownPopoverComponent } from '@components/menus/dropDownPopover/dropDownPopover.component';

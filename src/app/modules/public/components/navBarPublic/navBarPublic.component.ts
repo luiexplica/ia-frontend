@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { Icon_I } from '@interfaces/globals.interface';
 import { UiStoreService } from '@app/core/store/store-services/ui.store.service';

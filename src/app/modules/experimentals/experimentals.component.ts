@@ -1,4 +1,4 @@
-import { ButtonComponent } from './../../core/components/button/button.component';
+import { ButtonComponent } from '../../core/components/buttons/button/button.component';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
 import { LayoutRow_I } from '../../core/components/forms/interfaces';

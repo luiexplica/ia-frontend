@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, signal } f
 import { DrawerModule } from 'primeng/drawer';
 import { UiStoreService } from '@app/core/store/store-services/ui.store.service';
 import { Router } from '@angular/router';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { NgClass } from '@angular/common';
 
 @Component({

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { NgClass } from '@angular/common';
 
 @Component({

@@ -2,7 +2,7 @@ import { LoginForm_I, loginFormDef } from './login-form.defs';
 
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
-import { ButtonComponent } from "@components/button/button.component";
+import { ButtonComponent } from "@app/core/components/buttons/button/button.component";
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';

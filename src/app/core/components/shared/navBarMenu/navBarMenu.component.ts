@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { NgClass } from '@angular/common';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { RouterUtilsService } from '../../../services/routerUtils.service';

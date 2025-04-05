@@ -1,9 +1,9 @@
 
-import { JsonPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output, OnInit, signal, effect } from '@angular/core';
 import { RippleColor, RippleDirective } from '@directives/ripple.directive';
 import { Icon_I } from '@interfaces/globals.interface';
-import { IconComponent } from '../icon/icon.component';
+import { IconComponent } from '../../icon/icon.component';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
 export type ButtonVariant = 'filled' | 'outlined' | 'gradient' | 'text';
@@ -71,8 +71,6 @@ export class ButtonComponent implements OnInit {
     this.setIconClasses();
 
   }
-
-
 
   setStyle() {
     if (this.buttonStyle() === 'primary') {
@@ -147,7 +145,6 @@ export class ButtonComponent implements OnInit {
   }
 
   setIconClasses() {
-
     if (!this.icon()) return;
 
     if (this.size() === 'xm') {

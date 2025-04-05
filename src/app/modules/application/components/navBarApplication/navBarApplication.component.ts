@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Icon_I } from '@interfaces/globals.interface';
 import { UiStoreService } from '@core/store/store-services/ui.store.service';
 import { UserDialogComponent } from '../userDialog/userDialog.component';
-import { ButtonComponent } from '@components/button/button.component';
+import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 
 @Component({
   selector: 'nav-bar-application',
