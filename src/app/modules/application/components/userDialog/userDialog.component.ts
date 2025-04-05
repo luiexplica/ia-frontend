@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { ButtonComponent } from '@components/button/button.component';
 import { Icon_I } from '@interfaces/globals.interface';
@@ -110,7 +110,10 @@ export class UserDialogComponent {
   componentEffect = effect(() => {
 
     this.routerUtilsService.currentRoute();
-    this.setActiveRoute();
+    untracked(() => {
+      this.setActiveRoute();
+
+    })
 
   });
 
@@ -121,7 +124,14 @@ export class UserDialogComponent {
   }
 
   setActiveRoute() {
-    this.options.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
+    const currentRoute = this.routerUtilsService.currentRoute();
+    if (currentRoute) {
+      this.options.set(this.options().map(item => ({
+        ...item,
+        active: this.router.url.includes(item.id)
+      })));
+
+    }
 
   }
 

@@ -1,5 +1,5 @@
-import { JsonPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked } from '@angular/core';
 import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { UiStoreService } from '@core/store/store-services/ui.store.service';
@@ -15,7 +15,6 @@ import { RouterUtilsService } from '@core/services/routerUtils.service';
     NgTemplateOutlet,
     NestedMenuComponent,
     SidebarComponent,
-    JsonPipe
   ],
   templateUrl: './sidebarApplication.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -116,7 +115,7 @@ export class SidebarApplicationComponent {
         up: true
       },
       action: () => {
-         this.authService.logout();
+        this.authService.logout();
       },
       id: 'logout',
 
@@ -133,26 +132,34 @@ export class SidebarApplicationComponent {
 
   authService = inject(AuthService);
 
-    // if (this.layoutGlobalService.checkSize('pcTab')) {
-    //   this.uiStore.onSetSidebar(false);
-
-    // }
   componentEffect = effect(() => {
+    if (this.layoutGlobalService.checkSize('pcTab')) {
+      this.uiStore.onSetSidebar(false);
 
-    const l = this.routerUtilsService.currentRoute();
-    this.setActiveRoute();
+    }
+    this.routerUtilsService.currentRoute();
+    untracked(() => {
+      this.setActiveRoute();
+    });
 
   });
 
 
   setActiveRoute() {
+    const currentRoute = this.routerUtilsService.currentRoute();
+    if (currentRoute) {
+      this.application_routes.set(this.application_routes().map(item => ({
+        ...item,
+        active: this.router.url.includes(item.id)
+      })));
+      this.options.set(this.options().map(item => ({
+        ...item,
+        active: this.router.url.includes(item.id)
+      })));
 
-    console.log('sidebar application', this.options());
+    }
 
   }
-
-
-
 
   ngOnInit(): void {
     this.initComponent();

@@ -1,5 +1,5 @@
 
-import { ChangeDetectionStrategy, Component, signal, inject, OnInit, computed, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, inject, OnInit, computed, effect, untracked } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
@@ -67,8 +67,12 @@ export default class PublicComponent implements OnInit {
   hideFooter = computed(() => this.layoutGlobalService.hideFooter());
 
   effect = effect(() => {
+
     this.routerUtilsService.currentRoute();
-    this.setActiveRoute();
+    untracked(() => {
+      this.setActiveRoute();
+
+    })
 
   })
 
@@ -87,8 +91,14 @@ export default class PublicComponent implements OnInit {
   }
 
   setActiveRoute() {
-    this.public_routes.update((routes) => { routes.forEach((item) => { item.active = false; if (this.router.url.includes(item.id)) item.active = true; }); return routes });
+    const currentRoute = this.routerUtilsService.currentRoute();
+    if (currentRoute) {
+      this.public_routes.set(this.public_routes().map(item => ({
+        ...item,
+        active: this.router.url.includes(item.id)
+      })));
 
+    }
   }
 
   isActive(item: MenuItem_I) {
