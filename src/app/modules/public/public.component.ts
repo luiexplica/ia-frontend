@@ -4,18 +4,20 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { LayoutGlobalService } from '@core/services/layoutGlobal.service';
 import { FooterComponent } from '@components/shared/footer/footer.component';
-import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { RouterUtilsService } from '@core/services/routerUtils.service';
 import { NavBarPublicComponent } from './components/navBarPublic/navBarPublic.component';
 import { NavBarMenuComponent } from '@components/shared/navBarMenu/navBarMenu.component';
 import { SidebarComponent } from '@components/shared/sidebar/sidebar.component';
+import { PrimaryButtonComponent } from '@components/buttons/primaryButton/primaryButton.component';
+import { SecondaryButtonComponent } from '@components/buttons/secondaryButton/secondaryButton.component';
 
 @Component({
   selector: 'public',
   imports: [
     RouterOutlet,
     NavBarMenuComponent,
-    ButtonComponent,
+    PrimaryButtonComponent,
+    SecondaryButtonComponent,
     SidebarComponent,
     NavBarPublicComponent,
     FooterComponent

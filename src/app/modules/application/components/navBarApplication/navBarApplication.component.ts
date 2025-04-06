@@ -4,11 +4,12 @@ import { Icon_I } from '@interfaces/globals.interface';
 import { UiStoreService } from '@core/store/store-services/ui.store.service';
 import { UserDialogComponent } from '../userDialog/userDialog.component';
 import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
+import { TextButtonComponent } from '@components/buttons/textButton/textButton.component';
 
 @Component({
   selector: 'nav-bar-application',
   imports: [
-    ButtonComponent,
+    TextButtonComponent,
     UserDialogComponent,
   ],
   templateUrl: './navBarApplication.component.html',

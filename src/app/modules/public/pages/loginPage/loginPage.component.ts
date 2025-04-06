@@ -71,18 +71,18 @@ export class LoginPageComponent implements OnInit {
 
     const formValues = this.dynamicFormService.getFormValues<LoginForm_I>(this.form());
 
-    // try {
-    //   await this.authService.login({
-    //     email: formValues.email,
-    //     password: formValues.password
-    //   });
+    try {
+      await this.authService.login({
+        email: formValues.email,
+        password: formValues.password
+      });
 
-    //   this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
 
-    // } catch (error) {
-    //   // const err = handlerError(error);
+    } catch (error) {
+      // const err = handlerError(error);
 
-    // }
+    }
     this.isLoading.set(false);
 
   }

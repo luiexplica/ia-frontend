@@ -1,9 +1,7 @@
 
-import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output, signal, effect } from '@angular/core';
-import { RippleColor, RippleDirective } from '@directives/ripple.directive';
+import { RippleColor } from '@directives/ripple.directive';
 import { Icon_I } from '@interfaces/globals.interface';
-import { IconComponent } from '@components/icon/icon.component';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
 export type ButtonVariant = 'filled' | 'outlined' | 'gradient' | 'text';
@@ -11,13 +9,9 @@ export type ButtonSize = 'xm' | 'sm' | 'md' | 'lg' | 'xl';
 export type ButtonTextAlign = 'left' | 'center' | 'right';
 
 @Component({
-  selector: 'app-button',
   imports: [
-    IconComponent,
-    NgClass,
-    RippleDirective,
   ],
-  templateUrl: './button.component.html',
+  template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {

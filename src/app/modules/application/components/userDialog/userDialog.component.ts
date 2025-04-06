@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { MenuItem_I } from '@interfaces/menus.interface';
-import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { Icon_I } from '@interfaces/globals.interface';
 import { AuthService } from '@services/auth.service';
 import { DropDownPopoverComponent } from '@components/menus/dropDownPopover/dropDownPopover.component';
 import { SessionStoreService } from '@core/store/store-services/session.store.service';
 import { RouterUtilsService } from '@core/services/routerUtils.service';
 import { Router } from '@angular/router';
+import { TextButtonComponent } from '@components/buttons/textButton/textButton.component';
 
 @Component({
   selector: 'app-user-dialog',
   imports: [
-    ButtonComponent,
+    TextButtonComponent,
     DropDownPopoverComponent
   ],
   templateUrl: './userDialog.component.html',

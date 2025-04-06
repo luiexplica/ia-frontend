@@ -1,4 +1,3 @@
-import { ButtonComponent } from '../../core/components/buttons/button/button.component';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
 import { LayoutRow_I } from '../../core/components/forms/interfaces';
@@ -12,7 +11,6 @@ import { DynamicFormService } from '../../core/components/forms/services/dynamic
   selector: 'app-experimentals',
   imports: [
     FormLayoutComponent,
-    ButtonComponent,
     ReactiveFormsModule,
     DUIInput,
     JsonPipe

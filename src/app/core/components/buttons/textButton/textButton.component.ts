@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
-import { NgClass } from '@angular/common';
+import { JsonPipe, NgClass } from '@angular/common';
 import { RippleDirective } from '@directives/ripple.directive';
 import { IconComponent } from '@components/icon/icon.component';
 

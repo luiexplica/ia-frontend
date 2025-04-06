@@ -27,12 +27,18 @@
    />
 
   <div footer class="flex flex-col gap-2">
-    <app-button
-    [fullWidth]="true"
-    (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
-    <app-button
-    [fullWidth]="true"
-    (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
+    <app-primary-button
+      [uppercase]="true"
+      [bold]="true"
+      [fullWidth]="true"
+      (onClick)="goTo('register')"
+      text="Registrate" />
+    <app-secondary-button
+      [uppercase]="true"
+      [bold]="true"
+      [fullWidth]="true"
+      (onClick)="goTo('login')"
+      text="Iniciar sesión" />
 
   </div>
 

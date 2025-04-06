@@ -1,6 +1,5 @@
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, inject, signal, OnInit } from '@angular/core';
-import { ButtonComponent } from '@app/core/components/buttons/button/button.component';
 import { RouterLink, Router } from '@angular/router';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
@@ -9,11 +8,12 @@ import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.com
 import { RegisterForm_I, registerFormDef } from './register-form.defs';
 import { AuthService } from '@services/auth.service';
 import { uiService } from '@app/core/services/ui.service';
+import { PrimaryButtonComponent } from '@components/buttons/primaryButton/primaryButton.component';
 
 @Component({
   selector: 'app-register-page',
   imports: [
-    ButtonComponent,
+    PrimaryButtonComponent,
     FormLayoutComponent,
     ReactiveFormsModule,
     RouterLink
