@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TextButtonComponent } from '@components/buttons/textButton/textButton.component';
-import { Facebook_Icon } from '../../../models/icons/facebook';
+import { Facebook_Icon } from '@models/icons/facebook-icon';
 
 @Component({
   selector: 'footer-bar',
