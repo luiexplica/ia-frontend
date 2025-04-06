@@ -8,7 +8,6 @@
   @for (item of this.menuList(); track $index) {
     <li >
       <app-text-button
-        [buttonStyle]="'text'"
         (onClick)="item.action(item)"
         [className]="'capitalize px-4 '"
         [fullWidth]="this.setFullWidth()"

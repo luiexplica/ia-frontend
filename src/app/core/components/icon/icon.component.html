@@ -1,5 +1,7 @@
 
 
+{{ className() }}
+
 <div class="flex items-center justify-center iconContent h-fit ">
   @if(type() === 'src'){
     <img  src="{{ value() }}" alt="icon" [class]="className() + ' ' + this.icon().type" />

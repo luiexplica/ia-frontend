@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
-import { LayoutRow_I } from '../../core/components/forms/interfaces';
+import { LayoutRow_I } from '@components/forms/interfaces';
 import { formExperimental } from './form.def';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DUIInput } from 'david-ui-angular';
 import { JsonPipe } from '@angular/common';
-import { DynamicFormService } from '../../core/components/forms/services/dynamicForm.service';
+import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
 
 @Component({
   selector: 'app-experimentals',

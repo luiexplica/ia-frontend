@@ -140,6 +140,7 @@ export class SidebarApplicationComponent {
     this.routerUtilsService.currentRoute();
     untracked(() => {
       this.setActiveRoute();
+
     });
 
   });
@@ -171,7 +172,6 @@ export class SidebarApplicationComponent {
   }
 
   goTo(route: string) {
-    console.log('route', route);
     this.router.navigate([route]);
 
   }

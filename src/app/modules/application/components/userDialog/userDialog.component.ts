@@ -118,7 +118,6 @@ export class UserDialogComponent {
   });
 
   goTo(route: string) {
-    console.log('route', route);
     this.router.navigate([route]);
 
   }

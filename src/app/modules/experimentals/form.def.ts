@@ -1,4 +1,4 @@
-import { Field_I, LayoutRow_I, TextField_I } from "../../core/components/forms/interfaces";
+import { LayoutRow_I } from "@components/forms/interfaces";
 
 export const formExperimental: LayoutRow_I[] = [
   {

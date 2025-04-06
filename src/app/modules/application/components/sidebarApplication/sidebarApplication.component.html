@@ -1,19 +1,17 @@
 <ng-template #content>
 
   <div class="flex items-center ">
-
     <div class="logoSection hover:cursor-pointer">
       <img src="assets/images/logo_lui.png" class="w-14 h-14 md:w-20 md:h-20" alt="logo" />
 
     </div>
 
   </div>
-  <hr class="w-full mx-auto my-4 border-blue-gray-50" />
 
+  <hr class="w-full mx-auto my-4 border-blue-gray-50" />
   <app-nested-menu [menu]="application_routes()" />
 
   <hr class="w-full mx-auto my-4 border-blue-gray-50" />
-
   <app-nested-menu [menu]="options()" />
 
 </ng-template>

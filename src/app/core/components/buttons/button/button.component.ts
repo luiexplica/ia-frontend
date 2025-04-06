@@ -59,7 +59,6 @@ export class ButtonComponent {
 
   }
 
-
   get setAlign(): string {
     if (this.align() === 'left') {
       return `flex !justify-left`;
@@ -100,15 +99,15 @@ export class ButtonComponent {
       this.iconClasses.set('text-base');
     }
     if (this.size() === 'md') {
-      this.iconClasses.set('text-lg');
+      this.iconClasses.set('text-xl');
 
     }
     if (this.size() === 'lg') {
-      this.iconClasses.set('text-lg');
+      this.iconClasses.set('text-xl');
 
     }
     if (this.size() === 'xl') {
-      this.iconClasses.set('text-xl');
+      this.iconClasses.set('text-2xl');
 
     }
 

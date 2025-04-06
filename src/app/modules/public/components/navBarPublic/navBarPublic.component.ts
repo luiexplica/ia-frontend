@@ -12,7 +12,6 @@ import { TextButtonComponent } from '@components/buttons/textButton/textButton.c
 @Component({
   selector: 'nav-bar-public',
   imports: [
-    ButtonComponent,
     PrimaryButtonComponent,
     SecondaryButtonComponent,
     TextButtonComponent,
