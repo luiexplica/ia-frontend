@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
-import { JsonPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { RippleDirective } from '@directives/ripple.directive';
 import { IconComponent } from '@components/icon/icon.component';
 
@@ -34,7 +34,7 @@ export class TextButtonComponent extends ButtonComponent implements OnInit {
   }
 
   setStyle() {
-    this.buttonClasses.set(`text-slate-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`);
+    this.buttonClasses.set(`text-slate-700 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none`);
 
   }
 
@@ -45,7 +45,7 @@ export class TextButtonComponent extends ButtonComponent implements OnInit {
       return this.activeStyle();
 
     }
-    return `bg-slate-100`;
+    return `bg-slate-200`;
 
   }
 

@@ -23,7 +23,7 @@ export class SidebarApplicationComponent {
 
   application_routes = signal<MenuItem_I[]>([
     {
-      id: 'chat-ia',
+      id: 'app/products/chat-ia',
       title: 'Chat I.A',
       active: false,
       icon: {
@@ -32,11 +32,12 @@ export class SidebarApplicationComponent {
       },
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
+
       },
 
     },
     {
-      id: 'lexia-agent',
+      id: 'app/products/lexia-agent',
       title: 'Agente Lexia',
       active: false,
       icon: {
@@ -45,11 +46,12 @@ export class SidebarApplicationComponent {
       },
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
+
       },
 
     },
     {
-      id: 'ats-generator',
+      id: 'app/products/ats-generator',
       title: 'Generador de ATS',
       active: false,
       icon: {
@@ -58,6 +60,7 @@ export class SidebarApplicationComponent {
       },
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
+
       },
 
     },
@@ -66,6 +69,7 @@ export class SidebarApplicationComponent {
 
   options = signal<MenuItem_I[]>([
     {
+      id: 'app/settings/profile',
       title: 'Perfil de usuario',
       active: false,
       icon: {
@@ -74,11 +78,12 @@ export class SidebarApplicationComponent {
       },
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
+
       },
-      id: 'app/settings/profile',
 
     },
     {
+      id: 'app/settings/configurations',
       title: 'Configuraciones',
       active: false,
       icon: {
@@ -87,11 +92,12 @@ export class SidebarApplicationComponent {
       },
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
+
       },
-      id: 'app/settings/configurations',
 
     },
     {
+      id: 'app/settings/notifications',
       title: 'Notificaciones',
       active: false,
       icon: {
@@ -100,11 +106,12 @@ export class SidebarApplicationComponent {
       },
       action: (item: MenuItem_I) => {
         this.goTo(item.id);
+
       },
-      id: 'app/settings/notifications',
 
     },
     {
+      id: 'logout',
       title: 'Cerrar sesión',
       active: false,
       icon: {
@@ -116,8 +123,8 @@ export class SidebarApplicationComponent {
       },
       action: () => {
         this.authService.logout();
+
       },
-      id: 'logout',
 
     },
 
@@ -145,6 +152,15 @@ export class SidebarApplicationComponent {
 
   });
 
+  ngOnInit(): void {
+    this.initComponent();
+
+  }
+
+
+  initComponent() {
+
+  }
 
   setActiveRoute() {
     const currentRoute = this.routerUtilsService.currentRoute();
@@ -159,15 +175,6 @@ export class SidebarApplicationComponent {
       })));
 
     }
-
-  }
-
-  ngOnInit(): void {
-    this.initComponent();
-
-  }
-
-  initComponent() {
 
   }
 

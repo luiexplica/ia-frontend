@@ -1,6 +1,5 @@
-import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Icon_I } from '@interfaces/globals.interface';
 
 @Component({
@@ -17,27 +16,10 @@ export class IconComponent {
   icon = input.required<Icon_I>();
   className = input<string>('');
   type = computed(() => this.icon().type);
-  value = computed( () => this.icon().value)
+  value = computed(() => this.icon().value)
   safeIconValue = computed(() => {
-    if(this.type() === 'html') return this.sanitizer.bypassSecurityTrustHtml(this.icon().value);
+    if (this.type() === 'html') return this.sanitizer.bypassSecurityTrustHtml(this.icon().value);
     return '';
   });
-  // value = computed(() =>
-  //   {
-  //     console.log('entra computado');
-  //     const value = this.icon().value;
-  //     (this.type() === 'html') && this.safeIconValue.set(this.sanitizer.bypassSecurityTrustHtml(value));
 
-  //       console.log('value', value);
-  //       console.log('this.safeIconValue', this.safeIconValue());
-
-  //     return value;
-  //   }
-  // );
-
-
-
-
-
-
- }
+}

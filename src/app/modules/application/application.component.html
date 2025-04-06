@@ -1,19 +1,19 @@
 
 
-<div class="grid relative grid-cols-1 h-screen application md:grid-cols-12">
+<div class="relative grid h-screen grid-cols-1 application md:grid-cols-12">
 
   <section class="absolute w-full h-full md:col-span-3 md:relative xl:col-span-2 sidebar">
     <app-sidebar-application   />
   </section>
 
-  <div class="col-span-1 h-full md:col-span-9 xl:col-span-10 content">
+  <div class="h-full col-span-1 md:col-span-9 xl:col-span-10 content bg-slate-50">
 
     @if (!this.hideNavbar()) {
       <nav-bar-application  />
 
     }
 
-    <section class="container !mx-auto p-14  h-screen place-items-center"
+    <section class="container !mx-auto px-10 py-12  h-screen place-items-center"
       [class]="{
         'max-w-full': this.fullWidth()
       }">
