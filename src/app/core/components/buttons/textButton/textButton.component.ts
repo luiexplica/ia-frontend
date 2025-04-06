@@ -22,6 +22,7 @@ export class TextButtonComponent extends ButtonComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initComponent();
     this._initComponent();
 
   }

@@ -1,6 +1,5 @@
 
 <ul class="flex flex-col p-0 mt-2 list-none">
-
   @for (item of menu(); track $index) {
     <app-text-button
       [fullWidth]="true"
@@ -13,7 +12,8 @@
       [ngClass]="{
         'border-t pt-2 mt-2 border-gray-200': item?.divider?.up,
         'border-b pb-2 mb-2 border-gray-200': item?.divider?.bottom
-      }" />
+      }"
+     />
 
   }
 

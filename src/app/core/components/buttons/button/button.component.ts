@@ -49,11 +49,6 @@ export class ButtonComponent {
     // }
   });
 
-  constructor() {
-    this.initComponent();
-
-  }
-
   initComponent() {
     this.setIconClasses();
 
@@ -96,18 +91,18 @@ export class ButtonComponent {
 
     }
     if (this.size() === 'sm') {
-      this.iconClasses.set('text-base');
+      this.iconClasses.set('text-lg');
     }
     if (this.size() === 'md') {
-      this.iconClasses.set('text-xl');
+      this.iconClasses.set('text-lg');
 
     }
     if (this.size() === 'lg') {
-      this.iconClasses.set('text-xl');
+      this.iconClasses.set('text-lg');
 
     }
     if (this.size() === 'xl') {
-      this.iconClasses.set('text-2xl');
+      this.iconClasses.set('text-xl');
 
     }
 

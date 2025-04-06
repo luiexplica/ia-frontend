@@ -7,7 +7,7 @@ import { TextButtonComponent } from '@components/buttons/textButton/textButton.c
   selector: 'app-nested-menu',
   imports: [
     TextButtonComponent,
-    NgClass
+    NgClass,
   ],
   templateUrl: './nestedMenu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
