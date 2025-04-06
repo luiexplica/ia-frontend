@@ -14,14 +14,12 @@
       <app-nav-bar-menu class="hidden pcTab:flex" [menuList]="this.menuItems()" />
 
       <div class="hidden gap-2 buttonsSection pcTab:flex">
-          <app-button (onClick)="goTo('register')" [buttonStyle]="'primary'" text="Registrate" />
-          <app-button (onClick)="goTo('login')" [buttonStyle]="'secondary'" text="Iniciar sesión" />
+          <app-primary-button (onClick)="goTo('register')"  text="Registrate" />
+          <app-secondary-button (onClick)="goTo('login')"  text="Iniciar sesión" />
 
       </div>
       <div class="flex gap-2 buttonsSection pcTab:hidden">
-
-        <app-button
-          [className]="'relative '"
+        <app-text-button
           [size]="'sm'"
           [buttonStyle]="'text'"
           (onClick)="toggleDrawerSidebar()"

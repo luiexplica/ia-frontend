@@ -3,6 +3,7 @@ import { ButtonComponent } from '@app/core/components/buttons/button/button.comp
 import { NgClass } from '@angular/common';
 import { MenuItem_I } from '@interfaces/menus.interface';
 import { RouterUtilsService } from '../../../services/routerUtils.service';
+import { TextButtonComponent } from '../../buttons/textButton/textButton.component';
 
 type MenuOrientation_Type = 'horizontal' | 'vertical';
 type ItemsAlign = 'center' | 'start' | 'end';
@@ -10,7 +11,7 @@ type ItemsAlign = 'center' | 'start' | 'end';
 @Component({
   selector: 'app-nav-bar-menu',
   imports: [
-    ButtonComponent,
+    TextButtonComponent,
     NgClass,
   ],
   templateUrl: './navBarMenu.component.html',

@@ -5,11 +5,17 @@ import { MenuItem_I } from '@interfaces/menus.interface';
 import { Icon_I } from '@interfaces/globals.interface';
 import { UiStoreService } from '@app/core/store/store-services/ui.store.service';
 import { NavBarMenuComponent } from '@components/shared/navBarMenu/navBarMenu.component';
+import { PrimaryButtonComponent } from '@components/buttons/primaryButton/primaryButton.component';
+import { SecondaryButtonComponent } from '@components/buttons/secondaryButton/secondaryButton.component';
+import { TextButtonComponent } from '@components/buttons/textButton/textButton.component';
 
 @Component({
   selector: 'nav-bar-public',
   imports: [
     ButtonComponent,
+    PrimaryButtonComponent,
+    SecondaryButtonComponent,
+    TextButtonComponent,
     NavBarMenuComponent
   ],
   templateUrl: './navBarPublic.component.html',

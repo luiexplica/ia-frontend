@@ -2,7 +2,6 @@ import { LoginForm_I, loginFormDef } from './login-form.defs';
 
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { LayoutGlobalService } from '@app/core/services/layoutGlobal.service';
-import { ButtonComponent } from "@app/core/components/buttons/button/button.component";
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormService } from '@components/forms/services/dynamicForm.service';
@@ -10,13 +9,13 @@ import { LayoutRow_I } from '@components/forms/interfaces';
 import { FormLayoutComponent } from '@components/forms/formLayout/formLayout.component';
 import { uiService } from '@app/core/services/ui.service';
 import { AuthService } from '@services/auth.service';
-import { handlerError } from '@api/handlerError';
 import { SessionStoreService } from '@app/core/store/store-services/session.store.service';
+import { PrimaryButtonComponent } from '@components/buttons/primaryButton/primaryButton.component';
 
 @Component({
   selector: 'app-login-page',
   imports: [
-    ButtonComponent,
+    PrimaryButtonComponent,
     FormLayoutComponent,
     ReactiveFormsModule,
     RouterLink
@@ -72,18 +71,18 @@ export class LoginPageComponent implements OnInit {
 
     const formValues = this.dynamicFormService.getFormValues<LoginForm_I>(this.form());
 
-    try {
-      await this.authService.login({
-        email: formValues.email,
-        password: formValues.password
-      });
+    // try {
+    //   await this.authService.login({
+    //     email: formValues.email,
+    //     password: formValues.password
+    //   });
 
-      this.router.navigate(['/dashboard']);
+    //   this.router.navigate(['/dashboard']);
 
-    } catch (error) {
-      // const err = handlerError(error);
+    // } catch (error) {
+    //   // const err = handlerError(error);
 
-    }
+    // }
     this.isLoading.set(false);
 
   }

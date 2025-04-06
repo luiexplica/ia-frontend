@@ -1,9 +1,9 @@
 
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output, OnInit, signal, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, signal, effect } from '@angular/core';
 import { RippleColor, RippleDirective } from '@directives/ripple.directive';
 import { Icon_I } from '@interfaces/globals.interface';
-import { IconComponent } from '../../icon/icon.component';
+import { IconComponent } from '@components/icon/icon.component';
 
 export type ButtonStyle = 'primary' | 'secondary' | 'text' | 'danger' | 'warning' | 'success' | 'info';
 export type ButtonVariant = 'filled' | 'outlined' | 'gradient' | 'text';
@@ -20,7 +20,7 @@ export type ButtonTextAlign = 'left' | 'center' | 'right';
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
 
   buttonStyle = input<ButtonStyle>('primary');
   fullWidth = input(false);
@@ -53,94 +53,45 @@ export class ButtonComponent implements OnInit {
     //   console.log('this.buttonClasses', this.buttonClasses());
 
     // }
-  })
+  });
 
-
-  ngOnInit(): void {
+  constructor() {
     this.initComponent();
 
   }
 
   initComponent() {
-    this.setStyle();
-    this.setSize();
-    this.setRipple();
-    this.setRounded();
-    this.setFullWidth();
-    this.setAlign();
     this.setIconClasses();
 
   }
 
-  setStyle() {
-    if (this.buttonStyle() === 'primary') {
-      this.buttonClasses.set(`${this.className()} bg-primaryBlue !text-white border border-transparent shadow-md hover:shadow-lg focus:shadow-none active:bg-primaryBlue hover:bg-primaryBlue active:shadow-none`);
 
+  get setAlign(): string {
+    if (this.align() === 'left') {
+      return `flex !justify-left`;
     }
-    if (this.buttonStyle() === 'secondary') {
-      this.buttonClasses.set(`
-        ${this.className()} border shadow-sm border-slate-300 hover:shadow-lg text-slate-600 hover:text-primaryBlue  hover:border-primaryBlue  focus:text-primaryBlue  focus:border-primaryBlue active:text-primaryBlue active:border-primaryBlue  disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
-      `);
-
-    }
-    if (this.buttonStyle() === 'text') {
-      this.buttonClasses.set(`
-        ${this.className()} text-slate-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none
-      `);
-
-    }
+    return `flex !justify-center`;
 
   }
 
-  setActiveStyle(): string{
-
-    if(!this.active()) return '';
-
-    if (this.buttonStyle() === 'primary') {
-
+  get setSize(): string {
+    if (this.size() === 'xm') {
+      return `py-1 px-2.5 text-sm h-8`;
     }
-    if (this.buttonStyle() === 'primary') {
-
+    if (this.size() === 'sm') {
+      return `py-1.5 px-3 text-sm h-9`;
     }
-    if (this.buttonStyle() === 'text') {
-      return `bg-slate-100`;
-
+    if (this.size() === 'md') {
+      return `py-2 px-4 text-sm h-10`;
     }
-    if(this.activeStyle() != '') {
-      return this.activeStyle();
-
+    if (this.size() === 'lg') {
+      return `py-2.5 px-5 text-base h-12`;
+    }
+    if (this.size() === 'xl') {
+      return `py-3.5 px-6 text-base h-14`;
     }
 
     return '';
-
-  }
-
-  setAlign() {
-    if (this.align() === 'left') {
-      this.buttonClasses.set(`${this.buttonClasses()} flex !justify-left
-      `);
-      return
-    }
-    this.buttonClasses.set(`${this.buttonClasses()} flex !justify-center `);
-
-  }
-
-  setSize() {
-    if (this.size() === 'xm') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-1 px-2.5 text-sm h-8`);
-    }
-    if (this.size() === 'sm') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-1.5 px-3 text-sm h-9`);
-    }
-    if (this.size() === 'md') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-2 px-4 text-sm h-10`);
-    }
-    if (this.size() === 'lg') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-2.5 px-5 text-base h-12`);
-    }
-    if (this.size() === 'xl') {
-      this.buttonClasses.set(`${this.buttonClasses()} py-3.5 px-6 text-base h-14`);
-    }
 
   }
 
@@ -169,37 +120,20 @@ export class ButtonComponent implements OnInit {
 
   }
 
-  setRipple() {
-    if (this.ripple()) {
-      const caseLight: ButtonStyle[] = ['primary'];
-      const caseDark: ButtonStyle[] = ['text', 'secondary'];
-
-      if (caseLight.includes(this.buttonStyle())) {
-        this.rippleStyle.set('light');
-      }
-      if (caseDark.includes(this.buttonStyle())) {
-        this.rippleStyle.set('dark');
-      }
-      return;
-
-    }
-    this.rippleStyle.set('none');
-
-  }
-
-  setRounded() {
+  get setRounded(): string {
     if (this.rounded()) {
-      this.buttonClasses.set(`${this.buttonClasses()} rounded-full`);
-      return;
+      return `rounded-full`;
+
     }
-    this.buttonClasses.set(`${this.buttonClasses()} rounded-md`);
+    return `rounded-md`
 
   }
 
-  setFullWidth() {
+  get setFullWidth(): string {
     if (this.fullWidth()) {
-      this.buttonClasses.set(`${this.buttonClasses()} w-full`);
+      return ` w-full`;
     }
+    return '';
 
   }
 

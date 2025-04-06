@@ -1,1 +1,36 @@
-<p>secondaryButton works!</p>,
+
+<button
+  [attr.class]="`${buttonClasses()} ${className()} transition-all  relative flex flex-row items-center  hover:cursor-pointer outline-none ${setActiveStyle} ${setSize} ${setRounded} ${setFullWidth} ${setAlign}`"
+  type="button"
+  (click)="click()"
+  [RippleColor]="rippleStyle()"
+  [disabled]="disabled()"
+  [ngClass]="{
+    'uppercase': uppercase(),
+    'font-semibold': bold(),
+    'gap-2': icon()
+  }"
+>
+  @if (!isLoading()) {
+    @if(icon()){
+      <app-icon
+      [icon]="icon()!"
+      [className]="iconClasses()" />
+
+    }
+    @if(text()){
+      <span class="block">
+        {{ text() }}
+      </span>
+
+     }
+
+  } @else {
+    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+        <circle cx="50" cy="50" fill="none" stroke="currentColor" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+          <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+        </circle>
+    </svg>
+
+  }
+</button>
