@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CoreState_I } from '../app.reducers';
+import { CoreStore_I } from '../app.reducers';
 import { Session_Auth_I, Session_Client_I } from '@luiexplica/ia-dev-services';
 import { SessionActions } from '../actions/session.actions';
 
@@ -10,7 +10,7 @@ import { SessionActions } from '../actions/session.actions';
 export class SessionStoreService {
 
   store = inject(Store);
-  state = this.store.selectSignal((state: CoreState_I) => state.core.session);
+  state = this.store.selectSignal((state: CoreStore_I) => state.core.session);
 
   onChecking() {
     this.store.dispatch(SessionActions.onChecking());

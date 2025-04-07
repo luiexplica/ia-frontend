@@ -1,7 +1,7 @@
 import { inject, Injectable, OnDestroy } from "@angular/core";
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { CoreState_I } from "../store/app.reducers";
+import { CoreStore_I } from "../store/app.reducers";
 import { filter, map, Observable, Subject, takeUntil } from "rxjs";
 
 @Injectable({
@@ -10,7 +10,7 @@ import { filter, map, Observable, Subject, takeUntil } from "rxjs";
 export class noLoginVerifyGuard implements OnDestroy {
 
   private ngUnsubscribe = new Subject()
-  readonly store: Store<CoreState_I> = inject(Store<CoreState_I>)
+  readonly store: Store<CoreStore_I> = inject(Store<CoreStore_I>)
   router = inject(Router)
 
 

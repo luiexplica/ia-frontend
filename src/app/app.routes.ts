@@ -9,6 +9,7 @@ import { LoginVerifyGuard } from './core/guards/login-guard.guard';
 import { Routes } from '@angular/router';
 import { ApplicationComponent } from './modules/application/application.component';
 import { application_routes } from './modules/application/application.routes';
+import { ApplicationReducers } from './modules/application/store/application.reducers';
 
 export const routes: Routes = [
   {
@@ -23,9 +24,9 @@ export const routes: Routes = [
     //     './modules/public/public.component'
     //   ),
     providers: [
-      // importProvidersFrom(
-      //   StoreModule.forFeature('public', PublicReducers)
-      // ),
+      importProvidersFrom(
+        StoreModule.forFeature('application', ApplicationReducers)
+      ),
     ],
     children: application_routes,
     canActivate: [LoginVerifyGuard],
